@@ -5,53 +5,114 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/24 18:08:13 by thflahau          #+#    #+#             */
-/*   Updated: 2019/06/25 21:34:08 by thflahau         ###   ########.fr       */
+/*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
+/*   Updated: 2019/06/27 14:06:28 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <string.h>
+#include <unistd.h>
 #include "arena.h"
+#include "libft.h"
 
-__attribute__((deprecated)) // FONCTIONNE PAS COMME IL FAUT
-static uint16_t			ft_parse_options(char const **argv, uint16_t index)
+#define __unlikely(x)	__builtin_expect(!!(x), 0)
+#define __likely(x)		__builtin_expect(!!(x), 1)
+
+#define BADOP			"Unknown instruction"
+#define BADFMT			"File format is not supported"
+#define OUTOFRANGE		"Out of range numerical value"
+
+#define EXIT_ERROR		-1
+
+static inline int		ft_puterror(char const *string)
 {
-	if (strcmp((argv[index] + 1), "dump") == 0)
+	dprintf(STDERR_FILENO, "corewar: %s\n", string);
+	return (EXIT_ERROR);
+}
+
+static inline int		ft_valid_file_fmt(char const *file)
+{
+	char				*ptr;
+
+	if (__unlikely((ptr = strrchr(file, '.')) == NULL))
+		return (EXIT_ERROR);
+	return (strcmp(ptr, FILE_FORMAT));
+}
+
+static int32_t			ft_atoi32(char const *str)
+{
+	int64_t				nb = 0;
+
+	while (*str == ' ')
+		str++;
+	if (__unlikely(*str == 0 || ISDIGIT(*str) == 0))
+		return (EXIT_ERROR);
+	while (ISDIGIT(*str))
 	{
-		g_arena.options |= OPTION_DUMP;
-		if (LIKELY(argv[++index] != NULL))
-			g_arena.max_cycles = atoi(argv[index]);
-		printf("dump = %u\n", g_arena.max_cycles);
+		nb = nb * 10 + *str++ - '0';
+		if (__unlikely(nb > INT32_MAX))
+			return (EXIT_ERROR);
 	}
-	else if (strcmp((argv[index] + 1), "n") == 0)
+	return (__unlikely(*str) ? EXIT_ERROR : (int32_t)nb);
+}
+
+static int				ft_parse_options(char const **av, uint16_t index)
+{
+	if (strcmp((av[index] + sizeof(char)), "dump") == 0)
 	{
-		g_arena.options |= OPTION_NBR;
-		if (LIKELY(argv[++index] != NULL))
-			g_arena.options |= (atoi(argv[index]) & 0x7fu);
-		printf("n = %u\n", g_arena.options & 0x7fu);
+		if (__likely(av[++index] != NULL))
+			if ((g_arena.max_cycles = ft_atoi32(av[index])) <= 0)
+				return (ft_puterror("Invalid dump option value"));
 	}
 	else
-		printf("corewar: illegal option -- %s\n", argv[index] + 1);
-	return (index);
+		return (printf("corewar: Illegal option -- %s\n", av[index] + 1));
+	return (EXIT_SUCCESS);
 }
 
-static void				ft_parse_players(char const **argv)
+static int				ft_parse_player(char const *file)
 {
-	register uint16_t	index;
+	int					fd;
+	uint8_t				code[CHAMP_MAX_SIZE];
 
-	index = 0;
-	while (argv[++index] != NULL)
+	__builtin_memset(code, 0, CHAMP_MAX_SIZE);
+	if (__unlikely((fd = open(file, O_RDONLY)) < 0))
+		return (ft_puterror(strerror(errno)));
+	if (__unlikely(read(fd, &code, CHAMP_MAX_SIZE) < 0))
+		return (ft_puterror(strerror(errno)));
+
+	for (uint16_t index = 0; index < CHAMP_MAX_SIZE; ++index)
+		printf("%x ", code[index]);
+
+	if (__unlikely(close(fd) < 0))
+		return (ft_puterror(strerror(errno)));
+	return (EXIT_SUCCESS);
+}
+
+static int				ft_parse_args(int argc, char const **argv)
+{
+	register uint16_t	index = 0;
+
+	while (++index < (uint16_t)argc)
 	{
 		if (*argv[index] == '-')
-			index = ft_parse_options(argv, index);
-		else if (ft_valid_file_fmt(argv[index], FILE_FORMAT) == EXIT_SUCCESS)
-			printf("new player\n");
+		{
+			if (ft_parse_options(argv, index++) != EXIT_SUCCESS)
+				return (EXIT_ERROR);
+		}
+		else if (__likely(ft_valid_file_fmt(argv[index]) == 0))
+			ft_parse_player(argv[index]);
 		else
-			exit(EXIT_FAILURE); // Point de sortie
+			return (ft_puterror(BADFMT));
 	}
+	return (EXIT_SUCCESS);
 }
 
-int						main(__unused int argc, char const **argv)
+int						main(int argc, char const **argv)
 {
-	ft_parse_players(argv);
+	if (__unlikely(ft_parse_args(argc, argv) != EXIT_SUCCESS))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

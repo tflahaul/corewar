@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/06/25 22:07:25 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/06/27 14:18:50 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <stdint.h>
-# include "../include/op.h"
+# include "op.h"
 
 # ifdef __GNUC__
 #  define __CCV (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
@@ -58,27 +58,29 @@ typedef struct				s_process {
 */
 typedef struct				s_player {
 	uint32_t				id;
+	uint32_t				cycles_since_last_live;
 	char					name[64];
 	t_process				processes;
+	struct s_player			*next;
 }							t_player;
 
 /*
 **	@options:	Bitmap used to keep track of executable's options
 **	@max_cycles: Maximum amount of cycles before ending the game
 */
-# pragma pack(push, 2)
+# pragma pack(push, 4)
 
 typedef struct				s_arena_state {
-	uint16_t				options;
-	uint32_t				max_cycles;
+	uint32_t				options;
+	int32_t					max_cycles;
 	uint8_t					arena[MEM_SIZE];
 }							t_arena_state;
 # pragma pack(pop)
 
 static t_arena_state		g_arena;
 
-# define OPTION_DUMP		0x008000u
-# define OPTION_NBR			0x004000u
+# define OPTION_DUMP		0x000001u
+# define OPTION_NBR			0x000010u
 # define DUMPMASK			0x3f80u
 # define DUMP_SHIFT			0x7u
 # define BUFF_SIZE			1024
@@ -177,14 +179,6 @@ __attribute__((always_inline))
 static inline void			ft_list_add_tail(t_listhead *node, t_listhead *head)
 {
 	ft_list_add(node, head->prev, head);
-}
-
-static inline int32_t		ft_valid_file_fmt(char const *file, char const *fmt)
-{
-	if (UNLIKELY(file == NULL))
-		return (EXIT_FAILURE);
-	file = file + strlen(file) - (sizeof(char) << 2);
-	return (strcmp(file, fmt) ? EXIT_FAILURE : EXIT_SUCCESS);
 }
 
 static inline int			ft_extract_data_from_instruction(void)
