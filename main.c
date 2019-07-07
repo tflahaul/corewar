@@ -6,32 +6,20 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/06/27 14:06:28 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/07 16:52:32 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <fcntl.h>
-#include <errno.h>
 #include <string.h>
 #include <unistd.h>
 #include "arena.h"
+#include "arena_errors.h"
 #include "libft.h"
 
 #define __unlikely(x)	__builtin_expect(!!(x), 0)
 #define __likely(x)		__builtin_expect(!!(x), 1)
-
-#define BADOP			"Unknown instruction"
-#define BADFMT			"File format is not supported"
-#define OUTOFRANGE		"Out of range numerical value"
-
-#define EXIT_ERROR		-1
-
-static inline int		ft_puterror(char const *string)
-{
-	dprintf(STDERR_FILENO, "corewar: %s\n", string);
-	return (EXIT_ERROR);
-}
 
 static inline int		ft_valid_file_fmt(char const *file)
 {
@@ -64,30 +52,11 @@ static int				ft_parse_options(char const **av, uint16_t index)
 	if (strcmp((av[index] + sizeof(char)), "dump") == 0)
 	{
 		if (__likely(av[++index] != NULL))
-			if ((g_arena.max_cycles = ft_atoi32(av[index])) <= 0)
-				return (ft_puterror("Invalid dump option value"));
+			if ((g_arena.dump_cycles = ft_atoi32(av[index])) <= 0)
+				return (ft_puterror(BADDUMP));
 	}
 	else
 		return (printf("corewar: Illegal option -- %s\n", av[index] + 1));
-	return (EXIT_SUCCESS);
-}
-
-static int				ft_parse_player(char const *file)
-{
-	int					fd;
-	uint8_t				code[CHAMP_MAX_SIZE];
-
-	__builtin_memset(code, 0, CHAMP_MAX_SIZE);
-	if (__unlikely((fd = open(file, O_RDONLY)) < 0))
-		return (ft_puterror(strerror(errno)));
-	if (__unlikely(read(fd, &code, CHAMP_MAX_SIZE) < 0))
-		return (ft_puterror(strerror(errno)));
-
-	for (uint16_t index = 0; index < CHAMP_MAX_SIZE; ++index)
-		printf("%x ", code[index]);
-
-	if (__unlikely(close(fd) < 0))
-		return (ft_puterror(strerror(errno)));
 	return (EXIT_SUCCESS);
 }
 
