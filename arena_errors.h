@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:28:50 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/07 16:52:23 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/08 18:13:27 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@
 # define STDERR_FILENO		2
 
 # define BADOP				"Unknown instruction"
-# define TOOLARGE			"Player is too large"
-# define BADDUMP			"Invalid dump option value"
+# define FILERR				"Unsupported file type"
 # define BADFMT				"File format is not supported"
+# define BADDUMP			"Invalid dump option value"
+# define METAERR			"Error while reading metadata"
+# define TOOLARGE			"Player is too large"
 # define OUTOFRANGE			"Out of range numerical value"
-# define HEADERR			"Error while reading metadata"
+# define CHAMPSIZERR		"Bad champion size (either zero or too large)"
 
 int							ft_puterror(char const *str);
 int							ft_puterror_and_close_fd(char const *str, int fd);
