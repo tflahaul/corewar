@@ -27,6 +27,8 @@
 
 # define STDERR_FILENO		2
 
+# define BUFF_SIZE			512
+
 # define BADOP				"Unknown instruction"
 # define FILERR				"Unsupported file type"
 # define BADFMT				"File format is not supported"
@@ -34,8 +36,11 @@
 # define METAERR			"Error while reading metadata"
 # define TOOLARGE			"Player is too large"
 # define OUTOFRANGE			"Out of range numerical value"
+# define BADOPTION			"Illegal option -- "
+# define HELPMSG			"Try 'corewar --help' for more information"
 # define CHAMPSIZERR		"Bad champion size (either zero or too large)"
 
+int							ft_print_usage(void);
 int							ft_puterror(char const *str);
 int							ft_puterror_and_close_fd(char const *str, int fd);
 

@@ -10,14 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "arena_errors.h"
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
 
+#include "../arena_errors.h"
+
 int					ft_puterror(char const *string)
 {
-	dprintf(STDERR_FILENO, "corewar: %s\n", string);
+	if (string != NULL)
+		printf("corewar: %s\n", string);
+	else
+		printf("%s\n", HELPMSG);
 	return (EXIT_ERROR);
 }
 

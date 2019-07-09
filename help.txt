@@ -1,0 +1,7 @@
+usage: corewar [option ...] file.cor [...]
+Corewar is a 1984 programming game created by D.G. Jones and A.K. Dewdney
+in which two or more battle programs compete for control of a virtual computer.
+
+  -dump N     after N execution cycles, dump memory and exit.
+  -n N        set the number of the next player as N.
+  --help      display this help and exit.

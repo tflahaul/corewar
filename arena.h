@@ -16,22 +16,6 @@
 # include "op.h"
 # include <stdint.h>
 
-# ifdef __GNUC__
-#  define __CCV (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
-
-#  if __CCV > 29600
-#   define LIKELY(x)		__builtin_expect((x), 1)
-#   define UNLIKELY(x)		__builtin_expect((x), 0)
-
-#  else
-#   define LIKELY(x)		(x)
-#   define UNLIKELY(x)		(x)
-#  endif /* __CCV */
-
-# else
-#  error "Your compiler does not use the C preprocessor, try using GCC"
-# endif /* __GNUC__ */
-
 # define FILE_FORMAT		".cor"
 
 typedef struct				s_listhead {
@@ -39,23 +23,29 @@ typedef struct				s_listhead {
 	struct s_listhead		*prev;
 }							t_listhead;
 
-typedef struct				s_player {
+typedef struct				s_warrior {
 	uint32_t				id;
 	uint8_t					program[CHAMP_MAX_SIZE];
-	char					name[PROG_NAME_LENGTH + 2];
-	struct s_player			*next;
-}							t_player;
+	char					name[PROG_NAME_LENGTH + 1];
+	char					comment[COMMENT_LENGTH + 1];
+	struct s_warrior		*next;
+}							t_warrior;
 
 /*
 **	@options:		Bitmap used to keep track of executable's options
 **	@dump_cycles:	Amount of cycles before dumping the memory on the stdin
+**	@warriors:		Singly linked list of warriors
 */
 typedef struct				s_arena_state {
 	uint32_t				options;
-	t_player				players;
 	int32_t					dump_cycles;
+	t_warrior				*warriors;
 }							t_arena_state;
 
 static t_arena_state		g_arena;
+
+int							ft_parse_args(int argc, char const **argv);
+int							ft_parse_champion(char const *file);
+int							ft_fetch_and_check_metadata(int fd);
 
 #endif /* ARENA_H */
