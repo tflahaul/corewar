@@ -33,6 +33,8 @@ static int32_t			ft_atoi32(char const *str)
 {
 	int64_t				nb = 0;
 
+	if (__unlikely(str[0] == 0))
+		return (EXIT_ERROR);
 	while (*str == ' ')
 		str++;
 	if (__unlikely(*str == 0 || ISDIGIT(*str) == 0))
@@ -51,10 +53,14 @@ static int				ft_parse_options(char const **av, uint16_t index)
 	if (strcmp((av[index] + sizeof(char)), "dump") == 0)
 	{
 		if (__likely(av[++index] != NULL))
+		{
 			if ((g_arena.dump_cycles = ft_atoi32(av[index])) <= 0)
 				return (ft_puterror(BADDUMP));
+		}
+		else
+			return (ft_puterror(NULLDUMP));
 	}
-	if (strcmp((av[index] + sizeof(char)), "-help") == 0)
+	else if (strcmp((av[index] + sizeof(char)), "-help") == 0)
 		return (ft_print_usage());
 	else
 		return (printf("corewar: "BADOPTION"%s\n"HELPMSG, av[index] + 1));
@@ -65,8 +71,8 @@ int						ft_parse_args(int argc, char const **argv)
 {
 	register uint16_t	index = 0;
 
-	if (argc < 2)
-		return (ft_puterror(HELPMSG));
+	if (__unlikely(argc < 2))
+		return (ft_puterror(NULL));
 	while (++index < (uint16_t)argc)
 	{
 		if (*argv[index] == '-')
@@ -75,9 +81,14 @@ int						ft_parse_args(int argc, char const **argv)
 				return (EXIT_ERROR);
 		}
 		else if (__likely(ft_valid_file_fmt(argv[index]) == 0))
-			ft_parse_champion(argv[index]);
+		{
+			if (ft_parse_warrior(argv[index]) != EXIT_SUCCESS)
+				return (EXIT_ERROR);
+		}
 		else
-			return (ft_puterror(BADFMT));
+			return (ft_puterror(BADFMT"\n"HELPMSG));
 	}
+	if (__unlikely(g_arena.warriors == NULL))
+		return (ft_puterror(NOCHAMP));
 	return (EXIT_SUCCESS);
 }

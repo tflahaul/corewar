@@ -17,12 +17,15 @@
 #  define __CCV (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
 
 #  if __CCV > 29600
-#   define __likely(x)			__builtin_expect((x), 1)
-#   define __unlikely(x)		__builtin_expect((x), 0)
+#   define __likely(x)				__builtin_expect((x), 1)
+#   define __unlikely(x)			__builtin_expect((x), 0)
+#   ifndef offsetof
+#    define offsetof(type, member)	__builtin_offsetof(type, member)
+#   endif /* offsetof */
 
 #  else
-#   define __likely(x)			(x)
-#   define __unlikely(x)		(x)
+#   define __likely(x)				(x)
+#   define __unlikely(x)			(x)
 #  endif /* __CCV */
 
 # else

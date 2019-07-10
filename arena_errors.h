@@ -30,15 +30,19 @@
 # define BUFF_SIZE			512
 
 # define BADOP				"Unknown instruction"
+
 # define FILERR				"Unsupported file type"
-# define BADFMT				"File format is not supported"
-# define BADDUMP			"Invalid dump option value"
-# define METAERR			"Error while reading metadata"
-# define TOOLARGE			"Player is too large"
-# define OUTOFRANGE			"Out of range numerical value"
+# define BADFMT				"Unknown file extension"
+
 # define BADOPTION			"Illegal option -- "
-# define HELPMSG			"Try 'corewar --help' for more information"
+# define BADDUMP			"Invalid dump value"
+# define NULLDUMP			"Couldn't find dump value"
+
+# define METAERR			"Error while reading metadata"
+# define NOCHAMP			"No warrior was loaded in the arena"
 # define CHAMPSIZERR		"Bad champion size (either zero or too large)"
+
+# define HELPMSG			"Try 'corewar --help' for more information"
 
 int							ft_print_usage(void);
 int							ft_puterror(char const *str);

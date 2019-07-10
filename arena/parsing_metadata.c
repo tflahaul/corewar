@@ -22,8 +22,10 @@
 #include "../libft.h"
 #include "../op.h"
 
-#define METATYPE(member)	typeof(((header_t *)42)->member)
-#define METASIZE(member)	sizeof(((header_t *)42)->member)
+static inline uint16_t		ft_swap_uint16(uint16_t nb)
+{
+	return (((nb & 0x00ff) >> 8) | ((nb & 0xff00) << 8));
+}
 
 static inline uint32_t		ft_swap_uint32(uint32_t nb)
 {
@@ -33,7 +35,7 @@ static inline uint32_t		ft_swap_uint32(uint32_t nb)
 
 static inline int			ft_read_filetype(int fd)
 {
-	METATYPE(magic)			magic = 0;
+	unsigned int			magic = 0;
 
 	if (__unlikely(read(fd, &magic, sizeof(magic)) < 0))
 		return (EXIT_ERROR);
@@ -48,7 +50,7 @@ static inline int			ft_read_program_name(int fd)
 
 	if (__unlikely(lseek(fd, offsetof(header_t, prog_name), SEEK_SET) < 0))
 		return (EXIT_ERROR);
-	if (__unlikely(read(fd, buffer, METASIZE(prog_name)) < 0))
+	if (__unlikely(read(fd, buffer, sizeof(((header_t *)0)->prog_name)) < 0))
 		return (EXIT_ERROR);
 	buffer[PROG_NAME_LENGTH] = 0;
 // Load buffer into name field of t_player struct
@@ -57,7 +59,7 @@ static inline int			ft_read_program_name(int fd)
 
 static inline int			ft_read_program_size(int fd)
 {
-	METATYPE(prog_size)		size = 0;
+	unsigned int		size = 0;
 
 	if (__unlikely(lseek(fd, offsetof(header_t, prog_size), SEEK_SET) < 0))
 		return (EXIT_ERROR);
@@ -74,7 +76,7 @@ static inline int			ft_read_program_comment(int fd)
 
 	if (__unlikely(lseek(fd, offsetof(header_t, comment), SEEK_SET) < 0))
 		return (EXIT_ERROR);
-	if (__unlikely(read(fd, buffer, METASIZE(comment)) < 0))
+	if (__unlikely(read(fd, buffer, sizeof(((header_t *)0)->comment)) < 0))
 		return (EXIT_ERROR);
 	buffer[COMMENT_LENGTH] = 0;
 // Load comment into comment field of t_player struct

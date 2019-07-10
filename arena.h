@@ -42,10 +42,10 @@ typedef struct				s_arena_state {
 	t_warrior				*warriors;
 }							t_arena_state;
 
-static t_arena_state		g_arena;
+t_arena_state				g_arena;
 
 int							ft_parse_args(int argc, char const **argv);
-int							ft_parse_champion(char const *file);
+int							ft_parse_warrior(char const *file);
 int							ft_fetch_and_check_metadata(int fd);
 
 #endif /* ARENA_H */
