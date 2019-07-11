@@ -6,9 +6,11 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:19:10 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 12:04:23 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/11 14:46:09 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #include <stdint.h>
 #include <libft.h>
@@ -19,16 +21,16 @@ int32_t					ft_atoi_max_int32(char const *str)
 
 	nb = 0;
 	if (__builtin_expect((str[0] == 0), 0))
-		return (-1);
+		return (0);
 	while (*str == ' ')
 		str++;
-	if (__builtin_expect((*str == 0 || ISDIGIT(*str)), 0))
-		return (-1);
+	if (__builtin_expect((*str == 0 || ISDIGIT(*str) == 0), 0))
+		return (0);
 	while (ISDIGIT(*str))
 	{
 		nb = nb * 10 + *str++ - '0';
 		if (__builtin_expect((nb > INT32_MAX), 0))
-			return (-1);
+			return (0);
 	}
-	return (__builtin_expect((*str), 0) ? -1 : (int32_t)nb);
+	return (__builtin_expect((*str != 0), 0) ? 0 : (int32_t)nb);
 }

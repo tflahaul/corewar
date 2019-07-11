@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 12:20:29 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/11 14:12:32 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,22 @@ static inline int			ft_read_program_name(int fd)
 	if (__unlikely(read(fd, buffer, sizeof(((header_t *)0)->prog_name)) < 0))
 		return (EXIT_ERROR);
 	buffer[PROG_NAME_LENGTH] = 0;
-// Load buffer into name field of t_player struct
-//	strcpy((*g_arena.warriors)->name, buffer);
+	strcpy(g_arena.warriors->name, (char *)buffer);
 	return (EXIT_SUCCESS);
 }
 
 static inline int			ft_read_program_size(int fd)
 {
-	unsigned int		size = 0;
+	unsigned int			size = 0;
 
 	if (__unlikely(lseek(fd, offsetof(header_t, prog_size), SEEK_SET) < 0))
 		return (EXIT_ERROR);
 	if (__unlikely(read(fd, &size, sizeof(size)) < 0))
 		return (EXIT_ERROR);
-	if (size == 0 || ft_swap_uint32(size) > CHAMP_MAX_SIZE)
+	size = ft_swap_uint32(size);
+	if (size == 0 || size > CHAMP_MAX_SIZE)
 		return (EXIT_ERROR);
+	g_arena.warriors->size = size;
 	return (EXIT_SUCCESS);
 }
 
@@ -69,8 +70,7 @@ static inline int			ft_read_program_comment(int fd)
 	if (__unlikely(read(fd, buffer, sizeof(((header_t *)0)->comment)) < 0))
 		return (EXIT_ERROR);
 	buffer[COMMENT_LENGTH] = 0;
-// Load comment into comment field of t_player struct
-//	strcpy((*g_arena.warriors)->comment, buffer);
+	strcpy(g_arena.warriors->comment, (char *)buffer);
 	return (EXIT_SUCCESS);
 }
 

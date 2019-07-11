@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 12:09:34 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/11 14:46:27 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,27 @@ static inline int		ft_valid_file_fmt(char const *file)
 
 static int				ft_parse_options(char const **av, uint16_t index)
 {
-	if (strcmp((av[index] + sizeof(char)), "dump") == 0)
+	if (strcmp((av[index] + 1), "dump") == 0)
 	{
 		if (__likely(av[++index] != NULL))
 		{
 			if ((g_arena.dump_cycles = ft_atoi_max_int32(av[index])) <= 0)
-				return (ft_puterror(BADDUMP));
+				return (ft_puterror(BADOPT));
 		}
 		else
-			return (ft_puterror(NULLDUMP));
+			return (ft_puterror(NULLOPT));
 	}
-	else if (strcmp((av[index] + sizeof(char)), "-help") == 0)
+	else if (strcmp((av[index] + 1), "n") == 0)
+	{
+		if (__likely(av[++index] != NULL))
+		{
+			if ((g_arena.option = ft_atoi_max_int32(av[index])) < 0)
+				return (ft_puterror(BADOPT));
+		}
+		else
+			return (ft_puterror(NULLOPT));
+	}
+	else if (strcmp((av[index] + 1), "-help") == 0)
 		return (ft_print_usage());
 	else
 		return (printf("corewar: "BADOPTION"%s\n"HELPMSG"\n", av[index] + 1));

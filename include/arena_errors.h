@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:28:50 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 10:05:41 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/11 14:39:48 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 # define BADFMT				"Unknown file extension"
 
 # define BADOPTION			"Illegal option -- "
-# define BADDUMP			"Invalid dump value"
-# define NULLDUMP			"Couldn't find dump value"
+# define BADOPT				"Invalid option value"
+# define NULLOPT			"Couldn't find option value"
 
 # define METAERR			"Error while reading metadata"
 # define NOCHAMP			"No warrior was loaded in the arena"
