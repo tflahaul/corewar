@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/08 18:56:36 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/11 12:20:29 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,11 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "../corewar_compiler.h"
-#include "../arena_errors.h"
-#include "../arena.h"
-#include "../libft.h"
-#include "../op.h"
-
-static inline uint16_t		ft_swap_uint16(uint16_t nb)
-{
-	return (((nb & 0x00ff) >> 8) | ((nb & 0xff00) << 8));
-}
-
-static inline uint32_t		ft_swap_uint32(uint32_t nb)
-{
-	return (((nb & 0xff000000) >> 24) | ((nb & 0x00ff0000) >> 8) |
-			((nb & 0x0000ff00) << 8) | ((nb & 0x000000ff) << 24));
-}
+#include <op.h>
+#include <libft.h>
+#include <arena.h>
+#include <arena_errors.h>
+#include <corewar_compiler.h>
 
 static inline int			ft_read_filetype(int fd)
 {
@@ -54,6 +43,7 @@ static inline int			ft_read_program_name(int fd)
 		return (EXIT_ERROR);
 	buffer[PROG_NAME_LENGTH] = 0;
 // Load buffer into name field of t_player struct
+//	strcpy((*g_arena.warriors)->name, buffer);
 	return (EXIT_SUCCESS);
 }
 
@@ -80,6 +70,7 @@ static inline int			ft_read_program_comment(int fd)
 		return (EXIT_ERROR);
 	buffer[COMMENT_LENGTH] = 0;
 // Load comment into comment field of t_player struct
+//	strcpy((*g_arena.warriors)->comment, buffer);
 	return (EXIT_SUCCESS);
 }
 

@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   ft_swap_uint32.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/07 15:28:00 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 10:51:11 by thflahau         ###   ########.fr       */
+/*   Created: 2019/07/11 10:24:00 by thflahau          #+#    #+#             */
+/*   Updated: 2019/07/11 10:49:12 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <string.h>
-#include <stdio.h>
+#include <stdint.h>
 
-#include <arena_errors.h>
-
-int					ft_puterror(char const *string)
+uint32_t					ft_swap_uint32(uint32_t nb)
 {
-	if (string != NULL)
-		printf("corewar: %s\n", string);
-	else
-		printf("%s\n", HELPMSG);
-	return (EXIT_ERROR);
-}
-
-int					ft_puterror_and_close_fd(char const *string, int fd)
-{
-	if (__builtin_expect((close(fd) < 0), 0))
-		ft_puterror(strerror(errno));
-	return (ft_puterror(string));
+	return (((nb & 0xff000000) >> 24) | ((nb & 0x00ff0000) >> 8) |
+			((nb & 0x0000ff00) << 8) | ((nb & 0x000000ff) << 24));
 }

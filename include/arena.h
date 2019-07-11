@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/07 15:29:32 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/11 12:24:15 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ARENA_H
 
 # include "op.h"
+
 # include <stdint.h>
 
 # define FILE_FORMAT		".cor"
@@ -25,6 +26,7 @@ typedef struct				s_listhead {
 
 typedef struct				s_warrior {
 	uint32_t				id;
+	uint32_t				size;
 	uint8_t					program[CHAMP_MAX_SIZE];
 	char					name[PROG_NAME_LENGTH + 1];
 	char					comment[COMMENT_LENGTH + 1];
@@ -32,14 +34,14 @@ typedef struct				s_warrior {
 }							t_warrior;
 
 /*
-**	@options:		Bitmap used to keep track of executable's options
+**	@option:		Integer used to store `-n' option value
 **	@dump_cycles:	Amount of cycles before dumping the memory on the stdin
-**	@warriors:		Singly linked list of warriors
+**	@warriors:		Head of warriors singly linked list
 */
 typedef struct				s_arena_state {
-	uint32_t				options;
+	int32_t					option;
 	int32_t					dump_cycles;
-	t_warrior				*warriors;
+	t_warrior				**warriors;
 }							t_arena_state;
 
 t_arena_state				g_arena;

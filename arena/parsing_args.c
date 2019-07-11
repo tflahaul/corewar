@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/07 16:52:32 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/11 12:09:34 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "../arena.h"
-#include "../arena_errors.h"
-#include "../corewar_compiler.h"
-#include "../libft.h"
+#include <libft.h>
+#include <arena.h>
+#include <arena_errors.h>
+#include <corewar_compiler.h>
 
 static inline int		ft_valid_file_fmt(char const *file)
 {
@@ -29,32 +29,13 @@ static inline int		ft_valid_file_fmt(char const *file)
 	return (strcmp(ptr, FILE_FORMAT));
 }
 
-static int32_t			ft_atoi32(char const *str)
-{
-	int64_t				nb = 0;
-
-	if (__unlikely(str[0] == 0))
-		return (EXIT_ERROR);
-	while (*str == ' ')
-		str++;
-	if (__unlikely(*str == 0 || ISDIGIT(*str) == 0))
-		return (EXIT_ERROR);
-	while (ISDIGIT(*str))
-	{
-		nb = nb * 10 + *str++ - '0';
-		if (__unlikely(nb > INT32_MAX))
-			return (EXIT_ERROR);
-	}
-	return (__unlikely(*str) ? EXIT_ERROR : (int32_t)nb);
-}
-
 static int				ft_parse_options(char const **av, uint16_t index)
 {
 	if (strcmp((av[index] + sizeof(char)), "dump") == 0)
 	{
 		if (__likely(av[++index] != NULL))
 		{
-			if ((g_arena.dump_cycles = ft_atoi32(av[index])) <= 0)
+			if ((g_arena.dump_cycles = ft_atoi_max_int32(av[index])) <= 0)
 				return (ft_puterror(BADDUMP));
 		}
 		else
@@ -63,7 +44,7 @@ static int				ft_parse_options(char const **av, uint16_t index)
 	else if (strcmp((av[index] + sizeof(char)), "-help") == 0)
 		return (ft_print_usage());
 	else
-		return (printf("corewar: "BADOPTION"%s\n"HELPMSG, av[index] + 1));
+		return (printf("corewar: "BADOPTION"%s\n"HELPMSG"\n", av[index] + 1));
 	return (EXIT_SUCCESS);
 }
 

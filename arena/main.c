@@ -6,13 +6,13 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/07 16:52:32 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/11 10:33:27 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../arena.h"
-#include "../arena_errors.h"
-#include "../corewar_compiler.h"
+#include <arena.h>
+#include <arena_errors.h>
+#include <corewar_compiler.h>
 
 int						main(int argc, char const **argv)
 {
