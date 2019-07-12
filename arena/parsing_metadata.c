@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 14:12:32 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:25:27 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static inline int			ft_read_program_size(int fd)
 	if (__unlikely(read(fd, &size, sizeof(size)) < 0))
 		return (EXIT_ERROR);
 	size = ft_swap_uint32(size);
-	if (size == 0 || size > CHAMP_MAX_SIZE)
+	if (__unlikely(size == 0 || size > CHAMP_MAX_SIZE))
 		return (EXIT_ERROR);
 	g_arena.warriors->size = size;
 	return (EXIT_SUCCESS);

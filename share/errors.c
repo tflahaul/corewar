@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:28:00 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 10:51:11 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/12 12:58:21 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 int					ft_puterror(char const *string)
 {
 	if (string != NULL)
-		printf("corewar: %s\n", string);
+		dprintf(STDERR_FILENO, "corewar: %s\n", string);
 	else
-		printf("%s\n", HELPMSG);
+		dprintf(STDERR_FILENO, "%s\n", HELPMSG);
 	return (EXIT_ERROR);
 }
 

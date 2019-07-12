@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 14:53:50 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:34:22 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ static inline void		ft_print_warriors(void)
 		printf("Comment:[%s]\n", temp->comment);
 		printf("Size:[%u]\n", temp->size);
 		printf("ID:[%i]\n", temp->id);
+		printf("Code:");
+		for (unsigned int i = 0; i < temp->size; ++i)
+		{
+			if (!(i % 10))
+				printf("\n");
+			printf("%#5x", temp->program[i]);
+		}
+		printf("\n\n");
 		temp = temp->next;
 	}
 }

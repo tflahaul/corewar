@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 12:34:53 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 12:34:42 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:16:26 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 /*
 **	Strings
 */
+int					ft_strcmp(char const *s1, char const *s2);
 char				*ft_fast_strrchr(char const *str, int c);
+size_t				ft_fast_strlen(char const *str);
 int32_t				ft_atoi_max_int32(char const *str);
 
 /*

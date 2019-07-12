@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 14:46:27 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:17:17 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static inline int		ft_valid_file_fmt(char const *file)
 {
 	char				*ptr;
 
-	if (__unlikely((ptr = strrchr(file, '.')) == NULL))
+	if (__unlikely((ptr = ft_fast_strrchr(file, '.')) == NULL))
 		return (EXIT_ERROR);
-	return (strcmp(ptr, FILE_FORMAT));
+	return (ft_strcmp(ptr, FILE_FORMAT));
 }
 
 static int				ft_parse_options(char const **av, uint16_t index)
 {
-	if (strcmp((av[index] + 1), "dump") == 0)
+	if (ft_strcmp((av[index] + 1), "dump") == 0)
 	{
 		if (__likely(av[++index] != NULL))
 		{
@@ -41,7 +41,7 @@ static int				ft_parse_options(char const **av, uint16_t index)
 		else
 			return (ft_puterror(NULLOPT));
 	}
-	else if (strcmp((av[index] + 1), "n") == 0)
+	else if (ft_strcmp((av[index] + 1), "n") == 0)
 	{
 		if (__likely(av[++index] != NULL))
 		{
@@ -51,7 +51,7 @@ static int				ft_parse_options(char const **av, uint16_t index)
 		else
 			return (ft_puterror(NULLOPT));
 	}
-	else if (strcmp((av[index] + 1), "-help") == 0)
+	else if (ft_strcmp((av[index] + 1), "-help") == 0)
 		return (ft_print_usage());
 	else
 		return (printf("corewar: "BADOPTION"%s\n"HELPMSG"\n", av[index] + 1));

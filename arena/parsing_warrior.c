@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 14:34:02 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:36:47 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 
 int							ft_load_warrior(int fd)
 {
+	ssize_t					bytes;				
 	uint8_t					buffer[CHAMP_MAX_SIZE];
 
-	if (__unlikely(lseek(fd, g_arena.warriors->size, SEEK_END) < 0))
+	if (__unlikely(lseek(fd, sizeof(header_t), SEEK_SET) < 0))
 		return (ft_puterror(strerror(errno)));
-	if (__unlikely(read(fd, buffer, CHAMP_MAX_SIZE) < 0))
+	if (__unlikely((bytes = read(fd, buffer, CHAMP_MAX_SIZE)) < 0))
 		return (ft_puterror(strerror(errno)));
-	memcpy(g_arena.warriors->program, buffer, g_arena.warriors->size);
+	memcpy(g_arena.warriors->program, buffer, bytes);
 	return (EXIT_SUCCESS);
 }
 
@@ -41,8 +42,8 @@ int							ft_parse_warrior(char const *file)
 		return (EXIT_FAILURE);
 	if (__unlikely(ft_fetch_and_check_metadata(fd) != EXIT_SUCCESS))
 		return (EXIT_FAILURE);
-//	if (__unlikely(ft_load_warrior(fd) < 0))
-//		return (EXIT_FAILURE);
+	if (__unlikely(ft_load_warrior(fd) < 0))
+		return (EXIT_FAILURE);
 	if (__unlikely(close(fd) < 0))
 		return (ft_puterror(strerror(errno)));
 	return (EXIT_SUCCESS);

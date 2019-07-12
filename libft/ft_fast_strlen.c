@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fast_strrchr.c                                  :+:      :+:    :+:   */
+/*   ft_fast_strlen.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/11 10:23:54 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/12 12:46:58 by thflahau         ###   ########.fr       */
+/*   Created: 2019/07/12 12:38:17 by thflahau          #+#    #+#             */
+/*   Updated: 2019/07/12 12:56:21 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <smmintrin.h>
-#define FLAG		(_SIDD_SBYTE_OPS | _SIDD_MOST_SIGNIFICANT)
+#define FLAG (_SIDD_SBYTE_OPS | _SIDD_CMP_EQUAL_EACH | _SIDD_LEAST_SIGNIFICANT)
 
-char				*ft_fast_strrchr(char const *str, int c)
+size_t				ft_fast_strlen(char const *str)
 {
 	char			*ptr;
 	__m128i			chunk;
 	__m128i			*longword;
-	__m128i const	set = _mm_setr_epi16(c, 0, 0, 0, 0, 0, 0, 0);
+	__m128i const	set = _mm_setzero_si128();
 
-	ptr = NULL;
-	longword = (__m128i *)str;
+	if (__builtin_expect((!str || !str[0]), 0))
+		return (0);
+	ptr = (char *)str;
+	longword = (__m128i *)ptr;
 	while (longword)
 	{
 		chunk = _mm_loadu_si128(longword);
 		if (_mm_cmpistrc(set, chunk, FLAG))
+		{
 			ptr = (char *)longword + _mm_cmpistri(set, chunk, FLAG);
-		else if (_mm_cmpistrz(set, chunk, FLAG))
-			break ;
+			return ((size_t)(ptr - (char *)str));
+		}
 		++longword;
 	}
-	return (ptr);
+	return (0);
 }
