@@ -6,11 +6,9 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:19:10 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 14:46:09 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/13 12:19:39 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include <stdint.h>
 #include <libft.h>

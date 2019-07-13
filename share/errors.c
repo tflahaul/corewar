@@ -6,14 +6,15 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:28:00 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/12 12:58:21 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/13 12:14:31 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <unistd.h>
 #include <string.h>
-#include <stdio.h>
 
+#include <libft.h>
 #include <arena_errors.h>
 
 int					ft_puterror(char const *string)
@@ -21,7 +22,7 @@ int					ft_puterror(char const *string)
 	if (string != NULL)
 		dprintf(STDERR_FILENO, "corewar: %s\n", string);
 	else
-		dprintf(STDERR_FILENO, "%s\n", HELPMSG);
+		write(STDERR_FILENO, HELPMSG"\n", ft_strlen(HELPMSG) + 1);
 	return (EXIT_ERROR);
 }
 

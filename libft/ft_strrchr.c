@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fast_strrchr.c                                  :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 10:23:54 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/12 12:46:58 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/13 12:13:40 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <smmintrin.h>
 #define FLAG		(_SIDD_SBYTE_OPS | _SIDD_MOST_SIGNIFICANT)
 
-char				*ft_fast_strrchr(char const *str, int c)
+char				*ft_strrchr(char const *str, int c)
 {
 	char			*ptr;
 	__m128i			chunk;

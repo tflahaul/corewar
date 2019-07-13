@@ -6,11 +6,10 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/12 13:25:27 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/13 12:45:48 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <fcntl.h>
 #include <stdint.h>
 #include <string.h>
@@ -42,7 +41,7 @@ static inline int			ft_read_program_name(int fd)
 	if (__unlikely(read(fd, buffer, sizeof(((header_t *)0)->prog_name)) < 0))
 		return (EXIT_ERROR);
 	buffer[PROG_NAME_LENGTH] = 0;
-	strcpy(g_arena.warriors->name, (char *)buffer);
+	ft_memcpy(g_arena.warriors->name, buffer, ft_strlen((char *)buffer));
 	return (EXIT_SUCCESS);
 }
 
@@ -70,11 +69,10 @@ static inline int			ft_read_program_comment(int fd)
 	if (__unlikely(read(fd, buffer, sizeof(((header_t *)0)->comment)) < 0))
 		return (EXIT_ERROR);
 	buffer[COMMENT_LENGTH] = 0;
-	strcpy(g_arena.warriors->comment, (char *)buffer);
+	ft_memcpy(g_arena.warriors->comment, buffer, ft_strlen((char *)buffer));
 	return (EXIT_SUCCESS);
 }
 
-__attribute__((noinline))
 int							ft_fetch_and_check_metadata(int fd)
 {
 	if (__unlikely(ft_read_filetype(fd) < 0))

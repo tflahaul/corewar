@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:28:50 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 14:39:48 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/13 12:42:09 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@
 
 # define METAERR			"Error while reading metadata"
 # define NOCHAMP			"No warrior was loaded in the arena"
-# define CHAMPSIZERR		"Bad champion size (either zero or too large)"
+# define MAXCHAMP			"Trying to load more than 4 warriors in the arena"
+# define CHAMPSIZERR		"Bad warrior size (either zero or too large)"
 
 # define HELPMSG			"Try 'corewar --help' for more information"
 

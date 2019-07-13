@@ -6,14 +6,16 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:48:59 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 14:56:58 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/13 11:35:59 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <arena.h>
 
-int						ft_free_warriors(int exit)
+#include <arena.h>
+#include <arena_memory.h>
+
+void					ft_free_warriors(void)
 {
 	t_warrior			*ptr;
 	t_warrior			*temp;
@@ -25,5 +27,4 @@ int						ft_free_warriors(int exit)
 		free((void *)temp);
 		temp = ptr;
 	}
-	return (exit);
 }

@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/12 13:17:17 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/13 12:45:07 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static inline int		ft_valid_file_fmt(char const *file)
 {
 	char				*ptr;
 
-	if (__unlikely((ptr = ft_fast_strrchr(file, '.')) == NULL))
+	if (__unlikely((ptr = ft_strrchr(file, '.')) == NULL))
 		return (EXIT_ERROR);
 	return (ft_strcmp(ptr, FILE_FORMAT));
 }
@@ -81,5 +81,7 @@ int						ft_parse_args(int argc, char const **argv)
 	}
 	if (__unlikely(g_arena.warriors == NULL))
 		return (ft_puterror(NOCHAMP));
+	else if (__unlikely(ft_list_size_warrior() > MAX_PLAYERS))
+		return (ft_puterror(MAXCHAMP));
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/11 14:33:06 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/13 12:39:29 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int							ft_malloc_new_warrior(void);
 int							ft_parse_args(int argc, char const **argv);
 int							ft_parse_warrior(char const *file);
 int							ft_fetch_and_check_metadata(int fd);
+unsigned int				ft_list_size_warrior(void);
 
 #endif /* ARENA_H */

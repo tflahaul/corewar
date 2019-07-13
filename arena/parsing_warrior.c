@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/12 13:36:47 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/13 12:15:58 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <corewar_compiler.h>
 #include <arena_errors.h>
 #include <arena.h>
+#include <libft.h>
 
 int							ft_load_warrior(int fd)
 {
@@ -28,7 +29,7 @@ int							ft_load_warrior(int fd)
 		return (ft_puterror(strerror(errno)));
 	if (__unlikely((bytes = read(fd, buffer, CHAMP_MAX_SIZE)) < 0))
 		return (ft_puterror(strerror(errno)));
-	memcpy(g_arena.warriors->program, buffer, bytes);
+	ft_memcpy(g_arena.warriors->program, buffer, bytes);
 	return (EXIT_SUCCESS);
 }
 
