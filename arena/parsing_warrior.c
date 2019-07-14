@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/13 12:15:58 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/14 09:42:03 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <arena.h>
 #include <libft.h>
 
-int							ft_load_warrior(int fd)
+static int					ft_store_warrior(int fd)
 {
 	ssize_t					bytes;				
 	uint8_t					buffer[CHAMP_MAX_SIZE];
@@ -43,7 +43,7 @@ int							ft_parse_warrior(char const *file)
 		return (EXIT_FAILURE);
 	if (__unlikely(ft_fetch_and_check_metadata(fd) != EXIT_SUCCESS))
 		return (EXIT_FAILURE);
-	if (__unlikely(ft_load_warrior(fd) < 0))
+	if (__unlikely(ft_store_warrior(fd) < 0))
 		return (EXIT_FAILURE);
 	if (__unlikely(close(fd) < 0))
 		return (ft_puterror(strerror(errno)));

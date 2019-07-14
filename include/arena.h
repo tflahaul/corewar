@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/13 12:39:29 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/14 10:34:02 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,10 @@ typedef struct				s_warrior {
 }							t_warrior;
 
 /*
-**	@option:		Integer used to store `-n' option value
 **	@dump_cycles:	Amount of cycles before dumping the memory on the stdin
 **	@warriors:		Head of warriors singly linked list
 */
 typedef struct				s_arena_state {
-	int32_t					option;
 	int32_t					dump_cycles;
 	t_warrior				*warriors;
 }							t_arena_state;

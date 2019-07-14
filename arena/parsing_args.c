@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/13 12:45:07 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/14 10:30:35 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <libft.h>
 #include <arena.h>
 #include <arena_errors.h>
+#include <corewar_options.h>
 #include <corewar_compiler.h>
 
 static inline int		ft_valid_file_fmt(char const *file)
@@ -29,52 +30,18 @@ static inline int		ft_valid_file_fmt(char const *file)
 	return (ft_strcmp(ptr, FILE_FORMAT));
 }
 
-static int				ft_parse_options(char const **av, uint16_t index)
-{
-	if (ft_strcmp((av[index] + 1), "dump") == 0)
-	{
-		if (__likely(av[++index] != NULL))
-		{
-			if ((g_arena.dump_cycles = ft_atoi_max_int32(av[index])) <= 0)
-				return (ft_puterror(BADOPT));
-		}
-		else
-			return (ft_puterror(NULLOPT));
-	}
-	else if (ft_strcmp((av[index] + 1), "n") == 0)
-	{
-		if (__likely(av[++index] != NULL))
-		{
-			if ((g_arena.option = ft_atoi_max_int32(av[index])) < 0)
-				return (ft_puterror(BADOPT));
-		}
-		else
-			return (ft_puterror(NULLOPT));
-	}
-	else if (ft_strcmp((av[index] + 1), "-help") == 0)
-		return (ft_print_usage());
-	else
-		return (printf("corewar: "BADOPTION"%s\n"HELPMSG"\n", av[index] + 1));
-	return (EXIT_SUCCESS);
-}
-
 int						ft_parse_args(int argc, char const **argv)
 {
-	register uint16_t	index = 0;
-
 	if (__unlikely(argc < 2))
 		return (ft_puterror(NULL));
-	while (++index < (uint16_t)argc)
+	while (*(++argv) != NULL)
 	{
-		if (*argv[index] == '-')
+		if (**argv == '-')
+			ft_get_options(&argv);
+		else if (__likely(ft_valid_file_fmt(*argv) == 0))
 		{
-			if (ft_parse_options(argv, index++) != EXIT_SUCCESS)
-				return (EXIT_ERROR);
-		}
-		else if (__likely(ft_valid_file_fmt(argv[index]) == 0))
-		{
-			if (ft_parse_warrior(argv[index]) != EXIT_SUCCESS)
-				return (EXIT_ERROR);
+			if (ft_parse_warrior(*argv) != EXIT_SUCCESS)
+				return (EXIT_FAILURE);
 		}
 		else
 			return (ft_puterror(BADFMT"\n"HELPMSG));

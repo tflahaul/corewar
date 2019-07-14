@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:28:00 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/13 12:14:31 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/14 09:49:32 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ int					ft_puterror(char const *string)
 	else
 		write(STDERR_FILENO, HELPMSG"\n", ft_strlen(HELPMSG) + 1);
 	return (EXIT_ERROR);
+}
+
+int					ft_puterror_illegal_option(char const *string)
+{
+	dprintf(STDERR_FILENO, "corewar: Illegal option -- %s\n", string);
+	return (ft_puterror(NULL));
 }
 
 int					ft_puterror_and_close_fd(char const *string, int fd)

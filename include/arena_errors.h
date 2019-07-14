@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:28:50 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/13 12:42:09 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/14 10:04:32 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@
 
 # define HELPMSG			"Try 'corewar --help' for more information"
 
-int							ft_print_usage(void);
 int							ft_puterror(char const *str);
+int							ft_puterror_illegal_option(char const *str);
 int							ft_puterror_and_close_fd(char const *str, int fd);
 
 #endif /* ARENA_ERRORS_H */
