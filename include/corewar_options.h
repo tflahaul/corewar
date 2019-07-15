@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 08:40:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/14 10:23:13 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/15 14:08:30 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ typedef struct			s_options {
 void					ft_get_dump(char const ***av);
 void					ft_get_numb(char const ***av);
 void					ft_print_help(char const ***av);
+void					ft_set_visualize(char const ***av);
 
 static t_options		options[] = {
 	{"dump", &ft_get_dump, required_argument, 'd'},
 	{"number", &ft_get_numb, required_argument, 'n'},
 	{"help", &ft_print_help, no_argument, 'h'},
+	{"visualize", &ft_set_visualize, no_argument, 'v'},
 	{0, 0, 0, 0}
 };
 

@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 09:54:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/14 10:32:48 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/15 14:15:58 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ void					ft_print_help(char const ***argv)
 	exit(EXIT_SUCCESS);
 }
 
+void					ft_set_visualize(char const ***av)
+{
+	(void)av;
+	g_arena.options |= OPTION_V;
+}
+
 void					ft_get_dump(char const ***argv)
 {
 	++(*argv);
@@ -51,7 +57,7 @@ void					ft_get_dump(char const ***argv)
 		ft_puterror(NULLOPT);
 		exit(EXIT_FAILURE);
 	}
-	if ((g_arena.dump_cycles = ft_atoi_max_int32(**argv)) <= 0)
+	if ((g_arena.dump_cycles = ft_atoi_max_int32(**argv)) == EXIT_ERROR)
 	{
 		ft_puterror(BADOPT);
 		exit(EXIT_FAILURE);
@@ -64,6 +70,12 @@ void					ft_get_numb(char const ***argv)
 	if (__unlikely(**argv == NULL))
 	{
 		ft_puterror(NULLOPT);
+		exit(EXIT_FAILURE);
+	}
+	g_arena.options |= OPTION_N;
+	if ((g_arena.value = ft_atoi_max_int32(**argv)) == EXIT_ERROR)
+	{
+		ft_puterror(BADOPT);
 		exit(EXIT_FAILURE);
 	}
 }

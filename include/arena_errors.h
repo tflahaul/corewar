@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:28:50 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/14 10:04:32 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/15 13:07:02 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@
 # include <errno.h>
 
 # define EXIT_ERROR			-1
-
 # ifndef EXIT_SUCCESS
 #  define EXIT_SUCCESS		0
 # endif
-
 # ifndef EXIT_FAILURE
 #  define EXIT_FAILURE		1
 # endif
@@ -39,6 +37,7 @@
 # define NULLOPT			"Couldn't find option value"
 
 # define METAERR			"Error while reading metadata"
+# define NUMERR				"Two warriors have the same id"
 # define NOCHAMP			"No warrior was loaded in the arena"
 # define MAXCHAMP			"Trying to load more than 4 warriors in the arena"
 # define CHAMPSIZERR		"Bad warrior size (either zero or too large)"

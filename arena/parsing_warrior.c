@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/14 09:42:03 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/15 12:59:28 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,24 @@
 #include <arena.h>
 #include <libft.h>
 
-static int					ft_store_warrior(int fd)
+static inline void			ft_store_warrior_id(void)
 {
-	ssize_t					bytes;				
+	g_arena.warriors->id = COREWAR_EXEC_MAGIC;
+	if (HAS_NUMBER(g_arena.options))
+	{
+		if (__unlikely(ft_number_in_list(g_arena.value) == EXIT_FAILURE))
+		{
+			ft_puterror(NUMERR);
+			exit(EXIT_FAILURE);
+		}
+		g_arena.warriors->id = g_arena.value;
+		DEL_OPTION_N(g_arena.options);
+	}
+}
+
+static inline int			ft_store_warrior(int fd)
+{
+	ssize_t					bytes;
 	uint8_t					buffer[CHAMP_MAX_SIZE];
 
 	if (__unlikely(lseek(fd, sizeof(header_t), SEEK_SET) < 0))
@@ -30,6 +45,7 @@ static int					ft_store_warrior(int fd)
 	if (__unlikely((bytes = read(fd, buffer, CHAMP_MAX_SIZE)) < 0))
 		return (ft_puterror(strerror(errno)));
 	ft_memcpy(g_arena.warriors->program, buffer, bytes);
+	ft_store_warrior_id();
 	return (EXIT_SUCCESS);
 }
 
