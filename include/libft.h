@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 12:34:53 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/13 12:21:09 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/17 16:08:06 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 
 # include <stdint.h>
-# include <unistd.h>
+# include <sys/types.h>
 
 # define ISDIGIT(x)		((x) >= '0' && (x) <= '9')
 
@@ -31,7 +31,7 @@ int32_t			ft_atoi_max_int32(char const *str);
 */
 void			ft_bzero(void *ptr, size_t size);
 void			ft_memcpy(void *dst, void *src, size_t len);
-
+void			*ft_memset(void *dst, int c, size_t size);
 
 /*
 **	Bits

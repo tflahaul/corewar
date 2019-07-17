@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/15 14:06:36 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/17 16:15:33 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@
 # include <stdint.h>
 
 # define FILE_FORMAT		".cor"
-
-typedef struct				s_listhead {
-	struct s_listhead		*next;
-	struct s_listhead		*prev;
-}							t_listhead;
 
 typedef struct				s_warrior {
 	int32_t					id;
@@ -52,14 +47,14 @@ t_arena_state				g_arena;
 # define OPTION_V			0x00000010
 
 # define HAS_NUMBER(x)		(x & OPTION_N)
-# define DEL_OPTION_N(x)	(x &= ~OPTION_N)
+# define UNSET_OPTION_N(x)	(x &= ~OPTION_N)
 
 int							ft_malloc_new_warrior(void);
 int							ft_parse_args(int argc, char const **argv);
 int							ft_parse_warrior(char const *file);
 int							ft_fetch_and_check_metadata(int fd);
 int							ft_number_in_list(int32_t id);
-void						ft_arena_load_warriors(void);
+void						ft_hexdump_memory(void);
 unsigned int				ft_list_size_warrior(void);
 
 #endif /* ARENA_H */

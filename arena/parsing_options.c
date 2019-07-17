@@ -6,11 +6,10 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 09:19:28 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/14 10:11:31 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/16 12:43:25 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
 
@@ -32,7 +31,7 @@ static inline char		*ft_option_trim(char const *argument)
 
 static inline int		ft_long_option_lookup(char const *argument)
 {
-	int					ret = -1;
+	int					ret = EXIT_ERROR;
 	register uint16_t	index = 0;
 
 	while (options[index++].longname != 0)
@@ -43,7 +42,7 @@ static inline int		ft_long_option_lookup(char const *argument)
 
 static inline int		ft_short_option_lookup(char const *argument)
 {
-	int					ret = -1;
+	int					ret = EXIT_ERROR;
 	register uint16_t	index = 0;
 
 	if (__unlikely(*(argument + 1)))
@@ -67,5 +66,7 @@ void					ft_get_options(char const ***argv)
 		ft_puterror_illegal_option(ft_option_trim(**argv));
 		exit(EXIT_FAILURE);
 	}
-	(*options[index].funptr)(argv);
+	if (options[index].has_arg == required_argument)
+		++(*argv);
+	(*options[index].funptr)(*argv);
 }

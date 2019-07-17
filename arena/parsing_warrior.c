@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/15 12:59:28 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/16 13:38:36 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static inline void			ft_store_warrior_id(void)
 			exit(EXIT_FAILURE);
 		}
 		g_arena.warriors->id = g_arena.value;
-		DEL_OPTION_N(g_arena.options);
+		UNSET_OPTION_N(g_arena.options);
 	}
 }
 

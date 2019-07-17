@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 08:40:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/15 14:08:30 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/16 13:27:06 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ enum					e_needargs {
 */
 typedef struct			s_options {
 	char				*longname;
-	void				(*funptr)(char const ***av);
+	void				(*funptr)(char const **av);
 	int					has_arg;
 	char				shortname;
 }						t_options;
 
-void					ft_get_dump(char const ***av);
-void					ft_get_numb(char const ***av);
-void					ft_print_help(char const ***av);
-void					ft_set_visualize(char const ***av);
+void					ft_get_dump(char const **av);
+void					ft_get_numb(char const **av);
+void					ft_print_help(char const **av);
+void					ft_set_visualize(char const **av);
 
 static t_options		options[] = {
 	{"dump", &ft_get_dump, required_argument, 'd'},

@@ -6,7 +6,7 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 10:11:18 by thflahau          #+#    #+#              #
-#    Updated: 2019/07/14 09:40:27 by thflahau         ###   ########.fr        #
+#    Updated: 2019/07/17 16:27:58 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ OBJDIR		=	obj
 ##########   FLAGS   ##########
 CFLAGS		=	-Wall					\
 				-Wextra					\
-				-Werror
+				-Werror					\
+				-pedantic
 
 INCFLAG		=	-I $(HDR)
 LIBFLAG		=	-L $(LIBDIR) -lft
@@ -32,12 +33,18 @@ LIBFLAG		=	-L $(LIBDIR) -lft
 include $(ARENADIR)/arena_srcs.mk
 include $(ASMDIR)/assembler_srcs.mk
 
+SRCS1		=	$(addprefix $(ARENADIR)/, $(ARENA_SRCS))
+
+SHARESRC	=	share/errors.c		share/list_torvalds.c
+
 HDRFILES	=	$(filter %.h, $(shell find $(HDR)))
 LIBFT		=	$(LIBDIR)/libft.a
 
-all		:
+all		: $(NAME_ARENA)
+
+$(NAME_ARENA):
 	@make -C $(LIBDIR)
-	@gcc $(CFLAGS) arena/*.c share/*.c $(INCFLAG) $(LIBFLAG) -o $(NAME_ARENA)
+	@gcc $(CFLAGS) $(SRCS1) $(SHARESRC) $(INCFLAG) $(LIBFLAG) -o $(NAME_ARENA)
 
 clean	:
 	@make clean -C $(LIBDIR)

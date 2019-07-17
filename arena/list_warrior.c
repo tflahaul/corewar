@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:05:07 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/15 13:16:01 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/16 15:08:29 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,6 @@ inline int				ft_number_in_list(int32_t id)
 	return (EXIT_SUCCESS);
 }
 
-static inline void		ft_list_push_warrior(t_warrior *entry)
-{
-	if (__builtin_expect((g_arena.warriors == NULL), 0))
-		g_arena.warriors = entry;
-	else if (__builtin_expect(entry != NULL, 1))
-	{
-		entry->next = g_arena.warriors;
-		g_arena.warriors = entry;
-	}
-}
-
 unsigned int			ft_list_size_warrior(void)
 {
 	t_warrior			*node;
@@ -52,6 +41,17 @@ unsigned int			ft_list_size_warrior(void)
 	while (node != NULL && ++size)
 		node = node->next;
 	return (size);
+}
+
+static inline void		ft_list_push_warrior(t_warrior *entry)
+{
+	if (__builtin_expect((g_arena.warriors == NULL), 0))
+		g_arena.warriors = entry;
+	else if (__builtin_expect(entry != NULL, 1))
+	{
+		entry->next = g_arena.warriors;
+		g_arena.warriors = entry;
+	}
 }
 
 int						ft_malloc_new_warrior(void)
