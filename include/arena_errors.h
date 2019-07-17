@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:28:50 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/15 13:07:02 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/17 18:13:25 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 # define FILERR				"Unsupported file type"
 # define BADFMT				"Unknown file extension"
+# define ALLOCFAIL			"Memory allocation failure"
 
 # define BADOPTION			"Illegal option -- "
 # define BADOPT				"Invalid option value"

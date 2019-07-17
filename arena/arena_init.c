@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:26:06 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/17 16:42:10 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/17 18:16:38 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static int				ft_new_process(t_listhead *hd, int32_t id, uint16_t pc)
 
 	if (__unlikely((process = (t_process *)malloc(sizeof(*process))) == NULL))
 		return (EXIT_ERROR);
-	process->id = id;
+	ft_bzero(process, sizeof(*process));
+	process->registers[0] = id;
 	process->pc = pc;
 	ft_list_push(&(process->list), hd);
 	return (EXIT_SUCCESS);
@@ -47,8 +48,8 @@ int						ft_arena_load_warriors(t_listhead *head)
 	while (node != NULL)
 	{
 		ft_memcpy(arena, node->program, node->size);
-		if (ft_new_process(head, node->id, (uint16_t)(temp - arena)) < 0)
-			return (EXIT_FAILURE); // Leak
+		if (ft_new_process(head, node->id, (uint16_t)(arena - temp)) < 0)
+			return (ft_puterror_memalloc_failure(head));
 		arena += ft_compute_gap_between_warriors();
 		node = node->next;
 	}

@@ -6,11 +6,9 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/17 16:55:53 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/17 18:16:09 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include <arena.h>
 #include <arena_errors.h>
@@ -19,15 +17,14 @@
 #include <corewar_compiler.h>
 
 /* DEBUG */
-static inline int		ft_find_in_list(t_listhead const *head, uint16_t index)
+#include <stdio.h>
+static inline t_warrior	*getwar(int id)
 {
-	t_listhead			*position;
+	t_warrior			*node = g_arena.warriors;
 
-	position = (t_listhead *)head;
-	while ((position = position->next) != head)
-		if ((GET_PROCESS(position))->pc == index)
-			return (1);
-	return (0);
+	while (node != NULL && node->id != id)
+		node = node->next;
+	return (node);
 }
 
 /* DEBUG */
@@ -37,17 +34,14 @@ static void				ft_print_pcs(t_listhead const *head)
 
 	while (index < MEM_SIZE)
 	{
-		if (ft_find_in_list(head, index))
-			printf("\nPC = [%02hhx]\n", g_arena.arena[index]);
+		t_listhead *position = (t_listhead *)head;
+		while ((position = position->next) != head)
+			if ((GET_PROC(position))->pc == index)
+				printf("PC = [%02hhx]\n", g_arena.arena[index]);
 		++index;
 	}
-	int size = 0;
-	for (t_listhead *ptr = (t_listhead *)head->next; ptr != head; ptr = ptr->next)
-	{
-		printf("Process at PC %hu\n", GET_PROCESS(ptr)->pc);
-		++size;
-	}
-	printf("SIZE = [%i]\n", size);
+	for (t_listhead *p = (t_listhead *)head->next; p != head; p = p->next)
+		printf("[%s] -> PC = %hu\n", (getwar(GET_PROC(p)->registers[0]))->name, GET_PROC(p)->pc);
 }
 
 int						main(int argc, char const **argv)
@@ -57,9 +51,11 @@ int						main(int argc, char const **argv)
 	if (__unlikely(ft_parse_args(argc, argv) != EXIT_SUCCESS))
 		return (EXIT_FAILURE);
 	ft_list_init_head(&head);
-	ft_arena_load_warriors(&head);
+	if (ft_arena_load_warriors(&head) != EXIT_SUCCESS)
+		return (EXIT_ERROR);
 	if (g_arena.options & OPTION_V)
 		ft_hexdump_memory();
 	ft_print_pcs(&head);
+	ft_list_del(&head);
 	return (EXIT_SUCCESS);
 }
