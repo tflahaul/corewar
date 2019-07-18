@@ -6,7 +6,7 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 10:11:18 by thflahau          #+#    #+#              #
-#    Updated: 2019/07/17 16:27:58 by thflahau         ###   ########.fr        #
+#    Updated: 2019/07/18 13:15:43 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ include $(ASMDIR)/assembler_srcs.mk
 
 SRCS1		=	$(addprefix $(ARENADIR)/, $(ARENA_SRCS))
 
-SHARESRC	=	share/errors.c		share/list_torvalds.c
+SHARESRC	=	share/errors.c
 
 HDRFILES	=	$(filter %.h, $(shell find $(HDR)))
 LIBFT		=	$(LIBDIR)/libft.a

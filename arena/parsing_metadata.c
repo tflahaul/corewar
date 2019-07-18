@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/13 12:45:48 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/18 15:11:33 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static inline int			ft_read_program_name(int fd)
 {
 	unsigned char			buffer[PROG_NAME_LENGTH + 1];
 
-	if (__unlikely(lseek(fd, offsetof(header_t, prog_name), SEEK_SET) < 0))
+	if (__unlikely(lseek(fd, offsetof(t_header, prog_name), SEEK_SET) < 0))
 		return (EXIT_ERROR);
-	if (__unlikely(read(fd, buffer, sizeof(((header_t *)0)->prog_name)) < 0))
+	if (__unlikely(read(fd, buffer, sizeof(((t_header *)0)->prog_name)) < 0))
 		return (EXIT_ERROR);
 	buffer[PROG_NAME_LENGTH] = 0;
 	ft_memcpy(g_arena.warriors->name, buffer, ft_strlen((char *)buffer));
@@ -49,7 +49,7 @@ static inline int			ft_read_program_size(int fd)
 {
 	unsigned int			size = 0;
 
-	if (__unlikely(lseek(fd, offsetof(header_t, prog_size), SEEK_SET) < 0))
+	if (__unlikely(lseek(fd, offsetof(t_header, prog_size), SEEK_SET) < 0))
 		return (EXIT_ERROR);
 	if (__unlikely(read(fd, &size, sizeof(size)) < 0))
 		return (EXIT_ERROR);
@@ -64,9 +64,9 @@ static inline int			ft_read_program_comment(int fd)
 {
 	unsigned char			buffer[COMMENT_LENGTH + 1];
 
-	if (__unlikely(lseek(fd, offsetof(header_t, comment), SEEK_SET) < 0))
+	if (__unlikely(lseek(fd, offsetof(t_header, comment), SEEK_SET) < 0))
 		return (EXIT_ERROR);
-	if (__unlikely(read(fd, buffer, sizeof(((header_t *)0)->comment)) < 0))
+	if (__unlikely(read(fd, buffer, sizeof(((t_header *)0)->comment)) < 0))
 		return (EXIT_ERROR);
 	buffer[COMMENT_LENGTH] = 0;
 	ft_memcpy(g_arena.warriors->comment, buffer, ft_strlen((char *)buffer));

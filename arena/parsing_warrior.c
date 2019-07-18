@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/16 13:38:36 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/18 15:23:34 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static inline int			ft_store_warrior(int fd)
 	ssize_t					bytes;
 	uint8_t					buffer[CHAMP_MAX_SIZE];
 
-	if (__unlikely(lseek(fd, sizeof(header_t), SEEK_SET) < 0))
+	if (__unlikely(lseek(fd, sizeof(t_header), SEEK_SET) < 0))
 		return (ft_puterror(strerror(errno)));
 	if (__unlikely((bytes = read(fd, buffer, CHAMP_MAX_SIZE)) < 0))
 		return (ft_puterror(strerror(errno)));

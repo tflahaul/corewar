@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arena_process.h                                    :+:      :+:    :+:   */
+/*   ft_list_delete.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/17 15:23:49 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/18 15:09:35 by thflahau         ###   ########.fr       */
+/*   Created: 2019/07/18 14:37:07 by thflahau          #+#    #+#             */
+/*   Updated: 2019/07/18 15:05:46 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ARENA_PROCESS_H
-# define ARENA_PROCESS_H
+#include <stdlib.h>
+#include <list.h>
 
-# include <stdint.h>
-
-# include "list.h"
-# include "op.h"
-
-typedef struct				s_process
+void			ft_list_delete(t_listhead *head, void *(*funptr)(t_listhead *))
 {
-	uint16_t				pc;
-	uint16_t				carry;
-	t_listhead				list;
-	int32_t					registers[REG_NUMBER];
-}							t_process;
+	t_listhead	*node;
+	t_listhead	*next;
 
-void						*ft_get_process(t_listhead *node);
-int							ft_arena_load_warriors(t_listhead *head);
-
-#endif
+	node = head->next;
+	next = node->next;
+	while (node != head)
+	{
+		free((*funptr)(node));
+		node = next;
+		next = node->next;
+	}
+}

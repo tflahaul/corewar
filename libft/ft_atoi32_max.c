@@ -6,14 +6,14 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:19:10 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/15 12:51:10 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/18 14:59:50 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 #include <libft.h>
 
-int32_t					ft_atoi_max_int32(char const *str)
+int32_t					ft_atoi32_max(char const *str)
 {
 	int64_t				nb;
 

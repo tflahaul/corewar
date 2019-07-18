@@ -6,16 +6,15 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/17 16:15:33 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/18 15:09:51 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ARENA_H
 # define ARENA_H
 
-# include "op.h"
-
 # include <stdint.h>
+# include "op.h"
 
 # define FILE_FORMAT		".cor"
 

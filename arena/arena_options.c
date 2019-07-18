@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 09:54:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/16 12:26:48 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/18 15:06:44 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void					ft_get_dump(char const **argv)
 		ft_puterror(NULLOPT);
 		exit(EXIT_FAILURE);
 	}
-	if ((g_arena.dump_cycles = ft_atoi_max_int32(*argv)) == EXIT_ERROR)
+	if ((g_arena.dump_cycles = ft_atoi32_max(*argv)) == EXIT_ERROR)
 	{
 		ft_puterror(BADOPT);
 		exit(EXIT_FAILURE);
@@ -71,7 +71,7 @@ void					ft_get_numb(char const **argv)
 		exit(EXIT_FAILURE);
 	}
 	g_arena.options |= OPTION_N;
-	if ((g_arena.value = ft_atoi_max_int32(*argv)) == EXIT_ERROR)
+	if ((g_arena.value = ft_atoi32_max(*argv)) == EXIT_ERROR)
 	{
 		ft_puterror(BADOPT);
 		exit(EXIT_FAILURE);

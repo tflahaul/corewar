@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:26:06 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/17 18:16:38 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/18 14:41:41 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static int				ft_new_process(t_listhead *hd, int32_t id, uint16_t pc)
 
 int						ft_arena_load_warriors(t_listhead *head)
 {
-	t_warrior			*node;
 	uint8_t				*temp;
+	t_warrior			*node;
 	register uint8_t	*arena;
 
 	arena = g_arena.arena;
