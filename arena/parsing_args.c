@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/17 16:08:30 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/19 15:52:06 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,6 @@ static inline int		ft_valid_file_fmt(char const *file)
 	if (__unlikely((ptr = ft_strrchr(file, '.')) == NULL))
 		return (EXIT_ERROR);
 	return (ft_strcmp(ptr, FILE_FORMAT));
-}
-
-static inline void		ft_scan_warriors_id(void)
-{
-	int32_t				id;
-	t_warrior			*node;
-
-	node = g_arena.warriors;
-	while (node != NULL)
-	{
-		if (node->id == COREWAR_EXEC_MAGIC)
-		{
-			id = 0;
-			while (ft_number_in_list(id) == EXIT_FAILURE)
-				++id;
-			node->id = id;
-		}
-		node = node->next;
-	}
 }
 
 int						ft_parse_args(int argc, char const **argv)

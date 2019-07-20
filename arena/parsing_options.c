@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 09:19:28 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/18 15:24:19 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/19 15:25:20 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static inline int		ft_long_option_lookup(char const *argument)
 
 	while (options[index++].longname != 0)
 		if (ft_strcmp(argument, options[index - 1].longname) == 0)
-			ret = index - 1;
+			return (index - 1);
 	return (ret);
 }
 
@@ -48,7 +48,7 @@ static inline int		ft_short_option_lookup(char const *argument)
 		return (EXIT_ERROR);
 	while (options[index++].longname != 0)
 		if (*argument == options[index - 1].shortname)
-			ret = index - 1;
+			return (index - 1);
 	return (ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:48:59 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/18 15:03:18 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/20 15:06:48 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void				ft_hexdump_memory(void)
 {
 	uint16_t		index = 0;
 
-	printf("0x%#.5x:  ", index);
+	printf("0x%#.4x:  ", index);
 	while (index < MEM_SIZE)
 	{
 		printf("%02hhx", g_arena.arena[index]);
 		if (!(++index % 32))
 		{
 			printf("\n");
-			printf("%#.5x:  ", index);
+			printf("%#.4x:  ", index);
 		}
 		else
 			printf(" ");

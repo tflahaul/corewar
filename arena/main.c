@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/18 15:22:11 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/20 15:07:31 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ int						main(int argc, char const **argv)
 	if (ft_arena_load_warriors(&head) != EXIT_SUCCESS)
 		return (EXIT_ERROR);
 
+//////////// visu SDL plus tard //////////////
 	if (g_arena.options & OPTION_V)
 		ft_hexdump_memory();
+//////////////////////////////////////////////
 
 	ft_list_delete(&head, &ft_get_process);
 	return (EXIT_SUCCESS);

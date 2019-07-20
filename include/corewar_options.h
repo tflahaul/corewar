@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 08:40:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/16 13:27:06 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/20 13:22:58 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,4 @@ static t_options		options[] = {
 
 void					ft_get_options(char const ***av);
 
-#endif /* COREWAR_OPTIONS_H */
+#endif

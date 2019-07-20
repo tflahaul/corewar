@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 09:54:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/18 15:06:44 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/19 15:20:02 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void					ft_get_dump(char const **argv)
 		ft_puterror(NULLOPT);
 		exit(EXIT_FAILURE);
 	}
-	if ((g_arena.dump_cycles = ft_atoi32_max(*argv)) == EXIT_ERROR)
+	if ((g_arena.dump_cycles = ft_atoi32_max(*argv)) <= 0)
 	{
 		ft_puterror(BADOPT);
 		exit(EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 15:20:22 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/18 15:20:47 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/20 15:14:02 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,35 @@ typedef char					t_arg_type;
 
 typedef struct		s_header
 {
-  unsigned int		magic;
-  char				prog_name[PROG_NAME_LENGTH + 1];
-  unsigned int		prog_size;
-  char				comment[COMMENT_LENGTH + 1];
+	unsigned int	magic;
+	char			prog_name[PROG_NAME_LENGTH + 1];
+	unsigned int	prog_size;
+	char			comment[COMMENT_LENGTH + 1];
 }					t_header;
+
+typedef struct		s_instructions
+{
+	unsigned int	carry;
+	unsigned int	cycle;
+	unsigned int	has_code_byte;
+	void			(*funptr)(unsigned int);
+}					t_ops;
+
+void				op_live(unsigned int x);
+void				op_ld(unsigned int x);
+void				op_st(unsigned int x);
+void				op_add(unsigned int x);
+void				op_sub(unsigned int x);
+void				op_and(unsigned int x);
+void				op_or(unsigned int x);
+void				op_xor(unsigned int x);
+void				op_zjmp(unsigned int x);
+void				op_ldi(unsigned int x);
+void				op_sti(unsigned int x);
+void				op_fork(unsigned int x);
+void				op_lld(unsigned int x);
+void				op_lldi(unsigned int x);
+void				op_lfork(unsigned int x);
+void				op_aff(unsigned int x);
 
 #endif
