@@ -6,7 +6,7 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 10:41:28 by thflahau          #+#    #+#              #
-#    Updated: 2019/07/19 12:54:40 by thflahau         ###   ########.fr        #
+#    Updated: 2019/07/23 10:05:13 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,4 +24,6 @@ LIBSOURCES		=	ft_strrchr.c				\
 					ft_list_push.c				\
 					ft_list_add.c				\
 					ft_list_delete.c			\
-					ft_putstr.c
+					ft_putstr.c					\
+					ft_list_size.c				\
+					ft_list_pop.c

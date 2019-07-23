@@ -6,17 +6,20 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 12:36:13 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/20 15:15:25 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/22 16:46:49 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 
+#include <libft.h>
 #include <arena.h>
+#include <arena_errors.h>
+#include <arena_process.h>
 #include <corewar_compiler.h>
-
-static t_ops const		instructions[] = {
+/*
+static t_ops const	instructions[] = {
 	{0, 0, 0, 0},
 	{0, 0x00A, 0, &op_live},
 	{1, 0x005, 0, &op_ld},
@@ -36,21 +39,4 @@ static t_ops const		instructions[] = {
 	{1, 0x002, 0, &op_aff},
 	{0, 0, 0, 0}
 };
-
-void					ft_decode_instruction(unsigned int address)
-{
-	uint8_t				instruction_length;
-	uint8_t				byte;
-	uint8_t const		opcode = g_arena.arena[address];
-
-	instruction_length = 0;
-	if (opcode > 0 && opcode < 18)
-	{
-		if (instructions[opcode].has_code_byte)
-		{
-			byte = g_arena.arena[MEMINDEX(address + (++instruction_length))];
-
-		}
-		instructions[opcode].funptr(0);
-	}
-}
+*/

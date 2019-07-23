@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 12:34:53 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/19 12:55:43 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/23 10:04:28 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ void			ft_list_init_head(t_listhead *head);
 void			ft_list_add_tail(t_listhead *e, t_listhead *head);
 void			ft_list_delete(t_listhead *head, void *(*funptr)(t_listhead *));
 void			ft_list_push(t_listhead *e, t_listhead *head);
+void			ft_list_pop(t_listhead *node, void *(ptr)(t_listhead *));
 void			ft_list_add(t_listhead *e, t_listhead *prev, t_listhead *next);
+size_t			ft_list_size(t_listhead const *head);
 
 /*
 **	Bits

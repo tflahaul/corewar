@@ -6,7 +6,7 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 10:11:18 by thflahau          #+#    #+#              #
-#    Updated: 2019/07/18 13:15:43 by thflahau         ###   ########.fr        #
+#    Updated: 2019/07/22 16:25:29 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,6 @@ clean	:
 
 fclean	:
 	@make fclean -C $(LIBDIR)
-	@/bin/rm $(NAME_ARENA)
+	@/bin/rm -rf  $(NAME_ARENA)
 
 re		: fclean all
