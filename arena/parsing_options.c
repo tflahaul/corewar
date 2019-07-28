@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 09:19:28 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/19 15:25:20 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/28 14:55:48 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 static inline char		*ft_option_trim(char const *argument)
 {
 	char				*ptr;
-	register uint16_t	index = 0;
+	register uint16_t	index;
 
+	index = 0;
 	ptr = (char *)argument;
 	while (*ptr == '-' && __likely(++index <= 2))
 		++ptr;
@@ -30,24 +31,28 @@ static inline char		*ft_option_trim(char const *argument)
 
 static inline int		ft_long_option_lookup(char const *argument)
 {
-	int					ret = EXIT_ERROR;
-	register uint16_t	index = 0;
+	int					ret;
+	register uint16_t	index;
 
-	while (options[index++].longname != 0)
-		if (ft_strcmp(argument, options[index - 1].longname) == 0)
+	index = 0;
+	ret = EXIT_ERROR;
+	while (g_options[index++].longname != 0)
+		if (ft_strcmp(argument, g_options[index - 1].longname) == 0)
 			return (index - 1);
 	return (ret);
 }
 
 static inline int		ft_short_option_lookup(char const *argument)
 {
-	int					ret = EXIT_ERROR;
-	register uint16_t	index = 0;
+	int					ret;
+	register uint16_t	index;
 
+	index = 0;
+	ret = EXIT_ERROR;
 	if (__unlikely(*(argument + 1)))
 		return (EXIT_ERROR);
-	while (options[index++].longname != 0)
-		if (*argument == options[index - 1].shortname)
+	while (g_options[index++].longname != 0)
+		if (*argument == g_options[index - 1].shortname)
 			return (index - 1);
 	return (ret);
 }
@@ -65,7 +70,7 @@ void					ft_get_options(char const ***argv)
 		ft_puterror_illegal_option(ft_option_trim(**argv));
 		exit(EXIT_FAILURE);
 	}
-	if (options[index].has_arg == required_argument)
+	if (g_options[index].has_arg == required_argument)
 		++(*argv);
-	(*options[index].funptr)(*argv);
+	(*g_options[index].funptr)(*argv);
 }

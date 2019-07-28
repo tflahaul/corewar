@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:48:59 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/20 15:06:48 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/23 11:13:57 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include <libft.h>
 #include <arena.h>
-#include <arena_memory.h>
 #include <arena_errors.h>
 #include <arena_process.h>
 #include <corewar_compiler.h>

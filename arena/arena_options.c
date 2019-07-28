@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 09:54:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/19 15:20:02 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/28 14:55:17 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void					ft_get_dump(char const **argv)
 		ft_puterror(BADOPT);
 		exit(EXIT_FAILURE);
 	}
+	g_arena.options |= OPTION_D;
 }
 
 void					ft_get_numb(char const **argv)

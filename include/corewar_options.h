@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 08:40:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/20 13:22:58 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/28 12:33:57 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void					ft_get_numb(char const **av);
 void					ft_print_help(char const **av);
 void					ft_set_visualize(char const **av);
 
-static t_options		options[] = {
+static t_options		g_options[] = {
 	{"dump", &ft_get_dump, required_argument, 'd'},
 	{"number", &ft_get_numb, required_argument, 'n'},
 	{"help", &ft_print_help, no_argument, 'h'},

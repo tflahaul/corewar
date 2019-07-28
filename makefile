@@ -5,25 +5,27 @@
 #                                                     +:+ +:+         +:+      #
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/07/11 10:11:18 by thflahau          #+#    #+#              #
-#    Updated: 2019/07/22 16:25:29 by thflahau         ###   ########.fr        #
+#    Created: 2018/12/03 22:08:10 by abrunet           #+#    #+#              #
+#    Updated: 2019/07/28 15:22:47 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME_ARENA	=	corewar
-NAME_ASM	=	asm
+CC			=	gcc
+
+NAME1		= 	corewar
+NAME2		=	asm
 
 #######   DIRECTORIES   #######
-ARENADIR	=	arena
-ASMDIR		=	assembler
 HDR			=	include
 LIBDIR		=	libft
+ARENADIR	=	arena
+ASMDIR		=	assembler
 OBJDIR		=	obj
 
 ##########   FLAGS   ##########
-CFLAGS		=	-Wall					\
-				-Wextra					\
-				-Werror					\
+CFLAGS		=	-Wall						\
+				-Wextra						\
+				-Werror						\
 				-pedantic
 
 INCFLAG		=	-I $(HDR)
@@ -33,24 +35,46 @@ LIBFLAG		=	-L $(LIBDIR) -lft
 include $(ARENADIR)/arena_srcs.mk
 include $(ASMDIR)/assembler_srcs.mk
 
-SRCS1		=	$(addprefix $(ARENADIR)/, $(ARENA_SRCS))
-
-SHARESRC	=	share/errors.c
-
-HDRFILES	=	$(filter %.h, $(shell find $(HDR)))
 LIBFT		=	$(LIBDIR)/libft.a
 
-all		: $(NAME_ARENA)
+SRCS		=	$(addprefix $(ARENADIR)/, $(ARENA_SRCS))
 
-$(NAME_ARENA):
+ARENA_OBJ	=	$(patsubst %,$(OBJDIR)/%.o, $(ARENA_SRCS))
+
+DEPENDS		=	${ARENA_OBJ:.o=.d}
+
+######### COLORS ##########
+STD			=	\033[0m
+GREEN		=	\033[0;32m
+YELLOW		=	\033[0;33m
+
+##########   RULES   ##########
+all				: $(NAME1)
+
+$(NAME1)		: $(LIBFT) $(ARENA_OBJ)
+	@printf "$(YELLOW)%-40s$(STD)" "Building executable $@ ..."
+	@$(CC) $(CFLAGS) $(INCFLAG) share/errors.c $(ARENA_OBJ) -o $@ $(LIBFLAG)
+	@echo "$(GREEN)DONE$(STD)"
+
+$(LIBFT)		: $(HDR)/libft.h
 	@make -C $(LIBDIR)
-	@gcc $(CFLAGS) $(SRCS1) $(SHARESRC) $(INCFLAG) $(LIBFLAG) -o $(NAME_ARENA)
 
-clean	:
+$(OBJDIR)/%.o	: $(ARENADIR)/%.c
+	@mkdir -p $(OBJDIR)
+	@printf "%-40s" " > Compiling $* ..."
+	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@
+	@echo '✓'
+
+-include ${DEPENDS}
+
+clean			:
+	@/bin/rm -rf $(OBJDIR)
 	@make clean -C $(LIBDIR)
 
-fclean	:
+fclean			: clean
+	@/bin/rm -rf $(NAME1)
 	@make fclean -C $(LIBDIR)
-	@/bin/rm -rf  $(NAME_ARENA)
 
-re		: fclean all
+re				: fclean all
+
+.PHONY			: all $(LIBFT) clean fclean re

@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 12:34:53 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/23 10:04:28 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/28 12:33:39 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ size_t			ft_list_size(t_listhead const *head);
 /*
 **	Bits
 */
+int32_t			ft_swap_int32(int32_t nb) __attribute__((always_inline));
 uint16_t		ft_swap_uint16(uint16_t nb) __attribute__((always_inline));
 uint32_t		ft_swap_uint32(uint32_t nb) __attribute__((always_inline));
 
-#endif /* LIBFT_H */
+#endif

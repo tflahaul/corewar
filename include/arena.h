@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/20 14:52:33 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/23 11:13:41 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ t_arena_state			g_arena;
 
 # define OPTION_N		0x00000001
 # define OPTION_V		0x00000010
+# define OPTION_D		0x00000100
 
+# define HAS_DUMP(x)		(x & OPTION_D)
 # define HAS_NUMBER(x)		(x & OPTION_N)
 # define UNSET_OPTION_N(x)	(x &= ~OPTION_N)
 
@@ -58,5 +60,7 @@ int						ft_number_in_list(int32_t id);
 void					ft_scan_warriors_id(void);
 void					ft_hexdump_memory(void);
 unsigned int			ft_list_size_warrior(void);
+
+void					ft_free_warriors(void) __attribute__((destructor));
 
 #endif
