@@ -6,7 +6,7 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 22:08:10 by abrunet           #+#    #+#              #
-#    Updated: 2019/07/28 15:22:47 by thflahau         ###   ########.fr        #
+#    Updated: 2019/07/29 11:16:40 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,15 +43,15 @@ ARENA_OBJ	=	$(patsubst %,$(OBJDIR)/%.o, $(ARENA_SRCS))
 
 DEPENDS		=	${ARENA_OBJ:.o=.d}
 
-######### COLORS ##########
+#########   COLORS   ##########
 STD			=	\033[0m
 GREEN		=	\033[0;32m
 YELLOW		=	\033[0;33m
 
 ##########   RULES   ##########
-all				: $(NAME1)
+all				: $(LIBFT) $(NAME1)
 
-$(NAME1)		: $(LIBFT) $(ARENA_OBJ)
+$(NAME1)		: $(ARENA_OBJ)
 	@printf "$(YELLOW)%-40s$(STD)" "Building executable $@ ..."
 	@$(CC) $(CFLAGS) $(INCFLAG) share/errors.c $(ARENA_OBJ) -o $@ $(LIBFLAG)
 	@echo "$(GREEN)DONE$(STD)"
@@ -59,16 +59,17 @@ $(NAME1)		: $(LIBFT) $(ARENA_OBJ)
 $(LIBFT)		: $(HDR)/libft.h
 	@make -C $(LIBDIR)
 
+-include $(DEPENDS)
+
 $(OBJDIR)/%.o	: $(ARENADIR)/%.c
 	@mkdir -p $(OBJDIR)
 	@printf "%-40s" " > Compiling $* ..."
 	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@
 	@echo '✓'
 
--include ${DEPENDS}
-
 clean			:
 	@/bin/rm -rf $(OBJDIR)
+	@/bin/rm -rf corewar.d
 	@make clean -C $(LIBDIR)
 
 fclean			: clean

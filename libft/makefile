@@ -6,7 +6,7 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 10:35:03 by thflahau          #+#    #+#              #
-#    Updated: 2019/07/11 12:06:33 by thflahau         ###   ########.fr        #
+#    Updated: 2019/07/29 11:15:02 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,12 +29,18 @@ include		libftsources.mk
 
 OBJS		=	$(LIBSOURCES:.c=.o)
 
+STD			=	\033[0m
+GREEN		=	\033[0;32m
+YELLOW		=	\033[0;33m
+
 all		: $(NAME)
 
 $(NAME)	: $(OBJS)
+	@printf "$(YELLOW)%-40s$(STD)" "Building library $@ ..."
 	@$(CC) $(HFLAGS) $(CFLAGS) $(LIBSOURCES)
 	@ar -cq $@ $(OBJS)
 	@ranlib $@
+	@echo "$(GREEN)DONE$(STD)"
 
 %.o		: %.c	$(INCLUDE)/libft.h
 	@$(CC) $(CFLAGS) $(HFLAGS) -o $@ -c $<

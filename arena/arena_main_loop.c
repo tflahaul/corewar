@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/28 12:08:24 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/29 12:10:09 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 #include <arena_process.h>
 #include <corewar_compiler.h>
 
-static inline void		ft_pop_dead_processes(t_listhead const *head)
+static inline void			ft_pop_dead_processes(t_listhead const *head)
 {
-	t_listhead			*temp;
-	t_listhead			*position;
+	t_listhead				*temp;
+	t_listhead				*position;
 
 	temp = (t_listhead *)head->next;
 	while ((position = temp) != head)
@@ -34,18 +34,18 @@ static inline void		ft_pop_dead_processes(t_listhead const *head)
 	}
 }
 
-static inline void		ft_decode_next_instruction(t_process *node)
+static inline void			ft_decode_next_instruction(t_process *node)
 {
-	uint8_t const		opcode = g_arena.arena[node->pc];
+	uint8_t const			opcode = g_arena.arena[node->pc];
 
 	if (__likely(opcode > 0 && opcode < 17))
 		printf("OPC %#x\n", opcode);
 }
 
-static inline void		ft_exec_each_process(t_listhead const *head)
+static inline void			ft_exec_each_process(t_listhead const *head)
 {
-	t_process			*process;
-	t_listhead			*position;
+	t_process				*process;
+	t_listhead				*position;
 
 	position = (t_listhead *)head;
 	while ((position = position->next) != head)
@@ -62,33 +62,27 @@ static inline void		ft_exec_each_process(t_listhead const *head)
 	}
 }
 
-void					ft_arena_main_loop(t_listhead const *head)
+__attribute__((hot))
+void						ft_arena_main_loop(t_listhead const *head)
 {
-	register int		index;
-	register int		cycle;
-	register int32_t	main_cycle;
+	register int			clock;
+	register int			cycletodie;
 
-	index = 0;
-	main_cycle = 0;
-	cycle = CYCLE_TO_DIE;
-	while (cycle > 0)
+	clock = 0;
+	cycletodie = CYCLE_TO_DIE;
+	while (++clock)
 	{
-		++main_cycle;
-		if (++index == cycle)
+		ft_exec_each_process(head);
+		if (!(clock % cycletodie))
 		{
 			ft_pop_dead_processes(head);
 			if (ft_list_size(head) == 0)
-				cycle -= CYCLE_DELTA;
-			index = 0;
+				cycletodie -= CYCLE_DELTA;
 		}
-		ft_exec_each_process(head);
-		if (HAS_DUMP(g_arena.options))
+		if (HAS_DUMP(g_arena.options) && __unlikely(clock == g_arena.dump_cycles))
 		{
-			if (main_cycle == g_arena.dump_cycles)
-			{
-				ft_hexdump_memory();
-				return ;
-			}
+			ft_hexdump_memory();
+			break ;
 		}
 	}
 }

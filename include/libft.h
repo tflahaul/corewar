@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 12:34:53 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/28 12:33:39 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/07/29 11:28:28 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 **	Strings
 */
 int				ft_strcmp(char const *s1, char const *s2);
+int				ft_strncmp(char const *s1, char const *s2, size_t n);
 void			ft_putstr(char const *str) __attribute__((always_inline));
 size_t			ft_strlen(char const *str);
 char			*ft_strrchr(char const *str, int c);
