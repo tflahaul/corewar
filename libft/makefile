@@ -19,6 +19,7 @@ INCLUDE		=	../include
 CFLAGS		=	-Wall				\
 				-Wextra				\
 				-Werror				\
+				-Wno-unused-result	\
 				-msse4				\
 				-O3					\
 				-c

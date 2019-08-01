@@ -41,7 +41,7 @@ int						ft_parse_args(int argc, char const **argv)
 				return (EXIT_FAILURE);
 		}
 		else
-			return (ft_puterror(BADFMT"\n"HELPMSG));
+			return (ft_puterror(FILERR"\n"HELPMSG));
 	}
 	if (__unlikely(g_arena.warriors == NULL))
 		return (ft_puterror(NOCHAMP));

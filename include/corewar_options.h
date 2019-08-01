@@ -28,21 +28,13 @@ typedef struct			s_options {
 	char				*longname;
 	void				(*funptr)(char const **av);
 	int					has_arg;
-	char				shortname;
+	int					shortname;
 }						t_options;
 
 void					ft_get_dump(char const **av);
 void					ft_get_numb(char const **av);
 void					ft_print_help(char const **av);
 void					ft_set_visualize(char const **av);
-
-static t_options		g_options[] = {
-	{"dump", &ft_get_dump, required_argument, 'd'},
-	{"number", &ft_get_numb, required_argument, 'n'},
-	{"help", &ft_print_help, no_argument, 'h'},
-	{"visualize", &ft_set_visualize, no_argument, 'v'},
-	{0, 0, 0, 0}
-};
 
 void					ft_get_options(char const ***av);
 

@@ -10,33 +10,88 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#define DEBUG
+#include <stdio.h>
+
 #include <stdint.h>
 #include <stdlib.h>
 
+#include <op.h>
 #include <libft.h>
 #include <arena.h>
 #include <arena_errors.h>
 #include <arena_process.h>
 #include <corewar_compiler.h>
-/*
-static t_ops const	instructions[] = {
+
+static t_ops const		instructions[] = {
 	{0, 0, 0, 0},
-	{0, 0x00A, 0, &op_live},
-	{1, 0x005, 0, &op_ld},
-	{1, 0x005, 0, &op_st},
-	{1, 0x00A, 0, &op_add},
-	{1, 0x00A, 0, &op_sub},
-	{1, 0x006, 0, &op_and},
-	{1, 0x006, 0, &op_or},
-	{1, 0x006, 0, &op_xor},
-	{0, 0x014, 0, &op_zjmp},
-	{1, 0x019, 0, &op_ldi},
-	{1, 0x019, 0, &op_sti},
-	{0, 0x320, 0, &op_fork},
-	{1, 0x00A, 0, &op_lld},
-	{1, 0x032, 0, &op_lldi},
-	{0, 0x3E8, 0, &op_lfork},
-	{1, 0x002, 0, &op_aff},
+	{0, 0, 0, 0}, // live
+	{0, 1, 0, 1}, // ld
+	{0, 0, 0, 1}, // st
+	{0, 1, 0, 1}, // add
+	{0, 1, 0, 1}, // sub
+	{0, 1, 0, 1}, // and
+	{0, 1, 0, 1}, // or
+	{0, 1, 0, 1}, // xor
+	{0, 0, 0, 0}, // zjmp
+	{0, 0, 0, 1}, // ldi
+	{0, 0, 0, 1}, // sti
+	{0, 0, 0, 0}, // fork
+	{0, 1, 0, 1}, // lld
+	{0, 1, 0, 1}, // lldi
+	{0, 0, 0, 0}, // lfork
+	{0, 0, 0, 1}, // aff
 	{0, 0, 0, 0}
 };
-*/
+
+static void				ft_putbinary(unsigned char octet)
+{
+	for (unsigned int pow = (1 << 7); pow; pow >>= 1)
+		printf("%i", !!(pow & octet));
+	printf("\t%#x\n", octet);
+}
+
+static int				ft_get_instruction_parameters(unsigned char octet)
+{
+	unsigned int		index;
+	unsigned char		temp;
+
+	index = 0;
+	ft_putbinary(octet);
+	while (index < 3)
+	{
+		temp = (octet >> (6 - (index * 2))) & 0x03;
+		if (temp == REG_CODE)
+			printf("Param #%u = Addressage registre\n", index + 1);
+		else if (temp == DIR_CODE)
+			printf("Param #%u = Addressage direct\n", index + 1);
+		else if (temp == IND_CODE)
+			printf("Param #%u = Addressage indirect\n", index + 1);
+		++index;
+	}
+#ifdef DEBUG
+	if (__unlikely(octet <<= 6))
+	{
+		printf("ERREUR:Mauvais octet de codage des paramètres\n\n");
+		return (0);
+	}
+#endif
+	return (1);
+}
+
+void					ft_decode_instruction(t_process *process)
+{
+	__attribute__((unused)) void (*funptr)(void *);
+	unsigned int const	index = g_arena.arena[process->pc];
+
+	if (__likely(index > 0 && index < 18))
+	{
+		funptr = instructions[index].funptr;
+		if (instructions[index].has_code_byte)
+			ft_get_instruction_parameters(g_arena.arena[MEMINDEX(++process->pc)]);
+		else
+			printf("Pas d'octet de codage des paramètres pour l'instruction %#x\n", index);
+	}
+	else
+		++process->pc;
+}

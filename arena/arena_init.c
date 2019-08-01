@@ -30,7 +30,7 @@ static int				ft_new_process(t_listhead *hd, int32_t id, uint16_t pc)
 	if (__unlikely((process = (t_process *)malloc(sizeof(*process))) == NULL))
 		return (EXIT_ERROR);
 	ft_bzero(process, sizeof(*process));
-	process->registers[0] = id;
+	process->registers[1] = id;
 	process->pc = pc;
 	ft_list_push(&(process->list), hd);
 	return (EXIT_SUCCESS);

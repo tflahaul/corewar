@@ -21,8 +21,7 @@
 typedef struct			s_process
 {
 	t_listhead			list;
-	void				(*funptr)(struct s_process *node);
-	int32_t				registers[REG_NUMBER];
+	int32_t				registers[REG_NUMBER + 1];
 	uint32_t			live;
 	uint16_t			carry;
 	uint16_t			cycle;
@@ -30,6 +29,7 @@ typedef struct			s_process
 }						t_process;
 
 int						ft_arena_load_warriors(t_listhead *head);
+void					ft_decode_instruction(t_process *process);
 void					ft_arena_main_loop(t_listhead const *head);
 void					*ft_get_process(t_listhead *node);
 

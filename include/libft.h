@@ -25,7 +25,7 @@
 */
 int				ft_strcmp(char const *s1, char const *s2);
 int				ft_strncmp(char const *s1, char const *s2, size_t n);
-void			ft_putstr(char const *str) __attribute__((always_inline));
+void			ft_putstr(char const *str);
 size_t			ft_strlen(char const *str);
 char			*ft_strrchr(char const *str, int c);
 int32_t			ft_atoi32_max(char const *str);
@@ -51,8 +51,8 @@ size_t			ft_list_size(t_listhead const *head);
 /*
 **	Bits
 */
-int32_t			ft_swap_int32(int32_t nb) __attribute__((always_inline));
-uint16_t		ft_swap_uint16(uint16_t nb) __attribute__((always_inline));
-uint32_t		ft_swap_uint32(uint32_t nb) __attribute__((always_inline));
+int32_t			ft_swap_int32(int32_t nb);
+uint16_t		ft_swap_uint16(uint16_t nb);
+uint32_t		ft_swap_uint32(uint32_t nb);
 
 #endif

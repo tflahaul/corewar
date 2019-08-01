@@ -21,6 +21,8 @@
 #include <corewar_options.h>
 #include <corewar_compiler.h>
 
+#define BUFF_SIZE		512
+
 void					ft_print_help(char const **argv)
 {
 	int					fd;

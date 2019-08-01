@@ -24,15 +24,9 @@
 # ifndef EXIT_FAILURE
 #  define EXIT_FAILURE		1
 # endif
-
 # define STDERR_FILENO		2
 
-# define BUFF_SIZE			512
-
-# define BADOP				"Unknown instruction"
-
-# define FILERR				"Unsupported file type"
-# define BADFMT				"Unknown file extension"
+# define FILERR				"Not a valid corewar executable"
 # define ALLOCFAIL			"Memory allocation failure"
 
 # define BADOPTION			"Illegal option -- "

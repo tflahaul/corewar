@@ -18,14 +18,18 @@
 
 # define FILE_FORMAT		".cor"
 
+# pragma pack(push, 2)
+
 typedef struct			s_warrior {
 	int32_t				id;
 	uint32_t			size;
+	struct s_warrior	*next;
 	uint8_t				program[CHAMP_MAX_SIZE];
 	char				name[PROG_NAME_LENGTH + 1];
 	char				comment[COMMENT_LENGTH + 1];
-	struct s_warrior	*next;
 }						t_warrior;
+
+# pragma pack(pop)
 
 /*
 **	@options:		Bitmap used to keep track of given options
@@ -33,18 +37,18 @@ typedef struct			s_warrior {
 **	@warriors:		Head of warriors singly linked list
 */
 typedef struct			s_arena_state {
+	t_warrior			*warriors;
 	int32_t				value;
 	int32_t				dump_cycles;
-	t_warrior			*warriors;
 	uint8_t				arena[MEM_SIZE];
-	uint16_t			options;
+	uint64_t			options;
 }						t_arena_state;
 
 t_arena_state			g_arena;
 
-# define OPTION_N		0x00000001
-# define OPTION_V		0x00000010
-# define OPTION_D		0x00000100
+# define OPTION_N		0x00000001ul
+# define OPTION_V		0x00000010ul
+# define OPTION_D		0x00000100ul
 
 # define HAS_DUMP(x)		(x & OPTION_D)
 # define HAS_NUMBER(x)		(x & OPTION_N)

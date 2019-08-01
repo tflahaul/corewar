@@ -26,7 +26,8 @@ OBJDIR		=	obj
 CFLAGS		=	-Wall						\
 				-Wextra						\
 				-Werror						\
-				-pedantic
+				-pedantic					\
+				-O0 # debug
 
 INCFLAG		=	-I $(HDR)
 LIBFLAG		=	-L $(LIBDIR) -lft

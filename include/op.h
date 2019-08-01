@@ -63,13 +63,16 @@ typedef struct		s_header
 	char			comment[COMMENT_LENGTH + 1];
 }					t_header;
 
+# pragma pack(push, 2)
+
 typedef struct		s_instructions
 {
+	void			(*funptr)(void *);
 	unsigned int	carry;
 	unsigned int	cycle;
 	unsigned int	has_code_byte;
-	void			(*funptr)(unsigned int);
 }					t_ops;
+# pragma pack(pop)
 
 void				op_live(unsigned int x);
 void				op_ld(unsigned int x);
