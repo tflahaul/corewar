@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
@@ -73,10 +75,10 @@ void					ft_get_numb(char const **argv)
 		ft_puterror(NULLOPT);
 		exit(EXIT_FAILURE);
 	}
-	g_arena.options |= OPTION_N;
 	if ((g_arena.value = ft_atoi32_max(*argv)) == EXIT_ERROR)
 	{
 		ft_puterror(BADOPT);
 		exit(EXIT_FAILURE);
 	}
+	g_arena.options |= OPTION_N;
 }

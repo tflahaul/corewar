@@ -70,7 +70,7 @@ static int				ft_get_instruction_parameters(unsigned char octet)
 		++index;
 	}
 #ifdef DEBUG
-	if (__unlikely(octet <<= 6))
+	if (__unlikely(octet & 0x03))
 	{
 		printf("ERREUR:Mauvais octet de codage des paramètres\n\n");
 		return (0);
@@ -81,17 +81,24 @@ static int				ft_get_instruction_parameters(unsigned char octet)
 
 void					ft_decode_instruction(t_process *process)
 {
-	__attribute__((unused)) void (*funptr)(void *);
+	__attribute__((unused)) void (*funptr)(t_process *, t_param *);
 	unsigned int const	index = g_arena.arena[process->pc];
 
 	if (__likely(index > 0 && index < 18))
 	{
 		funptr = instructions[index].funptr;
 		if (instructions[index].has_code_byte)
-			ft_get_instruction_parameters(g_arena.arena[MEMINDEX(++process->pc)]);
+			ft_get_instruction_parameters(g_arena.arena[(process->pc = MEMINDEX(process->pc + 1))]);
 		else
-			printf("Pas d'octet de codage des paramètres pour l'instruction %#x\n", index);
+			printf("Pas d'octet de codage pour l'instruction %#x\n", index);
+		process->pc = MEMINDEX(process->pc + 2);
+		if (instructions[index].carry)
+			FLIPCARRY(process->carry);
 	}
-	else
-		++process->pc;
+	else {
+#ifdef DEBUG
+		printf("Instruction %#x inexistante\n", index);
+#endif
+		process->pc = MEMINDEX(process->pc + 1);
+	}
 }

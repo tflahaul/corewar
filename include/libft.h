@@ -27,14 +27,14 @@ int				ft_strcmp(char const *s1, char const *s2);
 int				ft_strncmp(char const *s1, char const *s2, size_t n);
 void			ft_putstr(char const *str);
 size_t			ft_strlen(char const *str);
-char			*ft_strrchr(char const *str, int c);
 int32_t			ft_atoi32_max(char const *str);
+char			*ft_strrchr(char const *str, int c);
 
 /*
 **	Memory
 */
 void			ft_bzero(void *ptr, size_t size);
-void			ft_memcpy(void *dst, void *src, size_t len);
+void			ft_memcpy(void *dst, void *src, size_t size);
 void			*ft_memset(void *dst, int c, size_t size);
 
 /*

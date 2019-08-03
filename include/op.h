@@ -55,40 +55,16 @@ typedef char					t_arg_type;
 # define COMMENT_LENGTH			2048
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
-typedef struct		s_header
-{
+typedef struct		s_header {
 	unsigned int	magic;
 	char			prog_name[PROG_NAME_LENGTH + 1];
 	unsigned int	prog_size;
 	char			comment[COMMENT_LENGTH + 1];
 }					t_header;
 
-# pragma pack(push, 2)
-
-typedef struct		s_instructions
-{
-	void			(*funptr)(void *);
-	unsigned int	carry;
-	unsigned int	cycle;
-	unsigned int	has_code_byte;
-}					t_ops;
-# pragma pack(pop)
-
-void				op_live(unsigned int x);
-void				op_ld(unsigned int x);
-void				op_st(unsigned int x);
-void				op_add(unsigned int x);
-void				op_sub(unsigned int x);
-void				op_and(unsigned int x);
-void				op_or(unsigned int x);
-void				op_xor(unsigned int x);
-void				op_zjmp(unsigned int x);
-void				op_ldi(unsigned int x);
-void				op_sti(unsigned int x);
-void				op_fork(unsigned int x);
-void				op_lld(unsigned int x);
-void				op_lldi(unsigned int x);
-void				op_lfork(unsigned int x);
-void				op_aff(unsigned int x);
+typedef struct		s_param {
+	unsigned int	oplength;
+	uint16_t		opaddress;
+}					t_param;
 
 #endif

@@ -44,7 +44,7 @@ int						ft_parse_args(int argc, char const **argv)
 			return (ft_puterror(FILERR"\n"HELPMSG));
 	}
 	if (__unlikely(g_arena.warriors == NULL))
-		return (ft_puterror(NOCHAMP));
+		return (ft_puterror(NOCHAMP"\n"HELPMSG));
 	else if (__unlikely(ft_list_size_warrior() > MAX_PLAYERS))
 		return (ft_puterror(MAXCHAMP));
 	ft_scan_warriors_id();

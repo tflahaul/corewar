@@ -23,12 +23,17 @@ int						main(int argc, char const **argv)
 	if (__unlikely(ft_parse_args(argc, argv) != EXIT_SUCCESS))
 		return (EXIT_FAILURE);
 	ft_list_init_head(&head);
-	if (ft_arena_load_warriors(&head) != EXIT_SUCCESS)
+	if (ft_load_warriors_into_arena(&head) != EXIT_SUCCESS)
 		return (EXIT_ERROR);
 
-//////////// visu SDL plus tard //////////////
+///////////// visu SDL plus tard /////////////
 	if (g_arena.options & OPTION_V)
-		ft_hexdump_memory();
+	{
+		if (g_arena.options & ~OPTION_V)
+			ft_puterror(OPTIGNORE);
+		g_arena.options = OPTION_V;
+		ft_hexdump_memory(); // goto visualizer
+	}
 //////////////////////////////////////////////
 
 	ft_arena_main_loop(&head);

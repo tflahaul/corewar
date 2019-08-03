@@ -10,15 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 #include <libft.h>
 #include <arena.h>
 #include <arena_errors.h>
 #include <arena_process.h>
 #include <corewar_compiler.h>
 
-inline void					ft_pop_dead_processes(t_listhead const *head)
+static inline void			ft_pop_dead_processes(t_listhead const *head)
 {
 	t_listhead				*temp;
 	t_listhead				*position;

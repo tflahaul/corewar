@@ -32,6 +32,7 @@
 # define BADOPTION			"Illegal option -- "
 # define BADOPT				"Invalid option value"
 # define NULLOPT			"Couldn't find option value"
+# define OPTIGNORE          "Warning: ignoring options: visualizer set"
 
 # define METAERR			"Error while reading metadata"
 # define NUMERR				"Two warriors have the same id"

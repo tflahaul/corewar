@@ -28,7 +28,6 @@ typedef struct			s_warrior {
 	char				name[PROG_NAME_LENGTH + 1];
 	char				comment[COMMENT_LENGTH + 1];
 }						t_warrior;
-
 # pragma pack(pop)
 
 /*
@@ -50,11 +49,16 @@ t_arena_state			g_arena;
 # define OPTION_V		0x00000010ul
 # define OPTION_D		0x00000100ul
 
+# define HAS_VISU(x)		(x & OPTION_V)
 # define HAS_DUMP(x)		(x & OPTION_D)
 # define HAS_NUMBER(x)		(x & OPTION_N)
 # define UNSET_OPTION_N(x)	(x &= ~OPTION_N)
 
 # define MEMINDEX(x)	((x) % MEM_SIZE)
+# define MODINDEX(x)	((x) % IDX_MOD)
+# define PCIDX(x, y)	((x) = MEM_INDEX((x) + y))
+
+# define FLIPCARRY(x)		((x) = ~(x))
 
 int						ft_malloc_new_warrior(void);
 int						ft_parse_args(int argc, char const **argv);

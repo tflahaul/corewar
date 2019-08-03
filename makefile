@@ -27,7 +27,7 @@ CFLAGS		=	-Wall						\
 				-Wextra						\
 				-Werror						\
 				-pedantic					\
-				-O0 # debug
+				-g -O0 # debug
 
 INCFLAG		=	-I $(HDR)
 LIBFLAG		=	-L $(LIBDIR) -lft

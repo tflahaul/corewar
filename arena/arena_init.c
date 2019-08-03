@@ -36,7 +36,7 @@ static int				ft_new_process(t_listhead *hd, int32_t id, uint16_t pc)
 	return (EXIT_SUCCESS);
 }
 
-int						ft_arena_load_warriors(t_listhead *head)
+int						ft_load_warriors_into_arena(t_listhead *head)
 {
 	uint8_t				*temp;
 	t_warrior			*node;
