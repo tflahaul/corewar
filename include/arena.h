@@ -20,6 +20,10 @@
 
 # pragma pack(push, 2)
 
+/*
+**	@size:			Warrior size; We only use this variable to copy size bytes
+**					of warrior code onto the arena.
+*/
 typedef struct			s_warrior {
 	int32_t				id;
 	uint32_t			size;
@@ -37,10 +41,12 @@ typedef struct			s_warrior {
 */
 typedef struct			s_arena_state {
 	t_warrior			*warriors;
+	t_warrior			*last_alive;
 	int32_t				value;
 	int32_t				dump_cycles;
 	uint8_t				arena[MEM_SIZE];
-	uint64_t			options;
+	uint32_t			options;
+	uint32_t			size;
 }						t_arena_state;
 
 t_arena_state			g_arena;
@@ -56,10 +62,11 @@ t_arena_state			g_arena;
 
 # define MEMINDEX(x)	((x) % MEM_SIZE)
 # define MODINDEX(x)	((x) % IDX_MOD)
-# define PCIDX(x, y)	((x) = MEM_INDEX((x) + y))
+# define FLIPCARRY(x)	((x) = ~(x))
 
-# define FLIPCARRY(x)		((x) = ~(x))
-
+/*
+**	Parsing
+*/
 int						ft_malloc_new_warrior(void);
 int						ft_parse_args(int argc, char const **argv);
 int						ft_parse_warrior(char const *file);
@@ -69,6 +76,14 @@ void					ft_scan_warriors_id(void);
 void					ft_hexdump_memory(void);
 unsigned int			ft_list_size_warrior(void);
 
+/*
+**	Conversion
+*/
+int32_t					ft_binarray_to_int32(unsigned int addr);
+
+/*
+**	Memory
+*/
 void					ft_free_warriors(void) __attribute__((destructor));
 
 #endif

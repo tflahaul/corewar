@@ -35,12 +35,15 @@ typedef struct			s_instructions {
 	unsigned int		carry;
 	unsigned int		cycle;
 	unsigned int		has_code_byte;
+	unsigned int		dirsize;
 }						t_ops;
 # pragma pack(pop)
 
 int						ft_load_warriors_into_arena(t_listhead *head);
+void					ft_arena_main_loop(t_listhead lst[MAX_PLAYERS]);
+void					ft_delete_proclist(t_listhead lst[MAX_PLAYERS]);
+void					ft_init_process(t_listhead lst[MAX_PLAYERS]);
 void					ft_decode_instruction(t_process *process);
-void					ft_arena_main_loop(t_listhead const *head);
 void					*ft_get_process(t_listhead *node);
 
 void					op_or(t_process *p, t_param *r);

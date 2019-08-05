@@ -32,14 +32,18 @@ static inline void			ft_pop_dead_processes(t_listhead const *head)
 	}
 }
 
-void						ft_arena_main_loop(t_listhead const *head)
+void						ft_arena_main_loop(t_listhead proclst[MAX_PLAYERS])
 {
 	t_listhead				*position;
 
-	for (unsigned int index = 0; index < MEM_SIZE; ++index)
+	for (unsigned int index = 0; index < MEM_SIZE / 4; ++index)
 	{
-		position = (t_listhead *)head;
-		while ((position = position->next) != head)
-			ft_decode_instruction((t_process *)ft_get_process(position));
+		for (unsigned int idx = 0; idx < MAX_PLAYERS; ++idx)
+		{
+			position = &(proclst[idx]);
+			while ((position = position->next) != &(proclst[idx]))
+				ft_decode_instruction((t_process *)ft_get_process(position));
+		}
 	}
+	ft_delete_proclist(proclst);
 }

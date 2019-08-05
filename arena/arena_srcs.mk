@@ -15,4 +15,4 @@ ARENA_SRCS	=	main							parsing_args			\
 				memory_management				list_warrior			\
 				parsing_options					arena_options			\
 				arena_init						arena_main_loop			\
-				instruction_decode
+				instruction_decode				arena_memory_management

@@ -18,15 +18,13 @@
 
 int						main(int argc, char const **argv)
 {
-	t_listhead			head;
+	t_listhead			proclist[MAX_PLAYERS];
 
 	if (__unlikely(ft_parse_args(argc, argv) != EXIT_SUCCESS))
 		return (EXIT_FAILURE);
-	ft_list_init_head(&head);
-	if (ft_load_warriors_into_arena(&head) != EXIT_SUCCESS)
+	ft_init_process(proclist);
+	if (ft_load_warriors_into_arena(proclist) != EXIT_SUCCESS)
 		return (EXIT_ERROR);
-
-///////////// visu SDL plus tard /////////////
 	if (g_arena.options & OPTION_V)
 	{
 		if (g_arena.options & ~OPTION_V)
@@ -34,9 +32,6 @@ int						main(int argc, char const **argv)
 		g_arena.options = OPTION_V;
 		ft_hexdump_memory(); // goto visualizer
 	}
-//////////////////////////////////////////////
-
-	ft_arena_main_loop(&head);
-	ft_list_delete(&head, &ft_get_process);
+	ft_arena_main_loop(proclist);
 	return (EXIT_SUCCESS);
 }

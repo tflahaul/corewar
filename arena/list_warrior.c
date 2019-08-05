@@ -76,5 +76,6 @@ int						ft_malloc_new_warrior(void)
 			return (ft_puterror(strerror(errno)));
 		ft_list_push_warrior(node);
 	}
+	g_arena.size++;
 	return (EXIT_SUCCESS);
 }

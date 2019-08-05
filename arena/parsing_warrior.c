@@ -72,6 +72,8 @@ int							ft_parse_warrior(char const *file)
 {
 	int						fd;
 
+	if (__unlikely(g_arena.size == MAX_PLAYERS))
+		return (ft_puterror(MAXCHAMP));
 	if (__unlikely((fd = open(file, O_RDONLY)) < 0))
 		return (ft_puterror(strerror(errno)));
 	if (__unlikely(ft_malloc_new_warrior() != EXIT_SUCCESS))

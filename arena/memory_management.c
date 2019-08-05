@@ -19,9 +19,9 @@
 #include <arena_process.h>
 #include <corewar_compiler.h>
 
-void				ft_hexdump_memory(void)
+void					ft_hexdump_memory(void)
 {
-	uint16_t		index = 0;
+	uint16_t			index = 0;
 
 	printf("0x%#.4x:  ", index);
 	while (index < MEM_SIZE)
@@ -38,15 +38,33 @@ void				ft_hexdump_memory(void)
 	printf("\n");
 }
 
-void				*ft_get_process(t_listhead *node)
+void					*ft_get_process(t_listhead *node)
 {
 	return ((void *)((char *)node - offsetof(t_process, list)));
 }
 
-void				ft_free_warriors(void)
+void					ft_init_process(t_listhead lst[MAX_PLAYERS])
 {
-	t_warrior		*ptr;
-	t_warrior		*temp;
+	register uint32_t	index;
+
+	index = 0;
+	while (index < MAX_PLAYERS)
+		ft_list_init_head(&(lst[index++]));
+}
+
+void					ft_delete_proclist(t_listhead lst[MAX_PLAYERS])
+{
+	register uint32_t	index;
+
+	index = 0;
+	while (index < MAX_PLAYERS)
+		ft_list_delete(&(lst[index++]), &ft_get_process);
+}
+
+void					ft_free_warriors(void)
+{
+	t_warrior			*ptr;
+	t_warrior			*temp;
 
 	temp = g_arena.warriors;
 	while (temp != NULL)

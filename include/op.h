@@ -64,7 +64,7 @@ typedef struct		s_header {
 
 typedef struct		s_param {
 	unsigned int	oplength;
-	uint16_t		opaddress;
+	unsigned short	opaddress;
 }					t_param;
 
 #endif

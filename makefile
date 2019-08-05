@@ -26,6 +26,8 @@ OBJDIR		=	obj
 CFLAGS		=	-Wall						\
 				-Wextra						\
 				-Werror						\
+				-Wshadow					\
+				-Wnull-dereference			\
 				-pedantic					\
 				-g -O0 # debug
 

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define DEBUG
 #include <stdio.h>
 
 #include <stdint.h>
@@ -24,81 +23,60 @@
 #include <corewar_compiler.h>
 
 static t_ops const		instructions[] = {
-	{0, 0, 0, 0},
-	{0, 0, 0, 0}, // live
-	{0, 1, 0, 1}, // ld
-	{0, 0, 0, 1}, // st
-	{0, 1, 0, 1}, // add
-	{0, 1, 0, 1}, // sub
-	{0, 1, 0, 1}, // and
-	{0, 1, 0, 1}, // or
-	{0, 1, 0, 1}, // xor
-	{0, 0, 0, 0}, // zjmp
-	{0, 0, 0, 1}, // ldi
-	{0, 0, 0, 1}, // sti
-	{0, 0, 0, 0}, // fork
-	{0, 1, 0, 1}, // lld
-	{0, 1, 0, 1}, // lldi
-	{0, 0, 0, 0}, // lfork
-	{0, 0, 0, 1}, // aff
-	{0, 0, 0, 0}
+	{0, 0, 0, 0, 0},
+	{0, 0, 0x00a, 0, 4}, // live
+	{0, 1, 0x005, 1, 4}, // ld
+	{0, 0, 0x005, 1, 4}, // st
+	{0, 1, 0x00a, 1, 4}, // add
+	{0, 1, 0x00a, 1, 4}, // sub
+	{0, 1, 0x006, 1, 4}, // and
+	{0, 1, 0x006, 1, 4}, // or
+	{0, 1, 0x006, 1, 4}, // xor
+	{0, 0, 0x014, 0, 2}, // zjmp
+	{0, 0, 0x019, 1, 2}, // ldi
+	{0, 0, 0x019, 1, 2}, // sti
+	{0, 0, 0x320, 0, 2}, // fork
+	{0, 1, 0x00a, 1, 4}, // lld
+	{0, 1, 0x032, 1, 2}, // lldi
+	{0, 0, 0x3e8, 0, 2}, // lfork
+	{0, 0, 0x002, 1, 4}  // aff
 };
 
-static void				ft_putbinary(unsigned char octet)
+static unsigned int		ft_get_instruction_length(uint32_t dsize, uint8_t octet)
 {
-	for (unsigned int pow = (1 << 7); pow; pow >>= 1)
-		printf("%i", !!(pow & octet));
-	printf("\t%#x\n", octet);
-}
-
-static int				ft_get_instruction_parameters(unsigned char octet)
-{
+	uint8_t				temp;
 	unsigned int		index;
-	unsigned char		temp;
+	unsigned int		length;
 
 	index = 0;
-	ft_putbinary(octet);
+	length = 2;
 	while (index < 3)
 	{
-		temp = (octet >> (6 - (index * 2))) & 0x03;
+		temp = (octet >> (6 - (2 * index++))) & 0x03;
 		if (temp == REG_CODE)
-			printf("Param #%u = Addressage registre\n", index + 1);
+			length += 1;
 		else if (temp == DIR_CODE)
-			printf("Param #%u = Addressage direct\n", index + 1);
+			length += dsize;
 		else if (temp == IND_CODE)
-			printf("Param #%u = Addressage indirect\n", index + 1);
-		++index;
+			length += 2;
 	}
-#ifdef DEBUG
-	if (__unlikely(octet & 0x03))
-	{
-		printf("ERREUR:Mauvais octet de codage des paramètres\n\n");
-		return (0);
-	}
-#endif
-	return (1);
+	return (length);
 }
 
 void					ft_decode_instruction(t_process *process)
 {
-	__attribute__((unused)) void (*funptr)(t_process *, t_param *);
-	unsigned int const	index = g_arena.arena[process->pc];
+	unsigned int		length;
+	unsigned int const	opc = g_arena.arena[process->pc];
 
-	if (__likely(index > 0 && index < 18))
+	if (__likely(opc > 0 && opc < 18))
 	{
-		funptr = instructions[index].funptr;
-		if (instructions[index].has_code_byte)
-			ft_get_instruction_parameters(g_arena.arena[(process->pc = MEMINDEX(process->pc + 1))]);
+		printf("Decoding instruction %#.2x...\n", opc);
+		if (instructions[opc].has_code_byte)
+			length = ft_get_instruction_length(instructions[opc].dirsize, g_arena.arena[MEMINDEX(process->pc + 1)]);
 		else
-			printf("Pas d'octet de codage pour l'instruction %#x\n", index);
-		process->pc = MEMINDEX(process->pc + 2);
-		if (instructions[index].carry)
-			FLIPCARRY(process->carry);
+			length = instructions[opc].dirsize + 1;
+		process->pc = MEMINDEX(process->pc + length);
 	}
-	else {
-#ifdef DEBUG
-		printf("Instruction %#x inexistante\n", index);
-#endif
+	else
 		process->pc = MEMINDEX(process->pc + 1);
-	}
 }
