@@ -26,23 +26,24 @@
 # endif
 # define STDERR_FILENO		2
 
-# define FILERR				"Not a valid corewar executable"
-# define ALLOCFAIL			"Memory allocation failure"
+# define FILERR				"Not a valid corewar executable."
+# define ALLOCFAIL			"Memory allocation failure."
 
 # define BADOPTION			"Illegal option -- "
-# define BADOPT				"Invalid option value"
-# define NULLOPT			"Couldn't find option value"
-# define OPTIGNORE          "Warning: ignoring options: visualizer set"
+# define BADOPT				"Invalid option value."
+# define NULLOPT			"Couldn't find option value."
+# define OPTIGNORE          "Warning: ignoring options: visualizer set."
 
-# define METAERR			"Error while reading metadata"
-# define NUMERR				"Two warriors have the same id"
-# define NOCHAMP			"No warrior was loaded in the arena"
-# define MAXCHAMP			"Trying to load more than 4 warriors in the arena"
-# define CHAMPSIZERR		"Bad warrior size (either zero or too large)"
+# define METAERR			"Error while reading metadata."
+# define NUMERR				"Two warriors have the same id."
+# define NOCHAMP			"No warrior was loaded in the arena."
+# define MAXCHAMP			"Trying to load more than 4 warriors in the arena."
+# define CHAMPSIZERR		"Bad warrior size (either zero or too large)."
 
-# define HELPMSG			"Try 'corewar --help' for more information"
+# define HELPMSG			"Try 'corewar --help' for more information."
 
 int							ft_puterror(char const *str);
+int							ft_close_fd_on_error(int fd);
 int							ft_puterror_illegal_option(char const *str);
 int							ft_puterror_memalloc_failure(t_listhead *head);
 int							ft_puterror_and_close_fd(char const *str, int fd);

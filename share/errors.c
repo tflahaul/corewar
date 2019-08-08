@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
 #include <string.h>
 
@@ -18,10 +17,16 @@
 #include <arena_errors.h>
 #include <arena_process.h>
 
+int					ft_close_fd_on_error(int fd)
+{
+	close(fd);
+	return (EXIT_ERROR);
+}
+
 int					ft_puterror(char const *string)
 {
 	if (string != NULL)
-		dprintf(STDERR_FILENO, "corewar: %s\n", string);
+		ft_dprintf(STDERR_FILENO, "corewar: %s\n", string);
 	else
 		write(STDERR_FILENO, HELPMSG"\n", ft_strlen(HELPMSG) + 1);
 	return (EXIT_ERROR);
@@ -29,7 +34,7 @@ int					ft_puterror(char const *string)
 
 int					ft_puterror_illegal_option(char const *string)
 {
-	dprintf(STDERR_FILENO, "corewar: Illegal option -- %s\n", string);
+	ft_dprintf(STDERR_FILENO, "corewar: Illegal option -- '%s'\n", string);
 	return (ft_puterror(NULL));
 }
 

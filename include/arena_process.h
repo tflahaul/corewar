@@ -31,7 +31,7 @@ typedef struct			s_process
 # pragma pack(push, 2)
 
 typedef struct			s_instructions {
-	void				(*funptr)(t_process *, t_param *);
+	void				(*funptr)(t_process *, uint32_t[4]);
 	unsigned int		carry;
 	unsigned int		cycle;
 	unsigned int		has_code_byte;
@@ -43,24 +43,24 @@ int						ft_load_warriors_into_arena(t_listhead *head);
 void					ft_arena_main_loop(t_listhead lst[MAX_PLAYERS]);
 void					ft_delete_proclist(t_listhead lst[MAX_PLAYERS]);
 void					ft_init_process(t_listhead lst[MAX_PLAYERS]);
-void					ft_decode_instruction(t_process *process);
+void					ft_fetch_instruction(t_process *process);
 void					*ft_get_process(t_listhead *node);
 
-void					op_or(t_process *p, t_param *r);
-void					op_ld(t_process *p, t_param *r);
-void					op_st(t_process *p, t_param *r);
-void					op_add(t_process *p, t_param *r);
-void					op_sub(t_process *p, t_param *r);
-void					op_and(t_process *p, t_param *r);
-void					op_xor(t_process *p, t_param *r);
-void					op_ldi(t_process *p, t_param *r);
-void					op_sti(t_process *p, t_param *r);
-void					op_aff(t_process *p, t_param *r);
-void					op_lld(t_process *p, t_param *r);
-void					op_fork(t_process *p, t_param *r);
-void					op_zjmp(t_process *p, t_param *r);
-void					op_lldi(t_process *p, t_param *r);
-void					op_live(t_process *p, t_param *r);
-void					op_lfork(t_process *p, t_param *r);
+void					op_or(t_process *p, uint32_t t[4]);
+void					op_ld(t_process *p, uint32_t t[4]);
+void					op_st(t_process *p, uint32_t t[4]);
+void					op_add(t_process *p, uint32_t t[4]);
+void					op_sub(t_process *p, uint32_t t[4]);
+void					op_and(t_process *p, uint32_t t[4]);
+void					op_xor(t_process *p, uint32_t t[4]);
+void					op_ldi(t_process *p, uint32_t t[4]);
+void					op_sti(t_process *p, uint32_t t[4]);
+void					op_aff(t_process *p, uint32_t t[4]);
+void					op_lld(t_process *p, uint32_t t[4]);
+void					op_fork(t_process *p, uint32_t t[4]);
+void					op_zjmp(t_process *p, uint32_t t[4]);
+void					op_lldi(t_process *p, uint32_t t[4]);
+void					op_live(t_process *p, uint32_t t[4]);
+void					op_lfork(t_process *p, uint32_t t[4]);
 
 #endif

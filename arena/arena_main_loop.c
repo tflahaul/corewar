@@ -32,7 +32,23 @@ static inline void			ft_pop_dead_processes(t_listhead const *head)
 	}
 }
 
-void						ft_arena_main_loop(t_listhead proclst[MAX_PLAYERS])
+void						ft_arena_main_loop(t_listhead pclst[MAX_PLAYERS])
+{
+	register int			ctd = CYCLE_TO_DIE;
+	register int			cycle = 0;
+
+	while (ctd > 0)
+	{
+		if (++cycle == ctd)
+		{
+			ctd -= CYCLE_DELTA;
+			cycle = 0;
+		}
+	}
+	ft_delete_proclist(pclst);
+}
+
+void						ft_araena_main_loop(t_listhead proclst[MAX_PLAYERS])
 {
 	t_listhead				*position;
 
@@ -42,7 +58,7 @@ void						ft_arena_main_loop(t_listhead proclst[MAX_PLAYERS])
 		{
 			position = &(proclst[idx]);
 			while ((position = position->next) != &(proclst[idx]))
-				ft_decode_instruction((t_process *)ft_get_process(position));
+				ft_fetch_instruction((t_process *)ft_get_process(position));
 		}
 	}
 	ft_delete_proclist(proclst);

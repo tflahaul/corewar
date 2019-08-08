@@ -79,7 +79,7 @@ unsigned int			ft_list_size_warrior(void);
 /*
 **	Conversion
 */
-int32_t					ft_binarray_to_int32(unsigned int addr);
+int32_t					ft_binarray_to_int(unsigned int adr, unsigned int sz);
 
 /*
 **	Memory

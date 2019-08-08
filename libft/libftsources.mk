@@ -27,4 +27,6 @@ LIBSOURCES		=	ft_strrchr.c				\
 					ft_putstr.c					\
 					ft_list_size.c				\
 					ft_list_pop.c				\
-					ft_strncmp.c
+					ft_strncmp.c				\
+					ft_dprintf.c				\
+					ft_display_file.c

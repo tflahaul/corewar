@@ -40,20 +40,21 @@ int						ft_load_warriors_into_arena(t_listhead lst[MAX_PLAYERS])
 {
 	uint8_t				*temp;
 	t_warrior			*node;
-	register int32_t	idx;
+	register uint32_t	idx;
 	register uint8_t	*arena;
 
-	idx = -1;
+	idx = 0;
 	temp = g_arena.arena;
 	arena = g_arena.arena;
 	node = g_arena.warriors;
-	while ((node != NULL) && (++idx < MAX_PLAYERS))
+	while ((node != NULL) && (idx < MAX_PLAYERS))
 	{
 		ft_memcpy(arena, node->program, node->size);
 		if (ft_new_process(&(lst[idx]), node->id, (uint16_t)(arena - temp)) < 0)
 			return (ft_puterror_memalloc_failure(&(lst[idx])));
 		arena += ft_compute_gap_between_warriors();
 		node = node->next;
+		++idx;
 	}
 	return (EXIT_SUCCESS);
 }

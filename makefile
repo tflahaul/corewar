@@ -56,7 +56,7 @@ all				: $(LIBFT) $(NAME1)
 
 $(NAME1)		: $(ARENA_OBJ)
 	@printf "$(YELLOW)%-40s$(STD)" "Building executable $@ ..."
-	@$(CC) $(CFLAGS) $(INCFLAG) share/errors.c $(ARENA_OBJ) -o $@ $(LIBFLAG)
+	@$(CC) $(CFLAGS) $(INCFLAG) share/errors.c arena/instructions/op_zjmp.c $(ARENA_OBJ) -o $@ $(LIBFLAG)
 	@echo "$(GREEN)DONE$(STD)"
 
 $(LIBFT)		: $(HDR)/libft.h

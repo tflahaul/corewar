@@ -43,7 +43,7 @@ int						ft_parse_args(int argc, char const **argv)
 		else
 			return (ft_puterror(FILERR"\n"HELPMSG));
 	}
-	if (__unlikely(g_arena.warriors == NULL))
+	if (__unlikely(g_arena.size == 0))
 		return (ft_puterror(NOCHAMP"\n"HELPMSG));
 	ft_scan_warriors_id();
 	return (EXIT_SUCCESS);
