@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 15:20:22 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/20 15:14:02 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/09 15:22:53 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,11 @@ typedef struct		s_header {
 	unsigned int	prog_size;
 	char			comment[COMMENT_LENGTH + 1];
 }					t_header;
+
+typedef struct		s_parameters {
+	int				ocp;
+	int				oplen;
+	int				tab[3];
+}					t_parameters;
 
 #endif

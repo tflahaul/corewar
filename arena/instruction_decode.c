@@ -6,9 +6,11 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 12:36:13 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/22 16:46:49 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/09 16:13:34 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #include <op.h>
 #include <libft.h>
@@ -17,7 +19,7 @@
 #include <arena_process.h>
 #include <corewar_compiler.h>
 
-static t_ops const		opset[] = {
+static t_ops const		g_opset[] = {
 	{0, 0, 0, 0, 0},
 	{0, 0, 0x00a, 0, 4}, // live
 	{0, 1, 0x005, 1, 4}, // ld
@@ -58,36 +60,31 @@ static unsigned int		ft_get_oplength(uint32_t dsize, uint8_t octet)
 	return (length);
 }
 
-/*
-**	On utilise un tableau d'entiers pour stocker les paramètres.
-**	parameters[0] = octet de codage des paramètres
-**	parameters[1..3] = valeurs des paramètres
-*/
-#include <stdio.h>
+static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
+{
+	return ((int)g_arena.arena[MEMINDEX(prc->pc + data->oplen)]);//nope
+}
 
 void					ft_fetch_instruction(t_process *process)
 {
-	unsigned int		length = 0;
-	unsigned int		parameters[4];
+	t_parameters		parameters;
 	unsigned int const	opc = g_arena.arena[process->pc];
 
 	if (__likely(opc > 0 && opc < 18))
 	{
-		printf("Decoding instruction %#.2x...\n", opc);
-		process->cycle = opset[opc].cycle;
-		if (opset[opc].has_code_byte)
+		printf("Decoding instructions %#.2x...\n", opc);
+		process->cycle = g_opset[opc].cycle;
+		ft_bzero(&parameters, sizeof(parameters));
+		if (g_opset[opc].has_code_byte)
 		{
-			length = ft_get_oplength(opset[opc].dirsize, g_arena.arena[MEMINDEX(process->pc + 1)]);
-			process->pc = MEMINDEX(process->pc + length + 1);
-		}
-		else if (opc == 9) /* juste pour test zjmp */
-		{
-			length = opset[opc].dirsize;
-			parameters[1] = ft_binarray_to_int((uint32_t)MEMINDEX(process->pc + 1), length);
-			(*opset[opc].funptr)(process, parameters);
+			parameters.ocp = g_arena.arena[MEMINDEX(process->pc + 1)];
+			for (unsigned int i = 0; i < 3; ++i)
+				parameters.tab[i] = ft_get_op_parameter(process, &parameters);
 		}
 		else
-			process->pc = MEMINDEX(process->pc + opset[opc].dirsize + 1);
+			parameters.tab[0] = ft_binarray_to_int(process->pc + 1, g_opset[opc].dirsize);
+		if (__likely(g_opset[opc].funptr != 0))
+			(*g_opset[opc].funptr)(process, &parameters);
 	}
 	else
 		process->pc = MEMINDEX(process->pc + 1);

@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:23:49 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/23 10:31:54 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/09 15:42:02 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct			s_process
 # pragma pack(push, 2)
 
 typedef struct			s_instructions {
-	void				(*funptr)(t_process *, uint32_t[4]);
+	void				(*funptr)(t_process *, t_parameters *);
 	unsigned int		carry;
 	unsigned int		cycle;
 	unsigned int		has_code_byte;
@@ -46,21 +46,21 @@ void					ft_init_process(t_listhead lst[MAX_PLAYERS]);
 void					ft_fetch_instruction(t_process *process);
 void					*ft_get_process(t_listhead *node);
 
-void					op_or(t_process *p, uint32_t t[4]);
-void					op_ld(t_process *p, uint32_t t[4]);
-void					op_st(t_process *p, uint32_t t[4]);
-void					op_add(t_process *p, uint32_t t[4]);
-void					op_sub(t_process *p, uint32_t t[4]);
-void					op_and(t_process *p, uint32_t t[4]);
-void					op_xor(t_process *p, uint32_t t[4]);
-void					op_ldi(t_process *p, uint32_t t[4]);
-void					op_sti(t_process *p, uint32_t t[4]);
-void					op_aff(t_process *p, uint32_t t[4]);
-void					op_lld(t_process *p, uint32_t t[4]);
-void					op_fork(t_process *p, uint32_t t[4]);
-void					op_zjmp(t_process *p, uint32_t t[4]);
-void					op_lldi(t_process *p, uint32_t t[4]);
-void					op_live(t_process *p, uint32_t t[4]);
-void					op_lfork(t_process *p, uint32_t t[4]);
+void					op_or(t_process *p, t_parameters *);
+void					op_ld(t_process *p, t_parameters *);
+void					op_st(t_process *p, t_parameters *);
+void					op_add(t_process *p, t_parameters *);
+void					op_sub(t_process *p, t_parameters *);
+void					op_and(t_process *p, t_parameters *);
+void					op_xor(t_process *p, t_parameters *);
+void					op_ldi(t_process *p, t_parameters *);
+void					op_sti(t_process *p, t_parameters *);
+void					op_aff(t_process *p, t_parameters *);
+void					op_lld(t_process *p, t_parameters *);
+void					op_fork(t_process *p, t_parameters *);
+void					op_zjmp(t_process *p, t_parameters *);
+void					op_lldi(t_process *p, t_parameters *);
+void					op_live(t_process *p, t_parameters *);
+void					op_lfork(t_process *p, t_parameters *);
 
 #endif
