@@ -18,17 +18,9 @@
 # include "list.h"
 # include "op.h"
 
-typedef struct			s_process
-{
-	t_listhead			list;
-	int32_t				registers[REG_NUMBER + 1];
-	uint32_t			live;
-	uint16_t			carry;
-	uint16_t			cycle;
-	uint16_t			pc;
-}						t_process;
-
 # pragma pack(push, 2)
+
+typedef struct s_process		t_process;
 
 typedef struct			s_instructions {
 	void				(*funptr)(t_process *, t_parameters *);
@@ -38,6 +30,15 @@ typedef struct			s_instructions {
 	unsigned int		dirsize;
 }						t_ops;
 # pragma pack(pop)
+
+typedef struct			s_process {
+	t_listhead			list;
+	t_ops				instruction;
+	int32_t				registers[REG_NUMBER + 1];
+	uint32_t			live;
+	uint16_t			carry;
+	uint16_t			pc;
+}						t_process;
 
 int						ft_load_warriors_into_arena(t_listhead *head);
 void					ft_arena_main_loop(t_listhead lst[MAX_PLAYERS]);

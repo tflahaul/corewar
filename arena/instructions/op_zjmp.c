@@ -10,11 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
 #include <arena.h>
 #include <arena_process.h>
 
 void					op_zjmp(t_process *process, t_parameters *parameters)
 {
-	if (process->carry != 0)
+//	if (process->carry != 0)
 		process->pc = MEMINDEX(process->pc + (parameters->tab[0] % IDX_MOD));
 }

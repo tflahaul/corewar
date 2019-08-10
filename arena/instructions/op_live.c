@@ -20,5 +20,5 @@ void						op_live(t_process *prc, t_parameters *parameters)
 {
 	if (!ft_number_in_list(parameters->tab[0]))
 		return ;
-	ft_dprintf(STDOUT_FILENO, "Un processus");
+	ft_dprintf(STDOUT_FILENO, "Un processus dit que le joueur %i est en vie\n", prc->registers[1]);
 }

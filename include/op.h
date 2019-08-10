@@ -65,6 +65,7 @@ typedef struct		s_header {
 typedef struct		s_parameters {
 	int				ocp;
 	int				oplen;
+	int				index;
 	int				tab[3];
 }					t_parameters;
 

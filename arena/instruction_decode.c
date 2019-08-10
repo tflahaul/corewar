@@ -39,30 +39,25 @@ static t_ops const		g_opset[] = {
 	{0, 0, 0x002, 1, 4}  // aff
 };
 
-static unsigned int		ft_get_oplength(uint32_t dsize, uint8_t octet)
+static inline int		ft_update_oplength(t_process *prc, t_parameters *data)
 {
-	uint8_t				temp;
-	unsigned int		index;
-	unsigned int		length;
+	int					size;
+	unsigned char const	byte = (data->ocp >> (6 - (2 * data->index++))) & 0x03;
 
-	index = 0;
-	length = 1;
-	while (index < 3)
-	{
-		temp = (octet >> (6 - (2 * index++))) & 0x03;
-		if (temp == REG_CODE)
-			length += 1;
-		else if (temp == DIR_CODE)
-			length += dsize;
-		else if (temp == IND_CODE)
-			length += 2;
-	}
-	return (length);
+	size = data->oplen;
+	if (byte == REG_CODE)
+		data->oplen++;
+	else if (byte == DIR_CODE)
+		data->oplen += prc->instruction.dirsize;
+	else if (byte == IND_CODE)
+		data->oplen += 2;
+	return (data->oplen - size);
 }
 
 static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 {
-	return ((int)g_arena.arena[MEMINDEX(prc->pc + data->oplen)]);//nope
+	int const			size = ft_update_oplength(prc, data);
+	return (ft_binarray_to_int(prc->pc + data->oplen, size));
 }
 
 void					ft_fetch_instruction(t_process *process)
@@ -72,8 +67,8 @@ void					ft_fetch_instruction(t_process *process)
 
 	if (__likely(opc > 0 && opc < 18))
 	{
-		printf("Decoding instructions %#.2x...\n", opc);
-		process->cycle = g_opset[opc].cycle;
+		printf("Decoding instruction %#.2x...\n", opc);
+		process->instruction = g_opset[opc];
 		ft_bzero(&parameters, sizeof(parameters));
 		if (g_opset[opc].has_code_byte)
 		{
@@ -81,10 +76,12 @@ void					ft_fetch_instruction(t_process *process)
 			for (unsigned int i = 0; i < 3; ++i)
 				parameters.tab[i] = ft_get_op_parameter(process, &parameters);
 		}
-		else
+		else //pb ret 0??
 			parameters.tab[0] = ft_binarray_to_int(process->pc + 1, g_opset[opc].dirsize);
-		if (__likely(g_opset[opc].funptr != 0))
+		if (g_opset[opc].funptr != 0)
 			(*g_opset[opc].funptr)(process, &parameters);
+		else //tmp
+			process->pc = MEMINDEX(process->pc + parameters.oplen);
 	}
 	else
 		process->pc = MEMINDEX(process->pc + 1);
