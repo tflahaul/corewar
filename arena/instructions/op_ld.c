@@ -19,7 +19,7 @@ void					op_ld(t_process *process, t_parameters *params)
 	if (__likely(ISREG(params->tab[1])))
 	{
 		process->registers[params->tab[1]] = (params->tab[0] % IDX_MOD);
-		FLIPCARRY(process->carry);
+		process->carry = process->registers[params->tab[1]] ? 0 : 1;
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

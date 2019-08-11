@@ -16,12 +16,15 @@
 
 void							op_st(t_process *process, t_parameters *params)
 {
+	register int32_t			value;
+
 	if (__likely(ISREG(params->tab[0])))
 	{
-		if ((params->ocp & 48) == REG_CODE && ISREG(params->tab[1]))
-			g_arena.arena[MEMINDEX(process->registers[params->tab[1]] % IDX_MOD)] = process->registers[params->tab[0]];
+		value = process->registers[params->tab[0]];
+		if ((params->ocp & 48) >> 4 == REG_CODE && ISREG(params->tab[1]))
+			process->registers[params->tab[1]] = value;
 		else
-			g_arena.arena[MEMINDEX(params->tab[1] % IDX_MOD)] = process->registers[params->tab[0]];
+			g_arena.arena[MEMINDEX(params->tab[1] % IDX_MOD)] = value;
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

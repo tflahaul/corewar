@@ -14,19 +14,19 @@
 #include <arena_process.h>
 #include <corewar_compiler.h>
 
-void					op_sti(t_process *process, t_parameters *params)
+void						op_sti(t_process *process, t_parameters *params)
 {
-	register int		addr = 0;
+	register int32_t		addr = 0;
 
-	if (__likely(ISREG(params->tab[0])))
+	if (__likely(ISREG(params->tab[0]) && (params->ocp & 192) == REG_CODE))
 	{
-		if ((params->ocp & 48) == REG_CODE && ISREG(params->tab[1]))
+		if ((params->ocp & 48) >> 4 == REG_CODE && ISREG(params->tab[1]))
 			addr += process->registers[params->tab[1]];
-		else
+		else if ((params->ocp & 48) >> 4 == IND_CODE)
 			addr += params->tab[1];
-		if ((params->ocp & 12) == REG_CODE && ISREG(params->tab[2]))
+		if ((params->ocp & 12) >> 2 == REG_CODE && ISREG(params->tab[2]))
 			addr += process->registers[params->tab[2]];
-		else
+		else if ((params->ocp & 12) >> 2 == IND_CODE)
 			addr += params->tab[2];
 		g_arena.arena[MEMINDEX(addr % IDX_MOD)] = process->registers[params->tab[0]];
 	}

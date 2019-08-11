@@ -65,6 +65,8 @@ t_arena_state			g_arena;
 # define MODINDEX(x)	((x) % IDX_MOD)
 # define FLIPCARRY(x)	((x) = ~(x))
 
+# define RRR			84 // 0b01010100
+
 /*
 **	Parsing
 */
