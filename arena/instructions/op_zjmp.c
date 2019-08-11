@@ -1,23 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_zjmp.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/09 13:00:45 by thflahau          #+#    #+#             */
+/*   Updated: 2019/08/11 12:13:59 by thflahau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <arena.h>
 #include <arena_process.h>
 
-static inline int32_t	ft_binarray_to_int32(unsigned int address)
+void					op_zjmp(t_process *process, t_parameters *parameters)
 {
-	int32_t				value;
-	register int		index;
-
-	index = 0;
-	while (index < 4)
-	{
-		value <<= __CHAR_BIT__;
-		value |= g_arena.arena[address++];
-	}
-	return (value);
-}
-
-void					op_zjmp(t_process *process, t_param *parameters)
-{
-	int32_t const		value = ft_binarray_to_int32(parameters->opaddress);
-
-	process->pc = MEMINDEX(process->pc + (value % IDX_MOD));
+//	if (process->carry != 0)
+		process->pc = MEMINDEX(process->pc + (parameters->tab[0] % IDX_MOD));
+//	else
+//		process->pc = MEMINDEX(process->pc + parameters->oplen + 1);
 }

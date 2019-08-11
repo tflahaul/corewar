@@ -10,11 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-#include <fcntl.h>
-#include <string.h>
-#include <unistd.h>
 #include <stdlib.h>
 
 #include <libft.h>
@@ -23,27 +18,11 @@
 #include <corewar_options.h>
 #include <corewar_compiler.h>
 
-#define BUFF_SIZE		512
-
 void					ft_print_help(char const **argv)
 {
-	int					fd;
-	int					bytes;
-	char				buffer[BUFF_SIZE + 1];
-
 	(void)argv;
-	if ((fd = open("help.txt", O_RDONLY)) < 0)
-	{
-		ft_puterror(strerror(errno));
-		exit(EXIT_ERROR);
-	}
-	while ((bytes = read(fd, buffer, BUFF_SIZE)) > 0)
-		write(STDERR_FILENO, buffer, bytes);
-	if (close(fd) < 0)
-	{
-		ft_puterror(strerror(errno));
-		exit(EXIT_ERROR);
-	}
+	if (ft_display_file("help.txt") != EXIT_SUCCESS)
+		exit(EXIT_FAILURE);
 	exit(EXIT_SUCCESS);
 }
 

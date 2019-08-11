@@ -23,8 +23,9 @@
 /*
 **	Strings
 */
-int				ft_strcmp(char const *s1, char const *s2);
 int				ft_strncmp(char const *s1, char const *s2, size_t n);
+int				ft_strcmp(char const *s1, char const *s2);
+void			ft_dprintf(int fd, char const *fmt, ...);
 void			ft_putstr(char const *str);
 size_t			ft_strlen(char const *str);
 int32_t			ft_atoi32_max(char const *str);
@@ -54,5 +55,10 @@ size_t			ft_list_size(t_listhead const *head);
 int32_t			ft_swap_int32(int32_t nb);
 uint16_t		ft_swap_uint16(uint16_t nb);
 uint32_t		ft_swap_uint32(uint32_t nb);
+
+/*
+**  Misc
+*/
+int		    	ft_display_file(char const *file);
 
 #endif

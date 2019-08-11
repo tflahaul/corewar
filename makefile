@@ -6,26 +6,27 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 22:08:10 by abrunet           #+#    #+#              #
-#    Updated: 2019/07/29 11:16:40 by thflahau         ###   ########.fr        #
+#    Updated: 2019/08/11 12:32:13 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	gcc
 
-NAME1		= 	corewar
-NAME2		=	asm
+NAME		= 	corewar
 
 #######   DIRECTORIES   #######
 HDR			=	include
 LIBDIR		=	libft
-ARENADIR	=	arena
-ASMDIR		=	assembler
+SRCDIR		=	arena
 OBJDIR		=	obj
+DIRS	=	$(patsubst $(SRCDIR)%, $(OBJDIR)%, $(shell find $(SRCDIR) -type d))
 
 ##########   FLAGS   ##########
 CFLAGS		=	-Wall						\
 				-Wextra						\
 				-Werror						\
+				-Wshadow					\
+				-Wnull-dereference			\
 				-pedantic					\
 				-g -O0 # debug
 
@@ -33,14 +34,11 @@ INCFLAG		=	-I $(HDR)
 LIBFLAG		=	-L $(LIBDIR) -lft
 
 #########   SOURCES   #########
-include $(ARENADIR)/arena_srcs.mk
-include $(ASMDIR)/assembler_srcs.mk
-
 LIBFT		=	$(LIBDIR)/libft.a
 
-SRCS		=	$(addprefix $(ARENADIR)/, $(ARENA_SRCS))
+SRCS		=	$(shell find $(SRCDIR) -type f -name "*.c")
 
-ARENA_OBJ	=	$(patsubst %,$(OBJDIR)/%.o, $(ARENA_SRCS))
+ARENA_OBJ	=	$(patsubst $(SRCDIR)%.c, $(OBJDIR)%.o, $(SRCS))
 
 DEPENDS		=	${ARENA_OBJ:.o=.d}
 
@@ -50,11 +48,11 @@ GREEN		=	\033[0;32m
 YELLOW		=	\033[0;33m
 
 ##########   RULES   ##########
-all				: $(LIBFT) $(NAME1)
+all				: $(LIBFT) $(NAME)
 
-$(NAME1)		: $(ARENA_OBJ)
+$(NAME)			: $(ARENA_OBJ)
 	@printf "$(YELLOW)%-40s$(STD)" "Building executable $@ ..."
-	@$(CC) $(CFLAGS) $(INCFLAG) share/errors.c $(ARENA_OBJ) -o $@ $(LIBFLAG)
+	@$(CC) $(CFLAGS) $(INCFLAG) $(ARENA_OBJ) -o $@ $(LIBFLAG)
 	@echo "$(GREEN)DONE$(STD)"
 
 $(LIBFT)		: $(HDR)/libft.h
@@ -62,19 +60,18 @@ $(LIBFT)		: $(HDR)/libft.h
 
 -include $(DEPENDS)
 
-$(OBJDIR)/%.o	: $(ARENADIR)/%.c
-	@mkdir -p $(OBJDIR)
+$(OBJDIR)/%.o	: $(SRCDIR)/%.c
+	@mkdir -p $(DIRS)
 	@printf "%-40s" " > Compiling $* ..."
 	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@
 	@echo '✓'
 
 clean			:
 	@/bin/rm -rf $(OBJDIR)
-	@/bin/rm -rf corewar.d
 	@make clean -C $(LIBDIR)
 
 fclean			: clean
-	@/bin/rm -rf $(NAME1)
+	@/bin/rm -rf $(NAME)
 	@make fclean -C $(LIBDIR)
 
 re				: fclean all

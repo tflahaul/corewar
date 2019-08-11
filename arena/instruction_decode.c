@@ -6,15 +6,11 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 12:36:13 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/22 16:46:49 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/11 14:25:36 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define DEBUG
 #include <stdio.h>
-
-#include <stdint.h>
-#include <stdlib.h>
 
 #include <op.h>
 #include <libft.h>
@@ -23,82 +19,69 @@
 #include <arena_process.h>
 #include <corewar_compiler.h>
 
-static t_ops const		instructions[] = {
-	{0, 0, 0, 0},
-	{0, 0, 0, 0}, // live
-	{0, 1, 0, 1}, // ld
-	{0, 0, 0, 1}, // st
-	{0, 1, 0, 1}, // add
-	{0, 1, 0, 1}, // sub
-	{0, 1, 0, 1}, // and
-	{0, 1, 0, 1}, // or
-	{0, 1, 0, 1}, // xor
-	{0, 0, 0, 0}, // zjmp
-	{0, 0, 0, 1}, // ldi
-	{0, 0, 0, 1}, // sti
-	{0, 0, 0, 0}, // fork
-	{0, 1, 0, 1}, // lld
-	{0, 1, 0, 1}, // lldi
-	{0, 0, 0, 0}, // lfork
-	{0, 0, 0, 1}, // aff
-	{0, 0, 0, 0}
+static t_ops const		g_opset[] = {
+	{0, 0, 0, 0, 0},
+	{&op_live, 0, 0x00a, 0, 4}, // live
+	{0, 1, 0x005, 1, 4}, // ld
+	{0, 0, 0x005, 1, 4}, // st
+	{0, 1, 0x00a, 1, 4}, // add
+	{0, 1, 0x00a, 1, 4}, // sub
+	{0, 1, 0x006, 1, 4}, // and
+	{0, 1, 0x006, 1, 4}, // or
+	{0, 1, 0x006, 1, 4}, // xor
+	{&op_zjmp, 0, 0x014, 0, 2}, // zjmp
+	{0, 0, 0x019, 1, 2}, // ldi
+	{0, 0, 0x019, 1, 2}, // sti
+	{0, 0, 0x320, 0, 2}, // fork
+	{0, 1, 0x00a, 1, 4}, // lld
+	{0, 1, 0x032, 1, 2}, // lldi
+	{0, 0, 0x3e8, 0, 2}, // lfork
+	{0, 0, 0x002, 1, 4}  // aff
 };
 
-static void				ft_putbinary(unsigned char octet)
+static inline int		ft_update_oplength(t_process *prc, t_parameters *data)
 {
-	for (unsigned int pow = (1 << 7); pow; pow >>= 1)
-		printf("%i", !!(pow & octet));
-	printf("\t%#x\n", octet);
+	int					size;
+	unsigned char const	byte = (data->ocp >> (6 - (2 * data->index++))) & 0x03;
+
+	size = data->oplen;
+	if (byte == REG_CODE)
+		data->oplen++;
+	else if (byte == DIR_CODE)
+		data->oplen += prc->instruction.dirsize;
+	else if (byte == IND_CODE)
+		data->oplen += 2;
+	return (data->oplen - size);
 }
 
-static int				ft_get_instruction_parameters(unsigned char octet)
+static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 {
-	unsigned int		index;
-	unsigned char		temp;
-
-	index = 0;
-	ft_putbinary(octet);
-	while (index < 3)
-	{
-		temp = (octet >> (6 - (index * 2))) & 0x03;
-		if (temp == REG_CODE)
-			printf("Param #%u = Addressage registre\n", index + 1);
-		else if (temp == DIR_CODE)
-			printf("Param #%u = Addressage direct\n", index + 1);
-		else if (temp == IND_CODE)
-			printf("Param #%u = Addressage indirect\n", index + 1);
-		++index;
-	}
-#ifdef DEBUG
-	if (__unlikely(octet & 0x03))
-	{
-		printf("ERREUR:Mauvais octet de codage des paramètres\n\n");
-		return (0);
-	}
-#endif
-	return (1);
+	int const			size = ft_update_oplength(prc, data);
+	return (ft_binarray_to_int(prc->pc + data->oplen, size));
 }
 
-void					ft_decode_instruction(t_process *process)
+void					ft_fetch_instruction(t_process *process, t_parameters *parameters)
 {
-	__attribute__((unused)) void (*funptr)(t_process *, t_param *);
-	unsigned int const	index = g_arena.arena[process->pc];
+	unsigned int const	opc = g_arena.arena[process->pc];
 
-	if (__likely(index > 0 && index < 18))
+	if (__likely(opc > 0 && opc < 18))
 	{
-		funptr = instructions[index].funptr;
-		if (instructions[index].has_code_byte)
-			ft_get_instruction_parameters(g_arena.arena[(process->pc = MEMINDEX(process->pc + 1))]);
+		printf("Decoding instruction %#.2x...\n", opc);
+		process->instruction = g_opset[opc];
+		ft_bzero(parameters, sizeof(*parameters));
+		if (g_opset[opc].has_code_byte)
+		{
+			parameters->oplen = 1;
+			parameters->ocp = g_arena.arena[MEMINDEX(process->pc + 1)];
+			for (unsigned int i = 0; i < 3; ++i)
+				parameters->tab[i] = ft_get_op_parameter(process, parameters);
+		}
 		else
-			printf("Pas d'octet de codage pour l'instruction %#x\n", index);
-		process->pc = MEMINDEX(process->pc + 2);
-		if (instructions[index].carry)
-			FLIPCARRY(process->carry);
+		{
+			parameters->oplen = g_opset[opc].dirsize;
+			parameters->tab[0] = ft_binarray_to_int(process->pc + 1, parameters->oplen);
+		}
 	}
-	else {
-#ifdef DEBUG
-		printf("Instruction %#x inexistante\n", index);
-#endif
+	else
 		process->pc = MEMINDEX(process->pc + 1);
-	}
 }
