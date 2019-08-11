@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 12:36:13 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/09 16:13:34 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/11 14:25:36 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 static t_ops const		g_opset[] = {
 	{0, 0, 0, 0, 0},
-	{0, 0, 0x00a, 0, 4}, // live
+	{&op_live, 0, 0x00a, 0, 4}, // live
 	{0, 1, 0x005, 1, 4}, // ld
 	{0, 0, 0x005, 1, 4}, // st
 	{0, 1, 0x00a, 1, 4}, // add
@@ -60,28 +60,27 @@ static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 	return (ft_binarray_to_int(prc->pc + data->oplen, size));
 }
 
-void					ft_fetch_instruction(t_process *process)
+void					ft_fetch_instruction(t_process *process, t_parameters *parameters)
 {
-	t_parameters		parameters;
 	unsigned int const	opc = g_arena.arena[process->pc];
 
 	if (__likely(opc > 0 && opc < 18))
 	{
 		printf("Decoding instruction %#.2x...\n", opc);
 		process->instruction = g_opset[opc];
-		ft_bzero(&parameters, sizeof(parameters));
+		ft_bzero(parameters, sizeof(*parameters));
 		if (g_opset[opc].has_code_byte)
 		{
-			parameters.ocp = g_arena.arena[MEMINDEX(process->pc + 1)];
+			parameters->oplen = 1;
+			parameters->ocp = g_arena.arena[MEMINDEX(process->pc + 1)];
 			for (unsigned int i = 0; i < 3; ++i)
-				parameters.tab[i] = ft_get_op_parameter(process, &parameters);
+				parameters->tab[i] = ft_get_op_parameter(process, parameters);
 		}
-		else //pb ret 0??
-			parameters.tab[0] = ft_binarray_to_int(process->pc + 1, g_opset[opc].dirsize);
-		if (g_opset[opc].funptr != 0)
-			(*g_opset[opc].funptr)(process, &parameters);
-		else //tmp
-			process->pc = MEMINDEX(process->pc + parameters.oplen);
+		else
+		{
+			parameters->oplen = g_opset[opc].dirsize;
+			parameters->tab[0] = ft_binarray_to_int(process->pc + 1, parameters->oplen);
+		}
 	}
 	else
 		process->pc = MEMINDEX(process->pc + 1);

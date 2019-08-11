@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/22 16:10:40 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/11 12:47:12 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 #include <arena_errors.h>
 #include <arena_process.h>
 #include <corewar_compiler.h>
+
+#include <stdio.h>
+
+static inline void		ft_print_winner(void)
+{
+	if (g_arena.last_alive)
+		printf("Le joueur %i '%s' gagne la partie\n", g_arena.last_alive->id, g_arena.last_alive->name);
+}
 
 int						main(int argc, char const **argv)
 {
@@ -33,5 +41,6 @@ int						main(int argc, char const **argv)
 		ft_hexdump_memory(); // goto visualizer
 	}
 	ft_arena_main_loop(proclist);
+	ft_print_winner();
 	return (EXIT_SUCCESS);
 }

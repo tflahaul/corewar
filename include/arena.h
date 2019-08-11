@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/23 11:13:41 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/11 12:49:08 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int						ft_number_in_list(int32_t id);
 void					ft_scan_warriors_id(void);
 void					ft_hexdump_memory(void);
 unsigned int			ft_list_size_warrior(void);
+t_warrior				*ft_get_warrior_from_id(int id);
 
 /*
 **	Conversion

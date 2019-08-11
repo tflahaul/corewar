@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:05:07 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/09 16:04:26 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/11 12:39:19 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,20 @@
 #include <libft.h>
 #include <arena.h>
 #include <arena_errors.h>
+
+inline t_warrior		*ft_get_warrior_from_id(int id)
+{
+	t_warrior			*node;
+
+	node = g_arena.warriors;
+	while (node != NULL)
+	{
+		if (node->id == id)
+			return (node);
+		node = node->next;
+	}
+	return (NULL);
+}
 
 inline int				ft_number_in_list(int32_t id)
 {
