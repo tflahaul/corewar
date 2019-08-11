@@ -6,17 +6,17 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/11 12:47:12 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/11 16:14:03 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #include <libft.h>
 #include <arena.h>
 #include <arena_errors.h>
 #include <arena_process.h>
 #include <corewar_compiler.h>
-
-#include <stdio.h>
 
 static inline void		ft_print_winner(void)
 {

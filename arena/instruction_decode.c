@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 12:36:13 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/11 14:25:36 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/11 16:30:21 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@
 static t_ops const		g_opset[] = {
 	{0, 0, 0, 0, 0},
 	{&op_live, 0, 0x00a, 0, 4}, // live
-	{0, 1, 0x005, 1, 4}, // ld
-	{0, 0, 0x005, 1, 4}, // st
-	{0, 1, 0x00a, 1, 4}, // add
-	{0, 1, 0x00a, 1, 4}, // sub
-	{0, 1, 0x006, 1, 4}, // and
-	{0, 1, 0x006, 1, 4}, // or
-	{0, 1, 0x006, 1, 4}, // xor
+	{&op_ld  , 1, 0x005, 1, 4}, // ld
+	{&op_st  , 0, 0x005, 1, 4}, // st
+	{&op_add , 1, 0x00a, 1, 4}, // add
+	{&op_sub , 1, 0x00a, 1, 4}, // sub
+	{&op_and , 1, 0x006, 1, 4}, // and
+	{&op_or  , 1, 0x006, 1, 4}, // or
+	{&op_xor , 1, 0x006, 1, 4}, // xor
 	{&op_zjmp, 0, 0x014, 0, 2}, // zjmp
-	{0, 0, 0x019, 1, 2}, // ldi
-	{0, 0, 0x019, 1, 2}, // sti
+	{&op_ldi , 0, 0x019, 1, 2}, // ldi
+	{&op_sti , 0, 0x019, 1, 2}, // sti
 	{0, 0, 0x320, 0, 2}, // fork
-	{0, 1, 0x00a, 1, 4}, // lld
-	{0, 1, 0x032, 1, 2}, // lldi
+	{&op_lld , 1, 0x00a, 1, 4}, // lld
+	{&op_lldi, 1, 0x032, 1, 2}, // lldi
 	{0, 0, 0x3e8, 0, 2}, // lfork
-	{0, 0, 0x002, 1, 4}  // aff
+	{&op_aff , 0, 0x002, 1, 4}  // aff
 };
 
 static inline int		ft_update_oplength(t_process *prc, t_parameters *data)

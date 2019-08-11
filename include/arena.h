@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/11 12:49:08 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/11 15:33:10 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_arena_state			g_arena;
 # define HAS_DUMP(x)		(x & OPTION_D)
 # define HAS_NUMBER(x)		(x & OPTION_N)
 # define UNSET_OPTION_N(x)	(x &= ~OPTION_N)
+# define ISREG(x)			((x) > 0 && (x) < 17)
 
 # define MEMINDEX(x)	((x) % MEM_SIZE)
 # define MODINDEX(x)	((x) % IDX_MOD)

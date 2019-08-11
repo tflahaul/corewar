@@ -6,7 +6,7 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 10:41:28 by thflahau          #+#    #+#              #
-#    Updated: 2019/08/09 13:01:32 by thflahau         ###   ########.fr        #
+#    Updated: 2019/08/11 15:52:49 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,4 +30,5 @@ LIBSOURCES		=	ft_strrchr.c				\
 					ft_strncmp.c				\
 					ft_dprintf.c				\
 					ft_display_file.c			\
-					ft_swap_int32.c
+					ft_swap_int32.c				\
+					ft_putchar.c
