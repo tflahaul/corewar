@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 13:58:50 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/11 14:24:18 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/12 14:39:36 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ void					ft_each_process(t_listhead tab[MAX_PLAYERS])
 			else
 			{
 				ft_fetch_instruction(process, &parameters);
-				if (process->instruction.funptr)
-					(*process->instruction.funptr)(process, &parameters);
-				else // debug
-					process->pc = MEMINDEX(process->pc + parameters.oplen + 1);
+				(*process->instruction.funptr)(process, &parameters);
 			}
 		}
 	}

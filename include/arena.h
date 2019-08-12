@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/11 15:33:10 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/12 15:00:37 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ t_arena_state			g_arena;
 
 # define MEMINDEX(x)	((x) % MEM_SIZE)
 # define MODINDEX(x)	((x) % IDX_MOD)
-# define FLIPCARRY(x)	((x) = ~(x))
 
 # define RRR			84 // 0b01010100
 
@@ -83,7 +82,8 @@ t_warrior				*ft_get_warrior_from_id(int id);
 /*
 **	Conversion
 */
-int32_t					ft_binarray_to_int(unsigned int adr, unsigned int sz);
+void					ft_int_to_binarray(unsigned int ptr, unsigned int nb);
+int32_t					ft_binarray_to_int(unsigned int ptr, unsigned int sz);
 
 /*
 **	Memory
