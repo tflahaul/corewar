@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:26:06 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/18 14:41:41 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/14 16:43:46 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static int				ft_new_process(t_listhead *hd, int32_t id, uint16_t pc)
 		return (EXIT_ERROR);
 	ft_bzero(process, sizeof(*process));
 	process->registers[1] = id;
+	process->head = hd;
 	process->pc = pc;
 	ft_list_push(&(process->list), hd);
 	return (EXIT_SUCCESS);

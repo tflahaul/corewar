@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:28:08 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/11 16:32:51 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/14 14:24:21 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void						op_add(t_process *process, t_parameters *params)
 	{
 		sum = process->registers[params->tab[0]] + process->registers[params->tab[1]];
 		process->registers[params->tab[2]] = sum;
-		process->carry = sum ? 0 : 1;
+		process->carry = !(sum);
 	}
 }

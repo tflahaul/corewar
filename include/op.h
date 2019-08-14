@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 15:20:22 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/09 15:22:53 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/14 17:19:00 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define REG_NUMBER				16
 
 # define CYCLE_TO_DIE			1536
-# define CYCLE_DELTA			50
+# define CYCLE_DELTA			100
 # define NBR_LIVE				21
 # define MAX_CHECKS				10
 

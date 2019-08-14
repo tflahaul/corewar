@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/11 14:38:17 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/14 16:53:40 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static inline int			ft_check_cycle_to_die(t_listhead lst[MAX_PLAYERS])
 	return (live >= NBR_LIVE ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
+/** moche, a refaire **/
 void						ft_arena_main_loop(t_listhead pclst[MAX_PLAYERS])
 {
 	int						live = 0;
@@ -76,4 +77,5 @@ void						ft_arena_main_loop(t_listhead pclst[MAX_PLAYERS])
 		ft_each_process(pclst);
 	}
 	ft_delete_proclist(pclst);
+	ft_hexdump_memory();
 }

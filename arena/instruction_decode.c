@@ -6,11 +6,9 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 12:36:13 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/12 14:41:13 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/14 16:32:44 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include <op.h>
 #include <libft.h>
@@ -35,7 +33,7 @@ static t_ops const		g_opset[] = {
 	{&op_fork, 0, 0x320, 0, 2}, // fork
 	{&op_lld , 1, 0x00a, 1, 4}, // lld
 	{&op_lldi, 1, 0x032, 1, 2}, // lldi
-	{&op_lfork, 0, 0x3e8, 0, 2}, // lfork
+	{&op_lfork, 0, 0x3e8, 0, 2},// lfork
 	{&op_aff , 0, 0x002, 1, 4}  // aff
 };
 
@@ -63,25 +61,24 @@ static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 	return (value);
 }
 
-void					ft_fetch_instruction(t_process *process, t_parameters *parameters)
+void					ft_fetch_instruction(t_process *process, t_parameters *params)
 {
 	unsigned int const	opc = g_arena.arena[process->pc];
 
 	if (__likely(opc > 0 && opc < 18))
 	{
 		process->instruction = g_opset[opc];
-		ft_bzero(parameters, sizeof(*parameters));
 		if (g_opset[opc].has_code_byte)
 		{
-			parameters->oplen = 1;
-			parameters->ocp = g_arena.arena[MEMINDEX(process->pc + 1)];
+			params->oplen = 1;
+			params->ocp = g_arena.arena[MEMINDEX(process->pc + 1)];
 			for (unsigned int i = 0; i < 3; ++i)
-				parameters->tab[i] = ft_get_op_parameter(process, parameters);
+				params->tab[i] = ft_get_op_parameter(process, params);
 		}
 		else
 		{
-			parameters->oplen = g_opset[opc].dirsize;
-			parameters->tab[0] = ft_binarray_to_int(process->pc + 1, parameters->oplen);
+			params->oplen = g_opset[opc].dirsize;
+			params->tab[0] = ft_binarray_to_int(process->pc + 1, params->oplen);
 		}
 	}
 	else

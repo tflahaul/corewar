@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:28:33 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/12 14:15:13 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/14 14:11:43 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void						op_fork(t_process *process, t_parameters *params)
 		return ;
 	ft_memcpy(node, process, sizeof(*process));
 	node->pc = MEMINDEX(process->pc + (params->tab[0] % IDX_MOD));
-	ft_list_push(&(node->list), &(process->list));
+	ft_list_push(&(node->list), process->head);
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

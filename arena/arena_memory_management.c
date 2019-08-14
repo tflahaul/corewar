@@ -6,11 +6,12 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/12 14:55:05 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/14 15:37:20 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <arena.h>
+#include <corewar_compiler.h>
 
 void					ft_int_to_binarray(unsigned int addr, unsigned int nb)
 {
@@ -24,12 +25,14 @@ inline int32_t			ft_binarray_to_int(unsigned int addr, unsigned int sz)
 {
 	int32_t				value = 0;
 
-	if (sz == 2)
+	if (sz == 1)
+		value = g_arena.arena[MEMINDEX(addr)];
+	else if (sz == 2)
 	{
 		value |= (g_arena.arena[MEMINDEX(addr)] << 8);
 		value |= g_arena.arena[MEMINDEX(addr + 1)];
 	}
-	else if (sz == 4)
+	else if (__likely(sz == 4))
 	{
 		value |= (g_arena.arena[MEMINDEX(addr + 0)] << 24);
 		value |= (g_arena.arena[MEMINDEX(addr + 1)] << 16);
