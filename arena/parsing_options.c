@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 09:19:28 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/28 14:55:48 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/16 13:36:29 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 
 static t_options		options[] = {
 	{"dump", &ft_get_dump, required_argument, 'd'},
-	{"number", &ft_get_numb, required_argument, 'n'},
 	{"help", &ft_print_help, no_argument, 'h'},
+	{"print", &ft_set_print, no_argument, 'p'},
+	{"number", &ft_get_numb, required_argument, 'n'},
 	{"visualize", &ft_set_visualize, no_argument, 'v'},
 	{0, 0, 0, 0}
 };

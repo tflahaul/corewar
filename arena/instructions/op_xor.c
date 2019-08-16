@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:29:35 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/14 12:27:25 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/16 15:47:49 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,3 @@ void						op_xor(t_process *process, t_parameters *params)
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }
-

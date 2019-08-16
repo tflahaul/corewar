@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/12 15:00:37 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/16 13:38:42 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_arena_state			g_arena;
 # define OPTION_N		0x00000001ul
 # define OPTION_V		0x00000010ul
 # define OPTION_D		0x00000100ul
+# define OPTION_P		0x00001000ul
 
 # define HAS_VISU(x)		(x & OPTION_V)
 # define HAS_DUMP(x)		(x & OPTION_D)

@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:26:06 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/14 16:43:46 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/16 13:51:01 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int						ft_load_warriors_into_arena(t_listhead lst[MAX_PLAYERS])
 {
 	uint8_t				*temp;
 	t_warrior			*node;
-	register uint32_t	idx;
 	register uint8_t	*arena;
+	register uint32_t	idx;
 
 	idx = 0;
 	temp = g_arena.arena;
