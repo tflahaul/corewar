@@ -39,8 +39,10 @@ typedef struct		s_process {
 	int32_t			registers[REG_NUMBER + 1];
 	uint32_t		live;
 	uint16_t		carry;
-	uint16_t		pc;
+	int16_t			pc;
 }					t_process;
+
+# define RESET_PROCESS(x)	(((t_process *)x)->instruction.funptr = (void *)0)
 
 int					ft_load_warriors_into_arena(t_listhead *head);
 void				ft_arena_main_loop(t_listhead lst[MAX_PLAYERS]);
@@ -49,6 +51,10 @@ void				ft_each_process(t_listhead lst[MAX_PLAYERS]);
 void				ft_init_process(t_listhead lst[MAX_PLAYERS]);
 void				ft_fetch_instruction(t_process *process, t_parameters *p);
 void				*ft_get_process(t_listhead *node);
+
+/*
+**	Instructions
+*/
 
 void				op_or(t_process *p, t_parameters *);
 void				op_ld(t_process *p, t_parameters *);

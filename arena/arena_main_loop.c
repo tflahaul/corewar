@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
 #include <libft.h>
 #include <arena.h>
 #include <arena_errors.h>
@@ -56,6 +58,7 @@ void						ft_arena_main_loop(t_listhead pclst[MAX_PLAYERS])
 
 	while (ctd > 0)
 	{
+		printf("[%zu] It is now cycle %i\n", ft_list_size(&pclst[0]), cycle);
 		if (++cycle == ctd)
 		{
 			if (ft_check_cycle_to_die(pclst) == EXIT_SUCCESS)

@@ -21,10 +21,13 @@ void						op_fork(t_process *process, t_parameters *params)
 {
 	t_process				*node;
 
-	if (__unlikely(!(node = (t_process *)malloc(sizeof(t_process)))))
-		return ;
-	ft_memcpy(node, process, sizeof(*process));
-	node->pc = MEMINDEX(process->pc + (params->tab[0] % IDX_MOD));
-	ft_list_push(&(node->list), process->head);
+	if (__likely((node = (t_process *)malloc(sizeof(t_process))) != NULL))
+	{
+		ft_memcpy(node, process, sizeof(*process));
+		node->pc = MEMINDEX(process->pc + (params->tab[0] % IDX_MOD));
+		ft_bzero(&(node->params), sizeof(t_parameters));
+		RESET_PROCESS(node);
+		ft_list_push(&(node->list), node->head);
+	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

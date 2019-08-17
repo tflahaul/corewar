@@ -14,12 +14,6 @@
 #include <arena.h>
 #include <arena_process.h>
 
-static inline void		ft_reset_process(t_process *process)
-{
-	process->instruction.funptr = (void *)0;
-	ft_bzero(&(process->params), sizeof(t_parameters));
-}
-
 void					ft_each_process(t_listhead tab[MAX_PLAYERS])
 {
 	t_process			*process;
@@ -38,7 +32,7 @@ void					ft_each_process(t_listhead tab[MAX_PLAYERS])
 				if (process->instruction.funptr != 0)
 				{
 					(*process->instruction.funptr)(process, &(process->params));
-					ft_reset_process(process);
+					RESET_PROCESS(process);
 				}
 				ft_fetch_instruction(process, &(process->params));
 			}

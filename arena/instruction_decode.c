@@ -68,6 +68,7 @@ void					ft_fetch_instruction(t_process *process, t_parameters *params)
 	if (__likely(opc > 0 && opc < 18))
 	{
 		process->instruction = g_opset[opc];
+		ft_bzero(&(process->params), sizeof(t_parameters));
 		if (g_opset[opc].has_code_byte)
 		{
 			params->oplen = 1;
