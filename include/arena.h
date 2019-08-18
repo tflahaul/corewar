@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/16 13:38:42 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/18 13:13:16 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ t_arena_state			g_arena;
 # define ISREG(x)			((x) > 0 && (x) < 17)
 
 # define MEMINDEX(x)	((x) % MEM_SIZE)
-# define MODINDEX(x)	((x) % IDX_MOD)
 
 # define RRR			84 // 0b01010100
 

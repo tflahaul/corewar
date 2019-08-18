@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/14 16:53:40 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/18 12:51:51 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void						ft_arena_main_loop(t_listhead pclst[MAX_PLAYERS])
 
 	while (ctd > 0)
 	{
-		printf("[%zu] It is now cycle %i\n", ft_list_size(&pclst[0]), cycle);
+//		printf("[%zu] It is now cycle %i\n", ft_list_size(&pclst[0]), cycle);
 		if (++cycle == ctd)
 		{
 			if (ft_check_cycle_to_die(pclst) == EXIT_SUCCESS)

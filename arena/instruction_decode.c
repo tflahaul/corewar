@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 12:36:13 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/14 16:32:44 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/18 13:37:25 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,30 @@ static inline int		ft_update_oplength(t_process *prc, t_parameters *data)
 	int					size = 0;
 	unsigned char const	byte = (data->ocp >> (6 - (2 * data->index++))) & 0x03;
 
-	size = 0;
 	if (byte == REG_CODE)
 		size = 1;
 	else if (byte == DIR_CODE)
 		size = prc->instruction.dirsize;
 	else if (byte == IND_CODE)
 		size = 2;
-	return (size);
+	return ((size == 2) ? 8 : size);
 }
 
 static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 {
+	int					value;
 	int const			size = ft_update_oplength(prc, data);
-	int const			value = ft_binarray_to_int(prc->pc + data->oplen + 1, size);
 
-	data->oplen += size;
+	if (size != 8)
+	{
+		value = ft_binarray_to_int(prc->pc + data->oplen + 1, size);
+		data->oplen += size;
+	}
+	else
+	{
+		value = ft_binarray_to_int(prc->pc + ft_binarray_to_int(prc->pc + data->oplen + 1, 2), 4);
+		data->oplen += 2;
+	}
 	return (value);
 }
 
