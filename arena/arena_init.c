@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:26:06 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/16 13:51:01 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/18 14:28:05 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static inline uint32_t	ft_compute_gap_between_warriors(void)
 	return ((uint32_t)(MEM_SIZE / ft_list_size_warrior()));
 }
 
-static int				ft_new_process(t_listhead *hd, int32_t id, uint16_t pc)
+static int				ft_new_process(t_listhead *hd, int32_t id, int16_t pc)
 {
 	t_process			*process;
 
@@ -51,7 +51,7 @@ int						ft_load_warriors_into_arena(t_listhead lst[MAX_PLAYERS])
 	while ((node != NULL) && (idx < MAX_PLAYERS))
 	{
 		ft_memcpy(arena, node->program, node->size);
-		if (ft_new_process(&(lst[idx]), node->id, (uint16_t)(arena - temp)) < 0)
+		if (ft_new_process(&(lst[idx]), node->id, (int16_t)(arena - temp)) < 0)
 			return (ft_puterror_memalloc_failure(&(lst[idx])));
 		node = node->next;
 		arena += gap;

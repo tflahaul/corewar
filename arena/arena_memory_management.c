@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/14 15:37:20 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/18 14:56:00 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ inline int32_t			ft_binarray_to_int(unsigned int addr, unsigned int sz)
 	{
 		value |= g_arena.arena[MEMINDEX(addr + 0)] << 8;
 		value |= g_arena.arena[MEMINDEX(addr + 1)];
+		return ((int16_t)value);
 	}
 	else if (__likely(sz == 4))
 	{
