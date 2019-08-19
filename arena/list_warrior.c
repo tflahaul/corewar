@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:05:07 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/11 12:39:19 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:39:00 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static inline void		ft_list_push_warrior(t_warrior *entry)
 {
 	if (__builtin_expect((g_arena.warriors == NULL), 0))
 		g_arena.warriors = entry;
-	else if (__builtin_expect(entry != NULL, 1))
+	else
 	{
 		entry->next = g_arena.warriors;
 		g_arena.warriors = entry;
@@ -74,20 +74,16 @@ int						ft_malloc_new_warrior(void)
 
 	if (g_arena.warriors == NULL)
 	{
-		if ((node = (t_warrior *)malloc(sizeof(*node))) != NULL)
-		{
-			ft_bzero(node, sizeof(*node));
-			g_arena.warriors = node;
-		}
-		else
+		if ((node = (t_warrior *)malloc(sizeof(*node))) == NULL)
 			return (ft_puterror(strerror(errno)));
+		ft_bzero(node, sizeof(*node));
+		g_arena.warriors = node;
 	}
 	else
 	{
-		if ((node = (t_warrior *)malloc(sizeof(*node))) != NULL)
-			ft_bzero(node, sizeof(*node));
-		else
+		if ((node = (t_warrior *)malloc(sizeof(*node))) == NULL)
 			return (ft_puterror(strerror(errno)));
+		ft_bzero(node, sizeof(*node));
 		ft_list_push_warrior(node);
 	}
 	g_arena.size++;

@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/19 15:16:55 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:24:51 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int							ft_parse_warrior(char const *file)
 {
 	int						fd;
 
-	if (__unlikely(g_arena.size == MAX_PLAYERS))
+	if (__unlikely(g_arena.size >= MAX_PLAYERS))
 		return (ft_puterror(MAXCHAMP));
 	if (__unlikely((fd = open(file, O_RDONLY)) < 0))
 		return (ft_puterror(strerror(errno)));

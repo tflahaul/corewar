@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/11 16:14:03 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:40:12 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int						main(int argc, char const **argv)
 
 	if (__unlikely(ft_parse_args(argc, argv) != EXIT_SUCCESS))
 		return (EXIT_FAILURE);
+	for (t_warrior *node = g_arena.warriors; node; (node = node->next))
+		printf("* Player %i, weighing %3i bytes, '%s'\n", node->id, node->size, node->name);
 	ft_init_process(proclist);
 	if (ft_load_warriors_into_arena(proclist) != EXIT_SUCCESS)
 		return (EXIT_ERROR);

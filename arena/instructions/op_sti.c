@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:29:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/18 15:03:58 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/19 13:06:48 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void						op_sti(t_process *process, t_parameters *params)
 			addr += process->registers[params->tab[2]];
 		else
 			addr += params->tab[2];
-		ft_int_to_binarray((process->pc + 1) + (addr % IDX_MOD), process->registers[params->tab[0]]);
+		if (process->instruction.has_code_byte)
+			ft_int_to_binarray(process->pc + (addr % IDX_MOD) + 1, process->registers[params->tab[0]]);
+		else
+			ft_int_to_binarray(process->pc + (addr % IDX_MOD), process->registers[params->tab[0]]);
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }
