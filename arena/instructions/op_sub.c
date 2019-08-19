@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:29:29 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/14 12:27:15 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/19 14:02:20 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void						op_sub(t_process *process, t_parameters *params)
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 	if (params->ocp != RRR)
 		return ;
-	if (ISREG(params->tab[0]) && ISREG(params->tab[1])&& ISREG(params->tab[2]))
+	if (ISREG(params->tab[0]) && ISREG(params->tab[1]) && ISREG(params->tab[2]))
 	{
 		sum = process->registers[params->tab[0]] - process->registers[params->tab[1]];
 		process->registers[params->tab[2]] = sum;

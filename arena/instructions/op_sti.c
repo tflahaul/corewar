@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:29:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/19 13:06:48 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/19 14:35:29 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@ void						op_sti(t_process *process, t_parameters *params)
 	{
 		if ((params->ocp & 48) >> 4 == REG_CODE && ISREG(params->tab[1]))
 			addr += process->registers[params->tab[1]];
+		else if ((params->ocp & 48) >> 4 == IND_CODE)
+			addr += ft_binarray_to_int(process->pc + params->tab[1], 2);
 		else
 			addr += params->tab[1];
 		if ((params->ocp & 12) >> 2 == REG_CODE && ISREG(params->tab[2]))
 			addr += process->registers[params->tab[2]];
+		else if ((params->ocp & 12) >> 2 == IND_CODE)
+			addr += ft_binarray_to_int(process->pc + params->tab[2], 2);
 		else
 			addr += params->tab[2];
-		if (process->instruction.has_code_byte)
-			ft_int_to_binarray(process->pc + (addr % IDX_MOD) + 1, process->registers[params->tab[0]]);
-		else
-			ft_int_to_binarray(process->pc + (addr % IDX_MOD), process->registers[params->tab[0]]);
+		ft_int_to_binarray(process->pc + (addr % IDX_MOD), process->registers[params->tab[0]]);
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

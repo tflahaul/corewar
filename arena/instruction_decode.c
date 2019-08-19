@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 12:36:13 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/18 13:37:25 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/19 14:34:57 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 	}
 	else
 	{
-		value = ft_binarray_to_int(prc->pc + ft_binarray_to_int(prc->pc + data->oplen + 1, 2), 4);
+		value = ft_binarray_to_int(prc->pc + data->oplen + 1, 2);
 		data->oplen += 2;
 	}
 	return (value);
