@@ -28,7 +28,7 @@ void						op_sti(t_process *process, t_parameters *params)
 			addr += process->registers[params->tab[2]];
 		else
 			addr += params->tab[2];
-		ft_int_to_binarray(process->pc + (addr % IDX_MOD), process->registers[params->tab[0]]);
+		ft_int_to_binarray(ft_update_program_counter(process->pc, (addr % IDX_MOD)), process->registers[params->tab[0]]);
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

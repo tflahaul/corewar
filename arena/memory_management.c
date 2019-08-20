@@ -27,7 +27,7 @@ void					ft_hexdump_memory(void)
 	while (index < MEM_SIZE)
 	{
 		printf("%02hhx", g_arena.arena[index]);
-		if (!(++index % 64))
+		if (!(++index % 32))
 		{
 			printf("\n");
 			printf("%#.4x:  ", index);

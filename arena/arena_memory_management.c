@@ -13,6 +13,11 @@
 #include <arena.h>
 #include <corewar_compiler.h>
 
+inline unsigned int		ft_update_program_counter(int16_t pc, int16_t nb)
+{
+	return (pc + nb >= 0 ? MEMINDEX(pc + nb) : MEMINDEX(MEM_SIZE + (pc + nb)));
+}
+
 void					ft_int_to_binarray(unsigned int addr, unsigned int nb)
 {
 	g_arena.arena[MEMINDEX(addr + 0)] = (nb >> 24) & 0xff;

@@ -29,7 +29,7 @@ void						op_lldi(t_process *process, t_parameters *params)
 			address += process->registers[params->tab[1]];
 		else
 			address += params->tab[1];
-		value = ft_binarray_to_int(process->pc + address, REG_SIZE);
+		value = ft_binarray_to_int(ft_update_program_counter(process->pc, address), 4);
 		process->registers[params->tab[2]] = value;
 		process->carry = !(value);
 	}

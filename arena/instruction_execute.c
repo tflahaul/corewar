@@ -28,10 +28,8 @@ void					ft_each_process(t_listhead tab[MAX_PLAYERS])
 			if (process->instruction.cycle == 0)
 			{
 				if (process->instruction.funptr != 0)
-				{
 					(*process->instruction.funptr)(process, &(process->params));
-					RESET_PROCESS(process);
-				}
+				RESET_PROCESS(process);
 				ft_fetch_instruction(process, &(process->params));
 			}
 			process->instruction.cycle--;

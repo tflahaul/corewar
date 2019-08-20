@@ -24,7 +24,7 @@ void						op_lfork(t_process *process, t_parameters *params)
 	if (__likely((node = (t_process *)malloc(sizeof(t_process))) != NULL))
 	{
 		ft_memcpy(node, process, sizeof(*process));
-		node->pc = MEMINDEX(process->pc + params->tab[0]);
+		node->pc = ft_update_program_counter(process->pc, params->tab[0]);
 		ft_bzero(&(node->params), sizeof(t_parameters));
 		RESET_PROCESS(node);
 		ft_list_push(&(node->list), node->head);

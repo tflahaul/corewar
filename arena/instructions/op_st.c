@@ -16,7 +16,7 @@
 
 void							op_st(t_process *process, t_parameters *params)
 {
-	register int32_t			value;
+	register int				value;
 
 	if (__likely(ISREG(params->tab[0])))
 	{
@@ -24,7 +24,7 @@ void							op_st(t_process *process, t_parameters *params)
 		if (ISREG(params->tab[1]) && (params->ocp & 48) >> 4 == REG_CODE)
 			process->registers[params->tab[1]] = value;
 		else
-			ft_int_to_binarray(process->pc + (params->tab[1] % IDX_MOD), value);
+			ft_int_to_binarray(ft_update_program_counter(process->pc, (params->tab[1] % IDX_MOD)), value);
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

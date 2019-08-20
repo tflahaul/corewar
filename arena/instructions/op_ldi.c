@@ -29,7 +29,7 @@ void						op_ldi(t_process *process, t_parameters *params)
 			address += process->registers[params->tab[1]];
 		else
 			address += params->tab[1];
-		value = ft_binarray_to_int(process->pc + (address % IDX_MOD), REG_SIZE);
+		value = ft_binarray_to_int(ft_update_program_counter(process->pc, (address % IDX_MOD)), 4);
 		process->registers[params->tab[2]] = value;
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);

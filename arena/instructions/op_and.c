@@ -16,20 +16,20 @@
 
 void						op_and(t_process *process, t_parameters *params)
 {
-	register int			i;
-	register int			j;
+	register int			p1;
+	register int			p2;
 
 	if (__likely(ISREG(params->tab[2])))
 	{
 		if ((params->ocp & 192) >> 6 == REG_CODE && ISREG(params->tab[0]))
-			i = process->registers[params->tab[0]];
+			p1 = process->registers[params->tab[0]];
 		else
-			i = params->tab[0];
+			p1 = params->tab[0];
 		if ((params->ocp & 48) >> 4 == REG_CODE && ISREG(params->tab[1]))
-			j = process->registers[params->tab[1]];
+			p2 = process->registers[params->tab[1]];
 		else
-			j = params->tab[1];
-		process->registers[params->tab[2]] = (i & j);
+			p2 = params->tab[1];
+		process->registers[params->tab[2]] = (p1 & p2);
 		process->carry = !(process->registers[params->tab[2]]);
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);

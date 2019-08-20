@@ -63,7 +63,8 @@ static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 	}
 	else
 	{
-		value = ft_binarray_to_int(prc->pc + ft_binarray_to_int(prc->pc + data->oplen + 1, 2), 4);
+		value = ft_update_program_counter(prc->pc, ft_binarray_to_int(prc->pc + data->oplen + 1, 2));
+		value = ft_binarray_to_int(value, REG_SIZE);
 		data->oplen += 2;
 	}
 	return (value);
