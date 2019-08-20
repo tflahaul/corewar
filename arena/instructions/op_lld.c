@@ -18,10 +18,7 @@ void					op_lld(t_process *process, t_parameters *params)
 {
 	if (__likely(ISREG(params->tab[1])))
 	{
-		if ((params->ocp & 192) >> 6 == DIR_CODE)
-			process->registers[params->tab[1]] = params->tab[0];
-		else
-			process->registers[params->tab[1]] = ft_binarray_to_int(process->pc + (params->tab[0] % IDX_MOD), 4);
+		process->registers[params->tab[1]] = params->tab[0];
 		process->carry = !(process->registers[params->tab[1]]);
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);

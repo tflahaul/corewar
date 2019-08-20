@@ -23,14 +23,10 @@ void						op_or(t_process *process, t_parameters *params)
 	{
 		if ((params->ocp & 192) >> 6 == REG_CODE && ISREG(params->tab[0]))
 			i = process->registers[params->tab[0]];
-		else if ((params->ocp & 192) >> 6 == IND_CODE)
-			i = ft_binarray_to_int(process->pc + params->tab[0], 4);
 		else
 			i = params->tab[0];
 		if ((params->ocp & 48) >> 4 == REG_CODE && ISREG(params->tab[1]))
 			j = process->registers[params->tab[1]];
-		else if ((params->ocp & 48) >> 4 == IND_CODE)
-			j = ft_binarray_to_int(process->pc + params->tab[1], 4);
 		else
 			j = params->tab[1];
 		process->registers[params->tab[2]] = (i | j);

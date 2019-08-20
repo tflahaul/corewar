@@ -47,8 +47,8 @@ static inline int		ft_update_oplength(t_process *prc, t_parameters *data)
 	else if (byte == DIR_CODE)
 		size = prc->instruction.dirsize;
 	else if (byte == IND_CODE)
-		size = 2;
-	return ((size == 2) ? 8 : size);
+		size = 8;
+	return (size);
 }
 
 static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
@@ -63,7 +63,7 @@ static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 	}
 	else
 	{
-		value = ft_binarray_to_int(prc->pc + data->oplen + 1, 2);
+		value = ft_binarray_to_int(prc->pc + ft_binarray_to_int(prc->pc + data->oplen + 1, 2), 4);
 		data->oplen += 2;
 	}
 	return (value);
