@@ -14,7 +14,7 @@
 #include <arena.h>
 #include <arena_process.h>
 
-void					ft_each_process(t_listhead tab[MAX_PLAYERS])
+void					ft_for_each_process(t_listhead tab[MAX_PLAYERS])
 {
 	t_process			*process;
 	t_listhead			*child;

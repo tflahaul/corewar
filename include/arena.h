@@ -16,14 +16,10 @@
 # include <stdint.h>
 # include "op.h"
 
-# define FILE_FORMAT		".cor"
+# define FILE_FORMAT	".cor"
 
 # pragma pack(push, 2)
 
-/*
-**	@size:			Warrior size; We only use this variable to copy size bytes
-**					of warrior code onto the arena.
-*/
 typedef struct			s_warrior {
 	int32_t				id;
 	uint32_t			size;

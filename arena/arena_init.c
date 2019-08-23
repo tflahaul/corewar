@@ -31,7 +31,6 @@ static int				ft_new_process(t_listhead *hd, int32_t id, int16_t pc)
 		return (EXIT_ERROR);
 	ft_bzero(process, sizeof(*process));
 	process->registers[1] = id;
-	process->head = hd;
 	process->pc = pc;
 	ft_list_push(&(process->list), hd);
 	return (EXIT_SUCCESS);

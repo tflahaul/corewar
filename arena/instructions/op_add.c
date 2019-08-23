@@ -17,11 +17,11 @@ void						op_add(t_process *process, t_parameters *params)
 {
 	register int32_t		sum;
 
-	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 	if (ISREG(params->tab[0]) && ISREG(params->tab[1]) && ISREG(params->tab[2]))
 	{
 		sum = process->registers[params->tab[0]] + process->registers[params->tab[1]];
 		process->registers[params->tab[2]] = sum;
-		process->carry = !(sum);
+		process->registers[0] = !(sum);
 	}
+	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

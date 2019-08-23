@@ -30,7 +30,7 @@ void						op_xor(t_process *process, t_parameters *params)
 		else
 			p2 = params->tab[1];
 		process->registers[params->tab[2]] = (p1 ^ p2);
-		process->carry = !(process->registers[params->tab[2]]);
+		process->registers[0] = !(process->registers[params->tab[2]]);
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

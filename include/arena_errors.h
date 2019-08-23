@@ -15,7 +15,7 @@
 
 # include <errno.h>
 
-# include "list.h"
+# include <libft.h>
 
 # define EXIT_ERROR			-1
 # ifndef EXIT_SUCCESS

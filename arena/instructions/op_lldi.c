@@ -31,7 +31,7 @@ void						op_lldi(t_process *process, t_parameters *params)
 			address += params->tab[1];
 		value = ft_binarray_to_int(ft_update_program_counter(process->pc, address), 4);
 		process->registers[params->tab[2]] = value;
-		process->carry = !(value);
+		process->registers[0] = !(value);
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

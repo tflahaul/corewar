@@ -15,7 +15,7 @@
 
 void					op_zjmp(t_process *process, t_parameters *parameters)
 {
-	if (process->carry != 0)
+	if (process->registers[0] != 0)
 		process->pc = ft_update_program_counter(process->pc, (parameters->tab[0] % IDX_MOD));
 	else
 		process->pc = MEMINDEX(process->pc + parameters->oplen + 1);

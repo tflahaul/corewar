@@ -16,7 +16,10 @@
 # include <stdint.h>
 # include <sys/types.h>
 
-# include "list.h"
+typedef struct			s_listhead {
+	struct s_listhead	*next;
+	struct s_listhead	*prev;
+}						t_listhead;
 
 # define ISDIGIT(x)		((x) >= '0' && (x) <= '9')
 

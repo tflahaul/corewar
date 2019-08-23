@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <list.h>
+#include <libft.h>
 
 void			ft_list_delete(t_listhead *head, void *(*funptr)(t_listhead *))
 {

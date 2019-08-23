@@ -15,40 +15,46 @@
 
 # include <stdint.h>
 
-# include "list.h"
+# include "libft.h"
 # include "op.h"
 
 # pragma pack(push, 2)
 
 typedef struct s_process		t_process;
 
-typedef struct		s_instructions {
-	void			(*funptr)(t_process *, t_parameters *);
-	unsigned int	carry;
-	unsigned int	cycle;
-	unsigned int	has_code_byte;
-	unsigned int	dirsize;
-}					t_ops;
+typedef struct			s_instructions {
+	void				(*funptr)(t_process *, t_parameters *);
+	unsigned int		carry;
+	unsigned int		cycle;
+	unsigned int		has_code_byte;
+	unsigned int		dirsize;
+}						t_ops;
 # pragma pack(pop)
 
-typedef struct		s_process {
-	t_listhead		list;
-	t_listhead		*head;
-	t_parameters	params;
-	t_ops			instruction;
-	int32_t			registers[REG_NUMBER + 1];
-	uint32_t		live;
-	uint16_t		carry;
-	int16_t			pc;
-}					t_process;
+/*
+**	@registers:		Registres du processus. On en ajoute 1 pour ne pas
+**					avoir à décrémenter le numéro de registre à chaque
+**					appel (le registre 6 est à l'index 6). Le registre
+**					0 est utilisé pour stocker la valeur du carry.
+**	@live:			Nombre de live sur la période.
+**	@pc:			Program counter
+*/
+typedef struct			s_process {
+	t_listhead			list;
+	t_parameters		params;
+	t_ops				instruction;
+	int32_t				registers[REG_NUMBER + 1];
+	uint32_t			live;
+	int16_t				pc;
+}						t_process;
 
 # define RESET_PROCESS(x)	(((t_process *)x)->instruction.funptr = (void *)0)
 
 int					ft_load_warriors_into_arena(t_listhead *head);
 void				ft_arena_main_loop(t_listhead lst[MAX_PLAYERS]);
-void				ft_delete_proclist(t_listhead lst[MAX_PLAYERS]);
-void				ft_each_process(t_listhead lst[MAX_PLAYERS]);
-void				ft_init_process(t_listhead lst[MAX_PLAYERS]);
+void				ft_for_each_process(t_listhead lst[MAX_PLAYERS]);
+void				ft_init_process_list(t_listhead lst[MAX_PLAYERS]);
+void				ft_delete_process_list(t_listhead lst[MAX_PLAYERS]);
 void				ft_fetch_instruction(t_process *process, t_parameters *p);
 void				*ft_get_process(t_listhead *node);
 

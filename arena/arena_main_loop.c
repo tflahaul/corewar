@@ -77,8 +77,8 @@ void						ft_arena_main_loop(t_listhead pclst[MAX_PLAYERS])
 			}
 			cycle = 0;
 		}
-		ft_each_process(pclst);
+		ft_for_each_process(pclst);
 	}
-	ft_delete_proclist(pclst);
+	ft_delete_process_list(pclst);
 	ft_hexdump_memory();
 }

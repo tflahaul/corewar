@@ -21,14 +21,14 @@ void						op_sti(t_process *process, t_parameters *params)
 	if (__likely(ISREG(params->tab[0]) && (params->ocp & 192) >> 6 == REG_CODE))
 	{
 		if ((params->ocp & 48) >> 4 == REG_CODE && ISREG(params->tab[1]))
-			addr += process->registers[params->tab[1]];
+			addr += (process->registers[params->tab[1]] % IDX_MOD);
 		else
 			addr += params->tab[1];
 		if ((params->ocp & 12) >> 2 == REG_CODE && ISREG(params->tab[2]))
-			addr += process->registers[params->tab[2]];
+			addr += (process->registers[params->tab[2]] % IDX_MOD);
 		else
 			addr += params->tab[2];
-		ft_int_to_binarray(ft_update_program_counter(process->pc, (addr % IDX_MOD)), process->registers[params->tab[0]]);
+		ft_int_to_binarray(ft_update_program_counter(process->pc, addr), process->registers[params->tab[0]]);
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

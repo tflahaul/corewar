@@ -32,7 +32,7 @@ int						main(int argc, char const **argv)
 		return (EXIT_FAILURE);
 	for (t_warrior *node = g_arena.warriors; node; (node = node->next))
 		printf("* Player %i, weighing %3i bytes, '%s'\n", node->id, node->size, node->name);
-	ft_init_process(proclist);
+	ft_init_process_list(proclist);
 	if (ft_load_warriors_into_arena(proclist) != EXIT_SUCCESS)
 		return (EXIT_ERROR);
 	if (g_arena.options & OPTION_V)

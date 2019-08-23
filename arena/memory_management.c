@@ -43,7 +43,7 @@ void					*ft_get_process(t_listhead *node)
 	return ((void *)((char *)node - offsetof(t_process, list)));
 }
 
-void					ft_init_process(t_listhead lst[MAX_PLAYERS])
+void					ft_init_process_list(t_listhead lst[MAX_PLAYERS])
 {
 	register uint32_t	index;
 
@@ -52,7 +52,7 @@ void					ft_init_process(t_listhead lst[MAX_PLAYERS])
 		ft_list_init_head(&(lst[index++]));
 }
 
-void					ft_delete_proclist(t_listhead lst[MAX_PLAYERS])
+void					ft_delete_process_list(t_listhead lst[MAX_PLAYERS])
 {
 	register uint32_t	index;
 
