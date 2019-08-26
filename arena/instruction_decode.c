@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 12:36:13 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/26 12:55:33 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/26 16:41:34 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 	else
 	{
 		value = ft_update_program_counter(prc->pc, ft_binarray_to_int(prc->pc + data->oplen + 1, 2));
-		value = ft_binarray_to_int(LRW_OP(prc->instruction.funptr) ? value : (value % IDX_MOD), 4);
+		if (prc->instruction.funptr != &op_st)
+			value = ft_binarray_to_int(LRW_OP(prc->instruction.funptr) ? value : value % IDX_MOD, 4);
 		data->oplen += 2;
 	}
 	return (value);
