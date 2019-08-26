@@ -6,11 +6,9 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/18 12:51:51 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/26 14:38:01 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include <libft.h>
 #include <arena.h>
@@ -40,25 +38,46 @@ static inline int			ft_pop_dead_processes(t_listhead const *head)
 	return (live);
 }
 
+static inline void			ft_reset_all(t_listhead const *head)
+{
+	t_listhead				*position;
+
+	position = (t_listhead *)head;
+	while ((position = position->next) != head)
+		((t_process *)ft_get_process(position))->live = 0;
+}
+
 static inline int			ft_check_cycle_to_die(t_listhead lst[MAX_PLAYERS])
 {
 	int						live = 0;
+	static int				kill;
 
-	for (register unsigned int index = 0; index < MAX_PLAYERS; ++index)
-		live += ft_pop_dead_processes(&(lst[index]));
+	if (kill)
+	{
+		for (register unsigned int index = 0; index < MAX_PLAYERS; ++index)
+			live += ft_pop_dead_processes(&(lst[index]));
+	}
+	else
+	{
+		for (register unsigned int index = 0; index < MAX_PLAYERS; ++index)
+			ft_reset_all(&(lst[index]));
+		kill = 1;
+	}
 	return (live >= NBR_LIVE ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-/** moche, a refaire **/
 void						ft_arena_main_loop(t_listhead pclst[MAX_PLAYERS])
 {
 	int						live = 0;
 	register int			cycle = 0;
+	register int			mainloop = 0;
 	register int			ctd = CYCLE_TO_DIE;
 
 	while (ctd > 0)
 	{
-//		printf("[%zu] It is now cycle %i\n", ft_list_size(&pclst[0]), cycle);
+		++mainloop;
+		if (HAS_DUMP(g_arena.options) && ++mainloop >= g_arena.dump_cycles)
+			break ;
 		if (++cycle == ctd)
 		{
 			if (ft_check_cycle_to_die(pclst) == EXIT_SUCCESS)

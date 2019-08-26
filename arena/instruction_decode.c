@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 12:36:13 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/19 14:34:57 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/26 12:55:33 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static t_ops const		g_opset[] = {
 	{&op_aff , 0, 0x002, 1, 4}  // aff
 };
 
+#define LRW_OP(x)		((x == &op_lld) || (x == &op_lldi) || (x == &op_lfork))
+
 static inline int		ft_update_oplength(t_process *prc, t_parameters *data)
 {
 	int					size = 0;
@@ -64,7 +66,7 @@ static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 	else
 	{
 		value = ft_update_program_counter(prc->pc, ft_binarray_to_int(prc->pc + data->oplen + 1, 2));
-		value = ft_binarray_to_int(value, REG_SIZE);
+		value = ft_binarray_to_int(LRW_OP(prc->instruction.funptr) ? value : (value % IDX_MOD), 4);
 		data->oplen += 2;
 	}
 	return (value);
@@ -74,7 +76,7 @@ void					ft_fetch_instruction(t_process *process, t_parameters *params)
 {
 	unsigned int const	opc = g_arena.arena[process->pc];
 
-	if (__likely(opc > 0 && opc < 18))
+	if (__likely(opc > 0 && opc < 17))
 	{
 		process->instruction = g_opset[opc];
 		ft_bzero(&(process->params), sizeof(t_parameters));
