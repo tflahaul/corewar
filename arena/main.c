@@ -24,16 +24,21 @@ static inline void		ft_print_winner(void)
 		printf("Le joueur %i '%s' gagne la partie\n", g_arena.last_alive->id, g_arena.last_alive->name);
 }
 
+static inline void		ft_introduce_contestants(void)
+{
+	printf("Introducing contestants...\n");
+	for (t_warrior *node = g_arena.warriors; node; (node = node->next))
+		printf("* Player %i, weighing %3i bytes, '%s'\n", node->id, node->size, node->name);
+}
+
 int						main(int argc, char const **argv)
 {
-	t_listhead			proclist[MAX_PLAYERS];
+	t_listhead			process_list[MAX_PLAYERS];
 
 	if (__unlikely(ft_parse_args(argc, argv) != EXIT_SUCCESS))
 		return (EXIT_FAILURE);
-	for (t_warrior *node = g_arena.warriors; node; (node = node->next))
-		printf("* Player %i, weighing %3i bytes, '%s'\n", node->id, node->size, node->name);
-	ft_init_process_list(proclist);
-	if (ft_load_warriors_into_arena(proclist) != EXIT_SUCCESS)
+	ft_init_process_list(process_list);
+	if (ft_load_warriors_into_arena(process_list) != EXIT_SUCCESS)
 		return (EXIT_ERROR);
 	if (g_arena.options & OPTION_V)
 	{
@@ -42,7 +47,8 @@ int						main(int argc, char const **argv)
 		g_arena.options = OPTION_V;
 		ft_hexdump_memory(); // goto visualizer
 	}
-	ft_arena_main_loop(proclist);
+	ft_introduce_contestants();
+	ft_arena_main_loop(process_list);
 	ft_print_winner();
 	return (EXIT_SUCCESS);
 }

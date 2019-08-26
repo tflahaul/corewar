@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arena_memory_management.c                          :+:      :+:    :+:   */
+/*   arena_read_write_memory.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include <arena.h>
 #include <corewar_compiler.h>
 
-inline unsigned int		ft_update_program_counter(int16_t pc, int16_t nb)
+inline unsigned short	ft_update_program_counter(int16_t pc, int16_t nb)
 {
 	return (pc + nb >= 0 ? MEMINDEX(pc + nb) : MEMINDEX(MEM_SIZE + (pc + nb)));
 }
@@ -26,7 +26,7 @@ void					ft_int_to_binarray(unsigned int addr, unsigned int nb)
 	g_arena.arena[MEMINDEX(addr + 3)] = nb & 0xff;
 }
 
-inline int32_t			ft_binarray_to_int(unsigned int addr, unsigned int size)
+int32_t					ft_binarray_to_int(unsigned int addr, unsigned int size)
 {
 	int32_t				value = 0;
 

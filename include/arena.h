@@ -85,6 +85,6 @@ int32_t					ft_binarray_to_int(unsigned int ptr, unsigned int sz);
 **	Memory
 */
 void					ft_free_warriors(void) __attribute__((destructor));
-unsigned int			ft_update_program_counter(int16_t pc, int16_t ptr);
+unsigned short			ft_update_program_counter(int16_t pc, int16_t ptr);
 
 #endif

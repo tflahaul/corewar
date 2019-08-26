@@ -36,7 +36,7 @@ typedef struct			s_instructions {
 **					avoir à décrémenter le numéro de registre à chaque
 **					appel (le registre 6 est à l'index 6). Le registre
 **					0 est utilisé pour stocker la valeur du carry.
-**	@live:			Nombre de live sur la période.
+**	@live:			Nombre de live valides sur la période.
 **	@pc:			Program counter
 */
 typedef struct			s_process {

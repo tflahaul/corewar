@@ -16,6 +16,8 @@
 #include <arena_process.h>
 #include <corewar_compiler.h>
 
+#define DECREASE_CTD(ctd)	do {(ctd) -= CYCLE_DELTA; live = 0;} while (0);
+
 static inline int			ft_pop_dead_processes(t_listhead const *head)
 {
 	int						live;
@@ -50,9 +52,9 @@ static inline void			ft_reset_all(t_listhead const *head)
 static inline int			ft_check_cycle_to_die(t_listhead lst[MAX_PLAYERS])
 {
 	int						live = 0;
-	static int				kill;
+	static int				first_check;
 
-	if (kill)
+	if (first_check != 0)
 	{
 		for (register unsigned int index = 0; index < MAX_PLAYERS; ++index)
 			live += ft_pop_dead_processes(&(lst[index]));
@@ -61,43 +63,32 @@ static inline int			ft_check_cycle_to_die(t_listhead lst[MAX_PLAYERS])
 	{
 		for (register unsigned int index = 0; index < MAX_PLAYERS; ++index)
 			ft_reset_all(&(lst[index]));
-		kill = 1;
+		first_check = 1;
 	}
 	return (live >= NBR_LIVE ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-void						ft_arena_main_loop(t_listhead pclst[MAX_PLAYERS])
+void						ft_arena_main_loop(t_listhead process_lst[MAX_PLAYERS])
 {
 	int						live = 0;
-	register int			cycle = 0;
-	register int			mainloop = 0;
+	register int			main_cycle = 0;
+	register int			internal_cycle = 0;
 	register int			ctd = CYCLE_TO_DIE;
 
 	while (ctd > 0)
 	{
-		++mainloop;
-		if (HAS_DUMP(g_arena.options) && ++mainloop >= g_arena.dump_cycles)
+		if (HAS_DUMP(g_arena.options) && ++main_cycle >= g_arena.dump_cycles)
 			break ;
-		if (++cycle == ctd)
+		if (++internal_cycle >= ctd)
 		{
-			if (ft_check_cycle_to_die(pclst) == EXIT_SUCCESS)
-			{
-				ctd -= CYCLE_DELTA;
-				live = 0;
-			}
-			else
-			{
-				++live;
-				if (live == MAX_CHECKS)
-				{
-					ctd -= CYCLE_DELTA;
-					live = 0;
-				}
-			}
-			cycle = 0;
+			if (ft_check_cycle_to_die(process_lst) == EXIT_SUCCESS)
+				DECREASE_CTD(ctd)
+			else if (++live >= MAX_CHECKS)
+				DECREASE_CTD(ctd)
+			internal_cycle = 0;
 		}
-		ft_for_each_process(pclst);
+		ft_for_each_process(process_lst);
 	}
-	ft_delete_process_list(pclst);
+	ft_delete_process_list(process_lst);
 	ft_hexdump_memory();
 }
