@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
+#    By: roduquen <roduquen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 22:08:10 by abrunet           #+#    #+#              #
-#    Updated: 2019/08/27 11:46:51 by thflahau         ###   ########.fr        #
+#    Updated: 2019/08/27 17:42:22 by roduquen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ NAME		= 	corewar
 HDR			=	include
 LIBDIR		=	libft
 SRCDIR		=	arena
+LIBSDL		=	-L ~/.brew/lib/ -lSDL2-2.0.0 -lSDL2_ttf-2.0.0 `sdl2-config --cflags --libs`
+INCSDL		=	-I ~/.brew/include/SDL2
 OBJDIR		=	obj
 DIRS	=	$(patsubst $(SRCDIR)%, $(OBJDIR)%, $(shell find $(SRCDIR) -type d))
 
@@ -52,7 +54,7 @@ all				: $(LIBFT) $(NAME)
 
 $(NAME)			: $(ARENA_OBJ)
 	@printf "$(YELLOW)%-40s$(STD)" "Building executable $@ ..."
-	@$(CC) $(CFLAGS) $(INCFLAG) $(ARENA_OBJ) -o $@ $(LIBFLAG)
+	@$(CC) $(CFLAGS) $(INCFLAG) $(ARENA_OBJ) -o $@ $(LIBFLAG) $(LIBSDL) $(INCSDL)
 	@echo "$(GREEN)DONE$(STD)"
 
 $(LIBFT)		: $(HDR)/libft.h
@@ -63,7 +65,7 @@ $(LIBFT)		: $(HDR)/libft.h
 $(OBJDIR)/%.o	: $(SRCDIR)/%.c
 	@mkdir -p $(DIRS)
 	@printf "%-43s" " > Compiling $* ..."
-	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@
+	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@ $(INCSDL)
 	@echo '✓'
 
 clean			:
