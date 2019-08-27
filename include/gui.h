@@ -6,7 +6,7 @@
 /*   By: roduquen <roduquen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 12:02:53 by roduquen          #+#    #+#             */
-/*   Updated: 2019/08/27 16:23:23 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/08/27 18:31:30 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ struct							s_gui
 	uint32_t					*arn_pixels;
 	SDL_Event					event;
 	SDL_bool					running;
+	int							text_w;
+	int							text_h;
+	char						string[64][64 + 64 + 64];
 };
 
 int								gui(t_gui *data);

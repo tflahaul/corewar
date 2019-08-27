@@ -6,13 +6,46 @@
 /*   By: roduquen <roduquen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 11:54:04 by roduquen          #+#    #+#             */
-/*   Updated: 2019/08/27 17:00:32 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/08/27 18:33:26 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <arena.h>
 #include <arena_process.h>
 #include <gui.h>
+
+static char	base_hexa(int c)
+{
+	static char	*base = "0123456789abcedf";
+
+	return (base[c]);
+}
+
+static void	translate_arena_to_string(t_gui *data)
+{
+	int			i;
+	int			j;
+	int			k;
+
+	i = 0;
+	k = 0;
+	j = 0;
+	while (i < MEM_SIZE)
+	{
+		data->string[k][j++] = base_hexa(g_arena.arena[i] / 16);
+		data->string[k][j++] = base_hexa(g_arena.arena[i] % 16);
+		if (j < 191)
+			data->string[k][j++] = ' ';
+		else
+		{
+			data->string[k][j] = 0;
+			j = 0;
+		}
+		i++;
+		if (i % 64 == 0)
+			k++;
+	}
+}
 
 static int	leave_sdl(t_gui *data, int type)
 {
@@ -58,12 +91,12 @@ static int	create_corewar_visual(t_gui *data)
 	int			test;
 	SDL_Rect	arena;
 	int			i;
+	SDL_Color	color = {255, 255, 255, 0};
 
 	arena.x = 16;
 	arena.y = 80;
-	arena.w = ARN_WIDTH;
-	arena.h = 21;
 	i = 0;
+	translate_arena_to_string(data);
 	if (!SDL_LockTexture(data->texture, NULL, (void**)&data->pixels
 			, &test))
 	{
@@ -71,6 +104,13 @@ static int	create_corewar_visual(t_gui *data)
 		SDL_RenderCopy(data->renderer, data->texture, NULL, NULL);
 		while (i < 64)
 		{
+			if (!(data->text = TTF_RenderText_Solid(data->font, data->string[i], color)))
+				return (1);
+			if (!(data->arn_texture = SDL_CreateTextureFromSurface(data->renderer, data->text)))
+				return (1);
+			SDL_QueryTexture(data->arn_texture, NULL, NULL, &data->text_w, &data->text_h);
+			arena.w = data->text_w;
+			arena.h = data->text_h;
 			arena.y = i++ * arena.h + 80;
 			SDL_RenderCopy(data->renderer, data->arn_texture, NULL, &arena);
 		}
@@ -83,27 +123,19 @@ static int	create_corewar_visual(t_gui *data)
 
 static int	init_font(t_gui *data)
 {
-	SDL_Color	color = {255, 255, 255, 0};
 	if (TTF_Init() < 0)
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize TTF: %s"
 				, SDL_GetError());
 		return (1);
 	}
-			printf("Yo\n");
-	if (!(data->font = TTF_OpenFont("/Library/Fonts/Tahoma.ttf", 15)))
+	if (!(data->font = TTF_OpenFont("/Library/Fonts/Arial Black.ttf", 15)))
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create font: %s"
 				, SDL_GetError());
 		return (1);
 	}
-			printf("Yo\n");
-	if (!(data->text = TTF_RenderText_Solid(data->font, "12 34 56 78 90 12 34 56 78 90 12 34 56 78 90 12 34 56 78 90 12 34 56 78 90 12 34 56 78 90 12 34 12 34 56 78 90 12 34 56 78 90 12 34 56 78 90 12 34 56 78 90 12 34 56 78 90 12 34 56 78 90 12 34", color)))
-		return (1);
-			printf("Yo\n");
-	if (!(data->arn_texture = SDL_CreateTextureFromSurface(data->renderer, data->text)))
-		return (1);
-			printf("Yo\n");
+	printf("w = %u, h = %u\n", data->text_w, data->text_h);
 	return (0);
 }
 
@@ -117,14 +149,14 @@ static int	init_texture(t_gui *data)
 				, SDL_GetError());
 		return (1);
 	}
-//	if (!(data->arn_texture = SDL_CreateTexture(data->renderer
-//					, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING
-//					, ARN_WIDTH, ARN_HEIGHT)))
-//	{
-//		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create texture: %s"
-//				, SDL_GetError());
-//		return (1);
-//	}
+	//	if (!(data->arn_texture = SDL_CreateTexture(data->renderer
+	//					, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING
+	//					, ARN_WIDTH, ARN_HEIGHT)))
+	//	{
+	//		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create texture: %s"
+	//				, SDL_GetError());
+	//		return (1);
+	//	}
 	return (init_font(data));
 }
 
