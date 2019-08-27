@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/19 12:24:51 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/27 16:24:05 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include <corewar_compiler.h>
 #include <arena_errors.h>
 #include <arena.h>
-#include <libft.h>
 
 inline void					ft_scan_warriors_id(void)
 {

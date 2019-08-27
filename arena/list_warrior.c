@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 11:05:07 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/19 12:39:00 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/27 15:51:23 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,6 @@ inline int				ft_number_in_list(int32_t id)
 		node = node->next;
 	}
 	return (EXIT_SUCCESS);
-}
-
-unsigned int			ft_list_size_warrior(void)
-{
-	t_warrior			*node;
-	unsigned int		size;
-
-	size = 0;
-	node = g_arena.warriors;
-	while (node != NULL && ++size)
-		node = node->next;
-	return (size);
 }
 
 static inline void		ft_list_push_warrior(t_warrior *entry)

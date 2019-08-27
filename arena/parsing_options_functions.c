@@ -6,13 +6,12 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 09:54:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/16 13:37:59 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/27 16:23:56 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include <libft.h>
 #include <arena.h>
 #include <arena_errors.h>
 #include <corewar_options.h>

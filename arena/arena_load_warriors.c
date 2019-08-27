@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arena_init.c                                       :+:      :+:    :+:   */
+/*   arena_load_warriors.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:26:06 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/18 14:28:05 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/27 15:53:22 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@
 #include <arena_errors.h>
 #include <arena_process.h>
 #include <corewar_compiler.h>
-
-static inline uint32_t	ft_compute_gap_between_warriors(void)
-{
-	return ((uint32_t)(MEM_SIZE / ft_list_size_warrior()));
-}
 
 static int				ft_new_process(t_listhead *hd, int32_t id, int16_t pc)
 {
@@ -42,7 +37,7 @@ int						ft_load_warriors_into_arena(t_listhead lst[MAX_PLAYERS])
 	register uint8_t	*arena;
 	register uint32_t	idx;
 	uint8_t const		*temp = g_arena.arena;
-	uint32_t const		gap = ft_compute_gap_between_warriors();
+	uint32_t const		gap = (MEM_SIZE / g_arena.size);
 
 	idx = 0;
 	arena = g_arena.arena;

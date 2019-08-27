@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:23:49 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/14 14:11:18 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/27 16:17:40 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct			s_instructions {
 	unsigned int		cycle;
 	unsigned int		has_code_byte;
 	unsigned int		dirsize;
+	unsigned int		readmem;
 }						t_ops;
 # pragma pack(pop)
 
@@ -61,7 +62,6 @@ void				*ft_get_process(t_listhead *node);
 /*
 **	Instructions
 */
-
 void				op_or(t_process *p, t_parameters *);
 void				op_ld(t_process *p, t_parameters *);
 void				op_st(t_process *p, t_parameters *);

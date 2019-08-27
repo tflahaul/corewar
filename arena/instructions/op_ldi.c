@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:28:44 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/26 12:50:03 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/27 16:38:38 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void						op_ldi(t_process *process, t_parameters *params)
 			address += process->registers[params->tab[1]];
 		else
 			address += params->tab[1];
-		value = ft_binarray_to_int(ft_update_program_counter(process->pc, address), 4);
+		value = ft_binarray_to_int(ft_update_program_counter(process->pc, address), REG_SIZE);
 		process->registers[params->tab[2]] = value;
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);

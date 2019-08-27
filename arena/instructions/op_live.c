@@ -6,13 +6,12 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:00:41 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 14:06:43 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/27 16:30:40 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-#include <libft.h>
 #include <arena.h>
 #include <arena_process.h>
 

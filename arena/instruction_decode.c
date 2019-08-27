@@ -6,38 +6,34 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 12:36:13 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/26 16:41:34 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/27 17:09:10 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <op.h>
-#include <libft.h>
 #include <arena.h>
 #include <arena_errors.h>
 #include <arena_process.h>
 #include <corewar_compiler.h>
 
 static t_ops const		g_opset[] = {
-	{0, 0, 0, 0, 0},
-	{&op_live, 0, 0x00a, 0, 4}, // live
-	{&op_ld  , 1, 0x005, 1, 4}, // ld
-	{&op_st  , 0, 0x005, 1, 4}, // st
-	{&op_add , 1, 0x00a, 1, 4}, // add
-	{&op_sub , 1, 0x00a, 1, 4}, // sub
-	{&op_and , 1, 0x006, 1, 4}, // and
-	{&op_or  , 1, 0x006, 1, 4}, // or
-	{&op_xor , 1, 0x006, 1, 4}, // xor
-	{&op_zjmp, 0, 0x014, 0, 2}, // zjmp
-	{&op_ldi , 0, 0x019, 1, 2}, // ldi
-	{&op_sti , 0, 0x019, 1, 2}, // sti
-	{&op_fork, 0, 0x320, 0, 2}, // fork
-	{&op_lld , 1, 0x00a, 1, 4}, // lld
-	{&op_lldi, 1, 0x032, 1, 2}, // lldi
-	{&op_lfork, 0, 0x3e8, 0, 2},// lfork
-	{&op_aff , 0, 0x002, 1, 4}  // aff
+	{0, 0, 0, 0, 0, 0},
+	{&op_live, 0, 0x00a, 0, 4, 0}, // live
+	{&op_ld  , 1, 0x005, 1, 4, 0}, // ld
+	{&op_st  , 0, 0x005, 1, 4, 1}, // st
+	{&op_add , 1, 0x00a, 1, 4, 0}, // add
+	{&op_sub , 1, 0x00a, 1, 4, 0}, // sub
+	{&op_and , 1, 0x006, 1, 4, 0}, // and
+	{&op_or  , 1, 0x006, 1, 4, 0}, // or
+	{&op_xor , 1, 0x006, 1, 4, 0}, // xor
+	{&op_zjmp, 0, 0x014, 0, 2, 0}, // zjmp
+	{&op_ldi , 0, 0x019, 1, 2, 0}, // ldi
+	{&op_sti , 0, 0x019, 1, 2, 1}, // sti
+	{&op_fork, 0, 0x320, 0, 2, 0}, // fork
+	{&op_lld , 1, 0x00a, 1, 4, 1}, // lld
+	{&op_lldi, 1, 0x032, 1, 2, 1}, // lldi
+	{&op_lfork, 0, 0x3e8, 0, 2, 0},// lfork
+	{&op_aff , 0, 0x002, 1, 4, 0}  // aff
 };
-
-#define LRW_OP(x)		((x == &op_lld) || (x == &op_lldi) || (x == &op_lfork))
 
 static inline int		ft_update_oplength(t_process *prc, t_parameters *data)
 {
@@ -66,8 +62,8 @@ static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 	else
 	{
 		value = ft_update_program_counter(prc->pc, ft_binarray_to_int(prc->pc + data->oplen + 1, 2));
-		if (prc->instruction.funptr != &op_st)
-			value = ft_binarray_to_int(LRW_OP(prc->instruction.funptr) ? value : value % IDX_MOD, 4);
+		if (!(prc->instruction.readmem))
+			value = ft_binarray_to_int(value >= 0 ? value : (MEM_SIZE + value), 4);
 		data->oplen += 2;
 	}
 	return (value);
@@ -85,8 +81,8 @@ void					ft_fetch_instruction(t_process *process, t_parameters *params)
 		{
 			params->oplen = 1;
 			params->ocp = g_arena.arena[MEMINDEX(process->pc + 1)];
-			for (unsigned int i = 0; i < 3; ++i)
-				params->tab[i] = ft_get_op_parameter(process, params);
+			for (int index = 0; index < 3; ++index)
+				params->tab[index] = ft_get_op_parameter(process, params);
 		}
 		else
 		{

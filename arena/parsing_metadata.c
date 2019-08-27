@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 14:04:02 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/27 16:33:42 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 #include <string.h>
 #include <unistd.h>
 
-#include <op.h>
-#include <libft.h>
 #include <arena.h>
 #include <arena_errors.h>
 #include <corewar_compiler.h>
 
 static inline int			ft_read_filetype(uint8_t *mdata)
 {
-	if (__unlikely(BINARRTOI(mdata) != COREWAR_EXEC_MAGIC))
+	if (__unlikely(BINARR_TO_I(mdata) != COREWAR_EXEC_MAGIC))
 		return (EXIT_ERROR);
 	return (EXIT_SUCCESS);
 }
 
 static inline int			ft_read_program_size(uint8_t *mdata)
 {
-	g_arena.warriors->size = BINARRTOI(mdata);
+	g_arena.warriors->size = BINARR_TO_I(mdata);
 	if (__unlikely(!(g_arena.warriors->size) || g_arena.warriors->size > CHAMP_MAX_SIZE))
 		return (EXIT_ERROR);
 	return (EXIT_SUCCESS);
