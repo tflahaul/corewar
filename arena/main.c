@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/19 12:40:12 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/27 11:47:21 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 static inline void		ft_print_winner(void)
 {
 	if (g_arena.last_alive)
-		printf("Le joueur %i '%s' gagne la partie\n", g_arena.last_alive->id, g_arena.last_alive->name);
+		printf("Player %i '%s' has won the game\n", g_arena.last_alive->id, g_arena.last_alive->name);
 }
 
 static inline void		ft_introduce_contestants(void)

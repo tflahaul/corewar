@@ -6,7 +6,7 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 22:08:10 by abrunet           #+#    #+#              #
-#    Updated: 2019/08/11 12:32:13 by thflahau         ###   ########.fr        #
+#    Updated: 2019/08/27 11:46:51 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ $(LIBFT)		: $(HDR)/libft.h
 
 $(OBJDIR)/%.o	: $(SRCDIR)/%.c
 	@mkdir -p $(DIRS)
-	@printf "%-40s" " > Compiling $* ..."
+	@printf "%-43s" " > Compiling $* ..."
 	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@
 	@echo '✓'
 

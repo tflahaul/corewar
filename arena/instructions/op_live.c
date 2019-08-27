@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 13:00:41 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/16 13:39:01 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/27 14:06:43 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void						op_live(t_process *process, t_parameters *params)
 	if ((warrior = ft_get_warrior_from_id(params->tab[0])) != NULL)
 	{
 		if (g_arena.options & OPTION_P)
-			printf("Un processus dit que le joueur %i est en vie\n", params->tab[0]);
+			printf("A process is saying player %i is alive\n", params->tab[0]);
 		g_arena.last_alive = warrior;
 		process->live++;
 	}

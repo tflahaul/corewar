@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/18 13:13:16 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/27 13:58:13 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,9 @@ t_arena_state			g_arena;
 # define HAS_NUMBER(x)		(x & OPTION_N)
 # define UNSET_OPTION_N(x)	(x &= ~OPTION_N)
 # define ISREG(x)			((x) > 0 && (x) < 17)
+# define BINARRTOI(x)		((x[0] << 24) | (x[1] << 16) | (x[2] << 8) | (x[3]))
 
 # define MEMINDEX(x)	((x) % MEM_SIZE)
-
-# define RRR			84 // 0b01010100
 
 /*
 **	Parsing
