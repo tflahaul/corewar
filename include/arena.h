@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 16:33:32 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/27 20:54:30 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_arena_state			g_arena;
 # define OPTION_D		0x00000100ul
 # define OPTION_P		0x00001000ul
 
+# define ABS(x)				((x) < 0 ? -(x) : (x))
+
 # define HAS_VISU(x)		(x & OPTION_V)
 # define HAS_DUMP(x)		(x & OPTION_D)
 # define HAS_NUMBER(x)		(x & OPTION_N)
@@ -60,6 +62,7 @@ t_arena_state			g_arena;
 # define BINARR_TO_I(x)		((x[0] << 24) | (x[1] << 16) | (x[2] << 8) | (x[3]))
 
 # define MEMINDEX(x)	((x) % MEM_SIZE)
+# define NEG_IDX(x)		((x) < 0 ? -(ABS(x) % IDX_MOD) : (x) % IDX_MOD)
 
 /*
 **	Parsing
