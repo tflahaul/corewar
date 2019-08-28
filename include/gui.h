@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gui.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roduquen <roduquen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 12:02:53 by roduquen          #+#    #+#             */
-/*   Updated: 2019/08/27 18:31:30 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/08/28 15:25:06 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,11 @@ struct							s_gui
 };
 
 int								gui(t_gui *data);
+
+/*
+**	Console messages
+*/
+void							ft_print_winner(void);
+void							ft_introduce_contestants(void);
 
 #endif

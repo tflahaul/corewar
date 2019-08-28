@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 13:58:50 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 16:23:35 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/28 15:18:59 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void					ft_for_each_process(t_listhead tab[MAX_PLAYERS])
 				RESET_PROCESS(process);
 				ft_fetch_instruction(process, &(process->params));
 			}
-			process->instruction.cycle--;
+			else
+				process->instruction.cycle--;
 		}
 	}
 }

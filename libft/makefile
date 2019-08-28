@@ -6,7 +6,7 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 10:35:03 by thflahau          #+#    #+#              #
-#    Updated: 2019/07/29 11:15:02 by thflahau         ###   ########.fr        #
+#    Updated: 2019/08/28 15:33:48 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,9 @@ $(NAME)	: $(OBJS)
 	@echo "$(GREEN)DONE$(STD)"
 
 %.o		: %.c	$(INCLUDE)/libft.h
+	@printf "%-43s" " > Compiling libft/$* ..."
 	@$(CC) $(CFLAGS) $(HFLAGS) -o $@ -c $<
+	@echo '✓'
 
 clean	:
 	@/bin/rm -f $(OBJS)

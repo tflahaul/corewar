@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 12:34:53 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 14:28:39 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/28 16:03:35 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@
 # include <stdint.h>
 # include <sys/types.h>
 
+# ifndef __SSE4_1__
+#  error "Please add -msse4 to your compilation flags"
+# endif
+
 typedef struct			s_listhead {
 	struct s_listhead	*next;
 	struct s_listhead	*prev;
 }						t_listhead;
-
-# define ISDIGIT(x)		((x) >= '0' && (x) <= '9')
 
 /*
 **	Strings

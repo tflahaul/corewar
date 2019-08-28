@@ -6,11 +6,10 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/26 14:38:01 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/28 15:19:54 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <arena.h>
 #include <arena_errors.h>
 #include <arena_process.h>
@@ -40,38 +39,25 @@ static inline int			ft_pop_dead_processes(t_listhead const *head)
 	return (live);
 }
 
-static inline void			ft_reset_all(t_listhead const *head)
-{
-	t_listhead				*position;
-
-	position = (t_listhead *)head;
-	while ((position = position->next) != head)
-		((t_process *)ft_get_process(position))->live = 0;
-}
-
 static inline int			ft_check_cycle_to_die(t_listhead lst[MAX_PLAYERS])
 {
-	int						live = 0;
+	int						lives_in_current_period = 0;
 	static int				first_check;
 
 	if (first_check != 0)
 	{
 		for (register unsigned int index = 0; index < MAX_PLAYERS; ++index)
-			live += ft_pop_dead_processes(&(lst[index]));
+			lives_in_current_period += ft_pop_dead_processes(&(lst[index]));
 	}
 	else
-	{
-		for (register unsigned int index = 0; index < MAX_PLAYERS; ++index)
-			ft_reset_all(&(lst[index]));
 		first_check = 1;
-	}
-	return (live >= NBR_LIVE ? EXIT_SUCCESS : EXIT_FAILURE);
+	return (lives_in_current_period >= NBR_LIVE ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
 void						ft_arena_main_loop(t_listhead process_lst[MAX_PLAYERS])
 {
 	int						live = 0;
-	register int			main_cycle = 0;
+	int						main_cycle = 0;
 	register int			internal_cycle = 0;
 	register int			ctd = CYCLE_TO_DIE;
 
