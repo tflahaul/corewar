@@ -18,10 +18,11 @@ NAME		= 	corewar
 HDR			=	include
 LIBDIR		=	libft
 SRCDIR		=	arena
-LIBSDL		=	-L ~/.brew/lib/ -lSDL2-2.0.0 -lSDL2_ttf-2.0.0 `sdl2-config --cflags --libs`
-INCSDL		=	-I ~/.brew/include/SDL2
+GUIDIR		=	gui
+LIBSDL		=	`sdl2-config --libs --cflags` -lSDL2 -lSDL2_ttf
 OBJDIR		=	obj
-DIRS	=	$(patsubst $(SRCDIR)%, $(OBJDIR)%, $(shell find $(SRCDIR) -type d))
+
+DIRS := $(patsubst $(SRCDIR)%, $(OBJDIR)%, $(shell find $(SRCDIR) -type d))
 
 ##########   FLAGS   ##########
 CFLAGS		=	-Wall						\
@@ -54,7 +55,7 @@ all				: $(LIBFT) $(NAME)
 
 $(NAME)			: $(ARENA_OBJ)
 	@printf "$(YELLOW)%-40s$(STD)" "Building executable $@ ..."
-	@$(CC) $(CFLAGS) $(INCFLAG) $(ARENA_OBJ) -o $@ $(LIBFLAG) $(LIBSDL) $(INCSDL)
+	@$(CC) $(CFLAGS) $(INCFLAG) $(ARENA_OBJ) -o $@ $(LIBFLAG) $(LIBSDL)
 	@echo "$(GREEN)DONE$(STD)"
 
 $(LIBFT)		: $(HDR)/libft.h
@@ -65,7 +66,7 @@ $(LIBFT)		: $(HDR)/libft.h
 $(OBJDIR)/%.o	: $(SRCDIR)/%.c
 	@mkdir -p $(DIRS)
 	@printf "%-43s" " > Compiling $* ..."
-	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@ $(INCSDL)
+	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@ $(LIBSDL)
 	@echo '✓'
 
 clean			:

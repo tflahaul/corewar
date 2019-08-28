@@ -46,7 +46,7 @@ int						main(int argc, char const **argv)
 		if (g_arena.options & ~OPTION_V)
 			ft_puterror(OPTIGNORE);
 		g_arena.options = OPTION_V;
-		if (gui(&data))
+		if (gui(&data)!= EXIT_SUCCESS)
 			return (EXIT_ERROR);
 	}
 	ft_introduce_contestants();
