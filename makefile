@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: roduquen <roduquen@student.42.fr>          +#+  +:+       +#+         #
+#    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 22:08:10 by abrunet           #+#    #+#              #
-#    Updated: 2019/08/27 17:42:22 by roduquen         ###   ########.fr        #
+#    Updated: 2019/08/28 13:25:37 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ HDR			=	include
 LIBDIR		=	libft
 SRCDIR		=	arena
 GUIDIR		=	gui
-LIBSDL		=	`sdl2-config --libs --cflags` -lSDL2 -lSDL2_ttf
 OBJDIR		=	obj
 
 DIRS := $(patsubst $(SRCDIR)%, $(OBJDIR)%, $(shell find $(SRCDIR) -type d))
@@ -34,7 +33,9 @@ CFLAGS		=	-Wall						\
 				-g -O0 # debug
 
 INCFLAG		=	-I $(HDR)
+INCSDL		=	`sdl2-config --cflags`
 LIBFLAG		=	-L $(LIBDIR) -lft
+LIBSDL		=	`sdl2-config --libs --cflags` -lSDL2 -lSDL2_ttf
 
 #########   SOURCES   #########
 LIBFT		=	$(LIBDIR)/libft.a
@@ -66,7 +67,7 @@ $(LIBFT)		: $(HDR)/libft.h
 $(OBJDIR)/%.o	: $(SRCDIR)/%.c
 	@mkdir -p $(DIRS)
 	@printf "%-43s" " > Compiling $* ..."
-	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@ $(LIBSDL)
+	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@ $(INCSDL)
 	@echo '✓'
 
 clean			:

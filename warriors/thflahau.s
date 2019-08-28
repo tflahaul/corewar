@@ -2,4 +2,5 @@
 .comment	"definitly not a living being"
 
 init:
-	st		r1, -513
+	lld 513, r2
+	st r2, 32

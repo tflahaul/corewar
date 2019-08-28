@@ -6,14 +6,14 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/18 14:56:00 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/28 13:21:53 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <arena.h>
 #include <corewar_compiler.h>
 
-inline unsigned short	ft_update_program_counter(int16_t pc, int16_t nb)
+inline unsigned short	ft_safe_update_pc(int16_t pc, int16_t nb)
 {
 	return (pc + nb >= 0 ? MEMINDEX(pc + nb) : MEMINDEX(MEM_SIZE + (pc + nb)));
 }

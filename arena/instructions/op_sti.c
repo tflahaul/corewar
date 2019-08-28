@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:29:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 20:52:33 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/28 13:23:04 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void						op_sti(t_process *process, t_parameters *params)
 			addr += process->registers[params->tab[2]];
 		else
 			addr += params->tab[2];
-		ft_int_to_binarray(ft_update_program_counter(process->pc, NEG_IDX(addr)), process->registers[params->tab[0]]);
+		ft_int_to_binarray(ft_safe_update_pc(process->pc, NEG_IDX(addr)), process->registers[params->tab[0]]);
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

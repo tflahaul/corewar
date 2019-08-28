@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 20:54:30 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/28 13:22:09 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ int32_t					ft_binarray_to_int(unsigned int ptr, unsigned int sz);
 **	Memory
 */
 void					ft_free_warriors(void) __attribute__((destructor));
-unsigned short			ft_update_program_counter(int16_t pc, int16_t ptr);
+unsigned short			ft_safe_update_pc(int16_t pc, int16_t ptr);
 
 #endif
