@@ -18,7 +18,10 @@ void					op_lld(t_process *process, t_parameters *params)
 {
 	if (__likely(ISREG(params->tab[1])))
 	{
-		process->registers[params->tab[1]] = params->tab[0];
+		if ((params->ocp & 192) >> 6 == REG_CODE && ISREG(params->tab[0]))
+			process->registers[params->tab[1]] = process->registers[params->tab[0]];
+		else
+			process->registers[params->tab[1]] = params->tab[0];
 		process->registers[0] = !(process->registers[params->tab[1]]);
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);

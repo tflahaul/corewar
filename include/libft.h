@@ -16,10 +16,6 @@
 # include <stdint.h>
 # include <sys/types.h>
 
-# ifndef __SSE4_1__
-#  error "Please add -msse4 to your compilation flags"
-# endif
-
 typedef struct			s_listhead {
 	struct s_listhead	*next;
 	struct s_listhead	*prev;

@@ -22,9 +22,9 @@ static t_ops const		g_opset[] = {
 	{&op_st  , 0, 0x005, 1, 4, 0x000}, // st
 	{&op_add , 1, 0x00a, 1, 4, 0x000}, // add
 	{&op_sub , 1, 0x00a, 1, 4, 0x000}, // sub
-	{&op_and , 1, 0x006, 1, 4, 0x000}, // and
-	{&op_or  , 1, 0x006, 1, 4, 0x000}, // or
-	{&op_xor , 1, 0x006, 1, 4, 0x000}, // xor
+	{&op_and , 1, 0x006, 1, 4, 0x002}, // and
+	{&op_or  , 1, 0x006, 1, 4, 0x002}, // or
+	{&op_xor , 1, 0x006, 1, 4, 0x002}, // xor
 	{&op_zjmp, 0, 0x014, 0, 2, 0x000}, // zjmp
 	{&op_ldi , 0, 0x019, 1, 2, 0x001}, // ldi
 	{&op_sti , 0, 0x019, 1, 2, 0x000}, // sti
@@ -63,8 +63,9 @@ static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 	{
 		value = ft_binarray_to_int(prc->pc + data->oplen + 1, 2);
 		if (prc->instruction.readmem)
-			value = ft_binarray_to_int(ft_safe_update_pc(prc->pc, \
-				(prc->instruction.readmem > 1 ? value : NEG_IDX(value))), 4);
+			value = ft_binarray_to_int(ft_safe_update_pc(prc->pc,			\
+				(prc->instruction.readmem > 1 ? value : NEG_IDX(value))),	\
+				(prc->instruction.funptr == &op_ldi || prc->instruction.funptr == &op_lldi) ? 2 : 4);
 		data->oplen += 2;
 	}
 	return (value);

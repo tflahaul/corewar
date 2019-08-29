@@ -63,6 +63,7 @@ t_arena_state			g_arena;
 
 # define MEMINDEX(x)	((x) % MEM_SIZE)
 # define NEG_IDX(x)		((x) < 0 ? -(ABS(x) % IDX_MOD) : (x) % IDX_MOD)
+# define NEG_MEM(x)		((x) < 0 ? (MEM_SIZE + MEMINDEX(x)) : MEMINDEX(x))
 
 /*
 **	Parsing
@@ -80,8 +81,8 @@ t_warrior				*ft_get_warrior_from_id(int id);
 /*
 **	Conversion
 */
-void					ft_int_to_binarray(unsigned int ptr, unsigned int nb);
-int32_t					ft_binarray_to_int(unsigned int ptr, unsigned int sz);
+void					ft_int_to_binarray(int ptr, int nb);
+int32_t					ft_binarray_to_int(int ptr, int sz);
 
 /*
 **	Memory

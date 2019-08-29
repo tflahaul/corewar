@@ -15,18 +15,18 @@
 
 inline unsigned short	ft_safe_update_pc(int16_t pc, int16_t nb)
 {
-	return (pc + nb >= 0 ? MEMINDEX(pc + nb) : MEMINDEX(MEM_SIZE + (pc + nb)));
+	return (pc + nb >= 0 ? MEMINDEX(pc + nb) : MEM_SIZE + (MEMINDEX(pc + nb)));
 }
 
-void					ft_int_to_binarray(unsigned int addr, unsigned int nb)
+void					ft_int_to_binarray(int addr, int nb)
 {
-	g_arena.arena[MEMINDEX(addr + 0)] = (nb >> 24) & 0xff;
-	g_arena.arena[MEMINDEX(addr + 1)] = (nb >> 16) & 0xff;
-	g_arena.arena[MEMINDEX(addr + 2)] = (nb >> 8) & 0xff;
-	g_arena.arena[MEMINDEX(addr + 3)] = nb & 0xff;
+	g_arena.arena[NEG_MEM(addr + 0)] = (uint8_t)((nb & 0xff000000) >> 24);
+	g_arena.arena[NEG_MEM(addr + 1)] = (uint8_t)((nb & 0x00ff0000) >> 16);
+	g_arena.arena[NEG_MEM(addr + 2)] = (uint8_t)((nb & 0x0000ff00) >> 8 );
+	g_arena.arena[NEG_MEM(addr + 3)] = (uint8_t)((nb & 0x000000ff));
 }
 
-int32_t					ft_binarray_to_int(unsigned int addr, unsigned int size)
+int32_t					ft_binarray_to_int(int addr, int size)
 {
 	int32_t				value = 0;
 

@@ -17,7 +17,7 @@
 void						op_lldi(t_process *process, t_parameters *params)
 {
 	register int			value;
-	register short			address = 0;
+	register int			address = 0;
 
 	if (__likely(ISREG(params->tab[2])))
 	{

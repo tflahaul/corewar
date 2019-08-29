@@ -22,14 +22,14 @@ void						op_ldi(t_process *process, t_parameters *params)
 	if (__likely(ISREG(params->tab[2])))
 	{
 		if ((params->ocp & 192) >> 6 == REG_CODE && ISREG(params->tab[0]))
-			address += process->registers[params->tab[0]];
+			address += NEG_IDX(process->registers[params->tab[0]]);
 		else
-			address += params->tab[0];
+			address += NEG_IDX(params->tab[0]);
 		if ((params->ocp & 48) >> 4 == REG_CODE && ISREG(params->tab[1]))
-			address += process->registers[params->tab[1]];
+			address += NEG_IDX(process->registers[params->tab[1]]);
 		else
-			address += params->tab[1];
-		value = ft_binarray_to_int(ft_safe_update_pc(process->pc, address), REG_SIZE);
+			address += NEG_IDX(params->tab[1]);
+		value = ft_binarray_to_int(ft_safe_update_pc(process->pc, address), 4);
 		process->registers[params->tab[2]] = value;
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);

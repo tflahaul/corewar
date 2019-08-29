@@ -21,7 +21,7 @@ void							op_st(t_process *process, t_parameters *params)
 	if (__likely(ISREG(params->tab[0])))
 	{
 		value = process->registers[params->tab[0]];
-		if (ISREG(params->tab[1]) && (params->ocp & 48) >> 4 == REG_CODE)
+		if ((params->ocp & 48) >> 4 == REG_CODE && ISREG(params->tab[1]))
 			process->registers[params->tab[1]] = value;
 		else
 			ft_int_to_binarray(ft_safe_update_pc(process->pc, NEG_IDX(params->tab[1])), value);

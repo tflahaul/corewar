@@ -15,7 +15,7 @@
 #include <gui.h>
 #include <arena.h>
 
-#define LOG_WINNER				"Player %i '%s' has won the game\n"
+#define LOG_WINNER				"Player %i, '%s', has won the game!\n"
 #define LOG_PLAYER				"* Player %i, weighing %3i bytes, '%s'\n"
 
 inline void						ft_print_winner(void)
