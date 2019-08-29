@@ -82,8 +82,9 @@ void					ft_fetch_instruction(t_process *process, t_parameters *params)
 		{
 			params->oplen = 1;
 			params->ocp = g_arena.arena[MEMINDEX(process->pc + 1)];
-			for (int index = 0; index < 3; ++index)
-				params->tab[index] = ft_get_op_parameter(process, params);
+			params->tab[0] = ft_get_op_parameter(process, params);
+			params->tab[1] = ft_get_op_parameter(process, params);
+			params->tab[2] = ft_get_op_parameter(process, params);
 		}
 		else
 		{

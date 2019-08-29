@@ -46,8 +46,10 @@ static inline int			ft_check_cycle_to_die(t_listhead lst[MAX_PLAYERS])
 
 	if (first_check != 0)
 	{
-		for (register unsigned int index = 0; index < MAX_PLAYERS; ++index)
-			lives_in_current_period += ft_pop_dead_processes(&(lst[index]));
+		lives_in_current_period += ft_pop_dead_processes(&(lst[0]));
+		lives_in_current_period += ft_pop_dead_processes(&(lst[1]));
+		lives_in_current_period += ft_pop_dead_processes(&(lst[2]));
+		lives_in_current_period += ft_pop_dead_processes(&(lst[3]));
 	}
 	else
 		first_check = 1;
