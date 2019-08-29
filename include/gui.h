@@ -6,7 +6,7 @@
 /*   By: roduquen <roduquen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 12:02:53 by roduquen          #+#    #+#             */
-/*   Updated: 2019/08/27 18:31:30 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/08/28 11:24:17 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ struct							s_gui
 	SDL_Texture					*arn_texture;
 	TTF_Font					*font;
 	SDL_Surface					*text;
+	SDL_Surface					*bmp;
 	uint32_t					*pixels;
 	uint32_t					*arn_pixels;
 	SDL_Event					event;
