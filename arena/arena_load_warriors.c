@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:26:06 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 15:53:22 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:13:07 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int						ft_load_warriors_into_arena(t_listhead lst[MAX_PLAYERS])
 	while ((node != NULL) && (idx < MAX_PLAYERS))
 	{
 		ft_memcpy(arena, node->program, node->size);
+		ft_memset(g_arena.arena_p + gap * idx, node->id, node->size);
 		if (ft_new_process(&(lst[idx]), node->id, (int16_t)(arena - temp)) < 0)
 			return (ft_puterror_memalloc_failure(&(lst[idx])));
 		node = node->next;

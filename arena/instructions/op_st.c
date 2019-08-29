@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:29:18 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 20:52:12 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:24:07 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 void							op_st(t_process *process, t_parameters *params)
 {
+	unsigned int				ret;
 	register int				value;
 
 	if (__likely(ISREG(params->tab[0])))
@@ -24,7 +25,11 @@ void							op_st(t_process *process, t_parameters *params)
 		if (ISREG(params->tab[1]) && (params->ocp & 48) >> 4 == REG_CODE)
 			process->registers[params->tab[1]] = value;
 		else
-			ft_int_to_binarray(ft_update_program_counter(process->pc, NEG_IDX(params->tab[1])), value);
+		{
+			ret = ft_safe_update_pc(process->pc, NEG_IDX(params->tab[1]));
+			ft_int_to_binarray(ret , value);
+			update_player_array(ret, process->registers[1]);
+		}
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

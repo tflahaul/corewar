@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 12:36:13 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 20:58:57 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/28 13:29:14 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@
 
 static t_ops const		g_opset[] = {
 	{0, 0, 0, 0, 0, 0},
-	{&op_live, 0, 0x00a, 0, 4, 0}, // live
-	{&op_ld  , 1, 0x005, 1, 4, 1}, // ld
-	{&op_st  , 0, 0x005, 1, 4, 0}, // st
-	{&op_add , 1, 0x00a, 1, 4, 0}, // add
-	{&op_sub , 1, 0x00a, 1, 4, 0}, // sub
-	{&op_and , 1, 0x006, 1, 4, 0}, // and
-	{&op_or  , 1, 0x006, 1, 4, 0}, // or
-	{&op_xor , 1, 0x006, 1, 4, 0}, // xor
-	{&op_zjmp, 0, 0x014, 0, 2, 0}, // zjmp
-	{&op_ldi , 0, 0x019, 1, 2, 1}, // ldi
-	{&op_sti , 0, 0x019, 1, 2, 0}, // sti
-	{&op_fork, 0, 0x320, 0, 2, 0}, // fork
-	{&op_lld , 1, 0x00a, 1, 4, 1}, // lld
-	{&op_lldi, 1, 0x032, 1, 2, 1}, // lldi
-	{&op_lfork, 0, 0x3e8, 0, 2, 1},// lfork
-	{&op_aff , 0, 0x002, 1, 4, 0}  // aff
+	{&op_live, 0, 0x00a, 0, 4, 0x000}, // live
+	{&op_ld  , 1, 0x005, 1, 4, 0x001}, // ld
+	{&op_st  , 0, 0x005, 1, 4, 0x000}, // st
+	{&op_add , 1, 0x00a, 1, 4, 0x000}, // add
+	{&op_sub , 1, 0x00a, 1, 4, 0x000}, // sub
+	{&op_and , 1, 0x006, 1, 4, 0x000}, // and
+	{&op_or  , 1, 0x006, 1, 4, 0x000}, // or
+	{&op_xor , 1, 0x006, 1, 4, 0x000}, // xor
+	{&op_zjmp, 0, 0x014, 0, 2, 0x000}, // zjmp
+	{&op_ldi , 0, 0x019, 1, 2, 0x001}, // ldi
+	{&op_sti , 0, 0x019, 1, 2, 0x000}, // sti
+	{&op_fork, 0, 0x320, 0, 2, 0x000}, // fork
+	{&op_lld , 1, 0x00a, 1, 4, 0x002}, // lld
+	{&op_lldi, 1, 0x032, 1, 2, 0x002}, // lldi
+	{&op_lfork, 0, 0x3e8, 0, 2, 0x00}, // lfork
+	{&op_aff , 0, 0x002, 1, 4, 0x000}  // aff
 };
 
 static inline int		ft_update_oplength(t_process *prc, t_parameters *data)
@@ -63,7 +63,8 @@ static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 	{
 		value = ft_binarray_to_int(prc->pc + data->oplen + 1, 2);
 		if (prc->instruction.readmem)
-			value = ft_binarray_to_int(ft_update_program_counter(prc->pc, value), REG_SIZE);
+			value = ft_binarray_to_int(ft_safe_update_pc(prc->pc, \
+				(prc->instruction.readmem > 1 ? value : NEG_IDX(value))), 4);
 		data->oplen += 2;
 	}
 	return (value);
@@ -81,8 +82,9 @@ void					ft_fetch_instruction(t_process *process, t_parameters *params)
 		{
 			params->oplen = 1;
 			params->ocp = g_arena.arena[MEMINDEX(process->pc + 1)];
-			for (int index = 0; index < 3; ++index)
-				params->tab[index] = ft_get_op_parameter(process, params);
+			params->tab[0] = ft_get_op_parameter(process, params);
+			params->tab[1] = ft_get_op_parameter(process, params);
+			params->tab[2] = ft_get_op_parameter(process, params);
 		}
 		else
 		{

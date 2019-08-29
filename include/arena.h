@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 20:54:30 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:24:37 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 typedef struct			s_warrior {
 	int32_t				id;
+	int32_t				id_p;
 	uint32_t			size;
 	struct s_warrior	*next;
 	uint8_t				program[CHAMP_MAX_SIZE];
@@ -41,6 +42,7 @@ typedef struct			s_arena_state {
 	int32_t				value;
 	int32_t				dump_cycles;
 	uint8_t				arena[MEM_SIZE];
+	uint8_t				arena_p[MEM_SIZE];
 	uint32_t			options;
 	uint32_t			size;
 }						t_arena_state;
@@ -82,11 +84,12 @@ t_warrior				*ft_get_warrior_from_id(int id);
 */
 void					ft_int_to_binarray(unsigned int ptr, unsigned int nb);
 int32_t					ft_binarray_to_int(unsigned int ptr, unsigned int sz);
+void					update_player_array(unsigned int addr, unsigned int id);
 
 /*
 **	Memory
 */
 void					ft_free_warriors(void) __attribute__((destructor));
-unsigned short			ft_update_program_counter(int16_t pc, int16_t ptr);
+unsigned short			ft_safe_update_pc(int16_t pc, int16_t ptr);
 
 #endif

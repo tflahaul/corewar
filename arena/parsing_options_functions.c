@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 09:54:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 16:23:56 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/29 11:33:52 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void					ft_print_help(char const **argv)
 	exit(EXIT_SUCCESS);
 }
 
-void					ft_set_visualize(char const **argv)
+void					ft_set_gui(char const **argv)
 {
 	(void)argv;
 	g_arena.options |= OPTION_V;

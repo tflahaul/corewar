@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:28:57 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/19 14:46:15 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/28 13:22:56 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void						op_lldi(t_process *process, t_parameters *params)
 			address += process->registers[params->tab[1]];
 		else
 			address += params->tab[1];
-		value = ft_binarray_to_int(ft_update_program_counter(process->pc, address), 4);
+		value = ft_binarray_to_int(ft_safe_update_pc(process->pc, address), 4);
 		process->registers[params->tab[2]] = value;
 		process->registers[0] = !(value);
 	}

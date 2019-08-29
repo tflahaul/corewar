@@ -6,11 +6,12 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 10:23:54 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/13 12:13:40 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/28 15:45:30 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <smmintrin.h>
+
 #define FLAG		(_SIDD_SBYTE_OPS | _SIDD_MOST_SIGNIFICANT)
 
 char				*ft_strrchr(char const *str, int c)

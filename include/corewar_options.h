@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 08:40:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/16 15:55:36 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/29 11:33:40 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ typedef struct			s_options {
 	int					shortname;
 }						t_options;
 
+void					ft_set_gui(char const **av);
 void					ft_get_dump(char const **av);
 void					ft_get_numb(char const **av);
 void					ft_set_print(char const **av);
 void					ft_print_help(char const **av);
-void					ft_set_visualize(char const **av);
 
 void					ft_get_options(char const ***av);
 

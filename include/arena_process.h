@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:23:49 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 16:17:40 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/29 16:00:49 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # pragma pack(push, 2)
 
 typedef struct s_process		t_process;
+typedef struct s_gui			t_gui;
 
 typedef struct			s_instructions {
 	void				(*funptr)(t_process *, t_parameters *);
@@ -52,7 +53,7 @@ typedef struct			s_process {
 # define RESET_PROCESS(x)	(((t_process *)x)->instruction.funptr = (void *)0)
 
 int					ft_load_warriors_into_arena(t_listhead *head);
-void				ft_arena_main_loop(t_listhead lst[MAX_PLAYERS]);
+void				ft_arena_main_loop(t_listhead lst[MAX_PLAYERS], t_gui *data);
 void				ft_for_each_process(t_listhead lst[MAX_PLAYERS]);
 void				ft_init_process_list(t_listhead lst[MAX_PLAYERS]);
 void				ft_delete_process_list(t_listhead lst[MAX_PLAYERS]);

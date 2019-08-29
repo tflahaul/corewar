@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: roduquen <roduquen@student.42.fr>          +#+  +:+       +#+         #
+#    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 22:08:10 by abrunet           #+#    #+#              #
-#    Updated: 2019/08/28 10:53:17 by roduquen         ###   ########.fr        #
+#    Updated: 2019/08/29 14:12:37 by roduquen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,9 @@ CFLAGS		=	-Wall						\
 				-g -O0 # debug
 
 INCFLAG		=	-I $(HDR)
+INCSDL		=	`sdl2-config --cflags`
 LIBFLAG		=	-L $(LIBDIR) -lft
+LIBSDL		=	`sdl2-config --libs --cflags` -lSDL2 -lSDL2_ttf
 
 #########   SOURCES   #########
 LIBFT		=	$(LIBDIR)/libft.a
