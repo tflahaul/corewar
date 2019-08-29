@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/28 15:19:54 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/29 11:05:46 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void						ft_arena_main_loop(t_listhead process_lst[MAX_PLAYERS])
 		{
 			if (ft_check_cycle_to_die(process_lst) == EXIT_SUCCESS)
 				DECREASE_CTD(ctd)
-			else if (++live >= MAX_CHECKS)
+			else if (live++ >= MAX_CHECKS)
 				DECREASE_CTD(ctd)
 			internal_cycle = 0;
 		}
