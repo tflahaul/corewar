@@ -31,19 +31,19 @@ int32_t					ft_binarray_to_int(int addr, int size)
 	int32_t				value = 0;
 
 	if (size == 1)
-		value = g_arena.arena[MEMINDEX(addr)];
+		value = g_arena.arena[NEG_MEM(addr)];
 	else if (size == 2)
 	{
-		value |= g_arena.arena[MEMINDEX(addr + 0)] << 8;
-		value |= g_arena.arena[MEMINDEX(addr + 1)];
+		value |= g_arena.arena[NEG_MEM(addr + 0)] << 8;
+		value |= g_arena.arena[NEG_MEM(addr + 1)];
 		return ((int16_t)value);
 	}
 	else if (__likely(size == 4))
 	{
-		value |= (g_arena.arena[MEMINDEX(addr + 0)] << 24);
-		value |= (g_arena.arena[MEMINDEX(addr + 1)] << 16);
-		value |= (g_arena.arena[MEMINDEX(addr + 2)] << 8);
-		value |= (g_arena.arena[MEMINDEX(addr + 3)]);
+		value |= (g_arena.arena[NEG_MEM(addr + 0)] << 24);
+		value |= (g_arena.arena[NEG_MEM(addr + 1)] << 16);
+		value |= (g_arena.arena[NEG_MEM(addr + 2)] << 8);
+		value |= (g_arena.arena[NEG_MEM(addr + 3)]);
 	}
 	return (value);
 }

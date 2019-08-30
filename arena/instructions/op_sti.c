@@ -16,7 +16,7 @@
 
 void						op_sti(t_process *process, t_parameters *params)
 {
-	register short			addr = 0;
+	register int			addr = 0;
 
 	if (__likely(ISREG(params->tab[0]) && (params->ocp & 192) >> 6 == REG_CODE))
 	{
@@ -28,7 +28,7 @@ void						op_sti(t_process *process, t_parameters *params)
 			addr += NEG_IDX(process->registers[params->tab[2]]);
 		else
 			addr += NEG_IDX(params->tab[2]);
-		ft_int_to_binarray(ft_safe_update_pc(process->pc, addr), process->registers[params->tab[0]]);
+		ft_int_to_binarray(process->pc + addr, process->registers[params->tab[0]]);
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

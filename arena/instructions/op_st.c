@@ -24,7 +24,7 @@ void							op_st(t_process *process, t_parameters *params)
 		if ((params->ocp & 48) >> 4 == REG_CODE && ISREG(params->tab[1]))
 			process->registers[params->tab[1]] = value;
 		else
-			ft_int_to_binarray(ft_safe_update_pc(process->pc, NEG_IDX(params->tab[1])), value);
+			ft_int_to_binarray(process->pc + NEG_IDX(params->tab[1]), value);
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

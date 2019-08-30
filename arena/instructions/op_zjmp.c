@@ -16,7 +16,7 @@
 void					op_zjmp(t_process *process, t_parameters *parameters)
 {
 	if (process->registers[0] != 0)
-		process->pc = ft_safe_update_pc(process->pc, NEG_IDX(parameters->tab[0]));
+		process->pc = ft_safe_update_pc(process->pc, parameters->tab[0]);
 	else
 		process->pc = MEMINDEX(process->pc + parameters->oplen + 1);
 }

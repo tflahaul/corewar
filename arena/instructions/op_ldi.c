@@ -29,7 +29,7 @@ void						op_ldi(t_process *process, t_parameters *params)
 			address += NEG_IDX(process->registers[params->tab[1]]);
 		else
 			address += NEG_IDX(params->tab[1]);
-		value = ft_binarray_to_int(ft_safe_update_pc(process->pc, address), 4);
+		value = ft_binarray_to_int(process->pc + address, REG_SIZE);
 		process->registers[params->tab[2]] = value;
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
