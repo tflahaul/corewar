@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/29 11:05:46 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/08/31 16:06:25 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,6 @@ static inline int			ft_pop_dead_processes(t_listhead const *head)
 	return (live);
 }
 
-static inline int			ft_check_cycle_to_die(t_listhead *list)
-{
-	int						lives_in_current_period = 0;
-	static int				first_check;
-
-	if (first_check != 0)
-		lives_in_current_period = ft_pop_dead_processes(list);
-	else
-		first_check = 1;
-	return (lives_in_current_period >= NBR_LIVE ? EXIT_SUCCESS : EXIT_FAILURE);
-}
-
 void						ft_arena_main_loop(t_listhead *processes)
 {
 	int						live = 0;
@@ -62,11 +50,11 @@ void						ft_arena_main_loop(t_listhead *processes)
 
 	while (ctd > 0)
 	{
-		if (HAS_DUMP(g_arena.options) && ++main_cycle >= g_arena.dump_cycles)
+		if (HAS_DUMP(g_arena.options) && main_cycle == g_arena.dump_cycles)
 			break ;
-		if (++internal_cycle >= ctd)
+		if (++main_cycle > ctd && ++internal_cycle > ctd)
 		{
-			if (ft_check_cycle_to_die(processes) == EXIT_SUCCESS)
+			if (ft_pop_dead_processes(processes) >= NBR_LIVE)
 				DECREASE_CTD(ctd)
 			else if (live++ >= MAX_CHECKS)
 				DECREASE_CTD(ctd)
