@@ -19,12 +19,12 @@
 int						main(int argc, char const **argv)
 {
 	t_gui				data;
-	t_listhead			process_list[MAX_PLAYERS];
+	t_listhead			processes;
 
 	if (__unlikely(ft_parse_args(argc, argv) != EXIT_SUCCESS))
 		return (EXIT_FAILURE);
-	ft_init_process_list(process_list);
-	if (ft_load_warriors_into_arena(process_list) != EXIT_SUCCESS)
+	ft_list_init_head(&processes);
+	if (ft_load_warriors_into_arena(&processes) != EXIT_SUCCESS)
 		return (EXIT_ERROR);
 	if (g_arena.options & OPTION_V)
 	{
@@ -35,7 +35,7 @@ int						main(int argc, char const **argv)
 			return (EXIT_ERROR);
 	}
 	ft_introduce_contestants();
-	ft_arena_main_loop(process_list);
+	ft_arena_main_loop(&processes);
 	ft_print_winner();
 	return (EXIT_SUCCESS);
 }

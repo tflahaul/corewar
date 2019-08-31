@@ -30,33 +30,30 @@ static inline int			ft_pop_dead_processes(t_listhead const *head)
 	{
 		temp = temp->next;
 		prcs = (t_process *)ft_get_process(position);
-		live += prcs->live;
 		if (prcs->live == 0)
 			ft_list_pop(position, &ft_get_process);
 		else
+		{
+			live = live + prcs->live;
 			prcs->live = 0;
+		}
 	}
 	return (live);
 }
 
-static inline int			ft_check_cycle_to_die(t_listhead lst[MAX_PLAYERS])
+static inline int			ft_check_cycle_to_die(t_listhead *list)
 {
 	int						lives_in_current_period = 0;
 	static int				first_check;
 
 	if (first_check != 0)
-	{
-		lives_in_current_period += ft_pop_dead_processes(&(lst[0]));
-		lives_in_current_period += ft_pop_dead_processes(&(lst[1]));
-		lives_in_current_period += ft_pop_dead_processes(&(lst[2]));
-		lives_in_current_period += ft_pop_dead_processes(&(lst[3]));
-	}
+		lives_in_current_period = ft_pop_dead_processes(list);
 	else
 		first_check = 1;
 	return (lives_in_current_period >= NBR_LIVE ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-void						ft_arena_main_loop(t_listhead process_lst[MAX_PLAYERS])
+void						ft_arena_main_loop(t_listhead *processes)
 {
 	int						live = 0;
 	int						main_cycle = 0;
@@ -69,14 +66,14 @@ void						ft_arena_main_loop(t_listhead process_lst[MAX_PLAYERS])
 			break ;
 		if (++internal_cycle >= ctd)
 		{
-			if (ft_check_cycle_to_die(process_lst) == EXIT_SUCCESS)
+			if (ft_check_cycle_to_die(processes) == EXIT_SUCCESS)
 				DECREASE_CTD(ctd)
 			else if (live++ >= MAX_CHECKS)
 				DECREASE_CTD(ctd)
 			internal_cycle = 0;
 		}
-		ft_for_each_process(process_lst);
+		ft_for_each_process(processes);
 	}
-	ft_delete_process_list(process_lst);
+	ft_list_delete(processes, &ft_get_process);
 	ft_hexdump_memory();
 }

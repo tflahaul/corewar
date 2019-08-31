@@ -13,26 +13,23 @@
 #include <arena.h>
 #include <arena_process.h>
 
-void					ft_for_each_process(t_listhead tab[MAX_PLAYERS])
+void					ft_for_each_process(t_listhead *processes)
 {
-	t_process			*process;
+	t_process			*parent;
 	t_listhead			*child;
 
-	for (register int idx = (MAX_PLAYERS - 1); idx >= 0; --idx)
+	child = processes;
+	while ((child = child->next) != processes)
 	{
-		child = &(tab[idx]);
-		while ((child = child->next) != &(tab[idx]))
+		parent = (t_process *)ft_get_process(child);
+		if (parent->instruction.cycle == 0)
 		{
-			process = (t_process *)ft_get_process(child);
-			if (process->instruction.cycle == 0)
-			{
-				if (process->instruction.funptr != 0)
-					(*process->instruction.funptr)(process, &(process->params));
-				RESET_PROCESS(process);
-				ft_fetch_instruction(process, &(process->params));
-			}
-			else
-				process->instruction.cycle--;
+			if (parent->instruction.funptr != 0)
+				(*parent->instruction.funptr)(parent, &(parent->params));
+			RESET_PROCESS(parent);
+			ft_fetch_instruction(parent, &(parent->params));
 		}
+		else
+			parent->instruction.cycle--;
 	}
 }

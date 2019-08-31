@@ -42,22 +42,6 @@ void					*ft_get_process(t_listhead *node)
 	return ((void *)((char *)node - offsetof(t_process, list)));
 }
 
-inline void				ft_init_process_list(t_listhead lst[MAX_PLAYERS])
-{
-	ft_list_init_head(&(lst[0]));
-	ft_list_init_head(&(lst[1]));
-	ft_list_init_head(&(lst[2]));
-	ft_list_init_head(&(lst[3]));
-}
-
-inline void				ft_delete_process_list(t_listhead lst[MAX_PLAYERS])
-{
-	ft_list_delete(&(lst[0]), &ft_get_process);
-	ft_list_delete(&(lst[1]), &ft_get_process);
-	ft_list_delete(&(lst[2]), &ft_get_process);
-	ft_list_delete(&(lst[3]), &ft_get_process);
-}
-
 void					ft_free_warriors(void)
 {
 	t_warrior			*ptr;
