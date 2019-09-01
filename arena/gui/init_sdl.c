@@ -6,14 +6,14 @@
 /*   By: roduquen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 12:26:25 by roduquen          #+#    #+#             */
-/*   Updated: 2019/09/01 12:47:51 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/01 18:44:44 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <gui.h>
 #include <libft.h>
 
-static void	init_color_and_count(t_gui *data)
+static void	init_color(t_gui *data)
 {
 	data->color[0].r = 185;
 	data->color[0].g = 185;
@@ -45,13 +45,13 @@ static int	init_font(t_gui *data)
 				, SDL_GetError());
 		return (EXIT_FAILURE);
 	}
-	if (!(data->font[0] = TTF_OpenFont("arena/gui/monofonto.ttf", 17)))
+	if (!(data->font[0] = TTF_OpenFont("arena/gui/img/monofonto.ttf", 17)))
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create font: %s"
 				, SDL_GetError());
 		return (EXIT_FAILURE);
 	}
-	if (!(data->font[1] = TTF_OpenFont("arena/gui/monofonto.ttf", 25)))
+	if (!(data->font[1] = TTF_OpenFont("arena/gui/img/monofonto.ttf", 25)))
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create font: %s"
 				, SDL_GetError());
@@ -70,14 +70,14 @@ static int	init_texture(t_gui *data)
 				, SDL_GetError());
 		return (EXIT_FAILURE);
 	}
-	if (!(data->bmp = SDL_LoadBMP("arena/gui/graphic.bmp")))
+	if (!(data->bmp = SDL_LoadBMP("arena/gui/img/graphic.bmp")))
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create bmp: %s"
 				, SDL_GetError());
 		return (EXIT_FAILURE);
 	}
 	data->speed = 1;
-	init_color_and_count(data);
+	init_color(data);
 	return (init_font(data));
 }
 
