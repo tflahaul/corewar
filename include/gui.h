@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 12:02:53 by roduquen          #+#    #+#             */
-/*   Updated: 2019/08/29 15:56:01 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/01 11:43:20 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ struct							s_gui
 	SDL_bool					running;
 	int							text_w;
 	int							text_h;
-	char						string[64][64 + 64 + 64];
 	int							pos[4096][2];
 };
 
