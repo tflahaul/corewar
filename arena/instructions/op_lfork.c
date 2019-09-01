@@ -27,6 +27,7 @@ void						op_lfork(t_process *process, t_parameters *params)
 		ft_bzero(&(node->params), sizeof(t_parameters));
 		RESET_PROCESS(node);
 		ft_list_push(&(node->list), process->list.prev);
+		++g_arena.processes;
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

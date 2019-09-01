@@ -31,7 +31,10 @@ static inline int			ft_pop_dead_processes(t_listhead const *head)
 		temp = temp->next;
 		prcs = (t_process *)ft_get_process(position);
 		if (prcs->live == 0)
+		{
 			ft_list_pop(position, &ft_get_process);
+			--g_arena.processes;
+		}
 		else
 		{
 			live = live + prcs->live;
@@ -48,19 +51,19 @@ void						ft_arena_main_loop(t_listhead *processes)
 	register int			internal_cycle = 0;
 	register int			ctd = CYCLE_TO_DIE;
 
-	while (ctd > 0)
+	while (ctd > 0 && g_arena.processes > 0)
 	{
-		if (HAS_DUMP(g_arena.options) && main_cycle == g_arena.dump_cycles)
-			break ;
-		if (++main_cycle > ctd && ++internal_cycle > ctd)
+		if (++main_cycle > (CYCLE_TO_DIE << 1) && ++internal_cycle > ctd)
 		{
 			if (ft_pop_dead_processes(processes) >= NBR_LIVE)
 				DECREASE_CTD(ctd)
-			else if (live++ >= MAX_CHECKS)
+			else if (++live == MAX_CHECKS)
 				DECREASE_CTD(ctd)
 			internal_cycle = 0;
 		}
 		ft_for_each_process(processes);
+		if (HAS_DUMP(g_arena.options) && main_cycle == g_arena.dump_cycles)
+			break ;
 	}
 	ft_list_delete(processes, &ft_get_process);
 	ft_hexdump_memory();

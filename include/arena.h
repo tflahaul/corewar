@@ -43,6 +43,7 @@ typedef struct			s_arena_state {
 	uint8_t				arena[MEM_SIZE];
 	uint32_t			options;
 	uint32_t			size;
+	uint32_t			processes;
 }						t_arena_state;
 
 t_arena_state			g_arena;
