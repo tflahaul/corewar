@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 12:02:53 by roduquen          #+#    #+#             */
-/*   Updated: 2019/09/02 12:18:35 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/02 13:36:05 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ int								create_corewar_visual(t_gui *data, int i);
 int								create_every_strings(t_gui *data, char *base);
 int								leave_sdl(t_gui *data, int type);
 int								sdl_events_hook(t_gui *data);
+int								sdl_events_pause(t_gui *data);
 
 #endif

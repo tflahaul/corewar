@@ -6,7 +6,7 @@
 /*   By: roduquen <roduquen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 11:54:04 by roduquen          #+#    #+#             */
-/*   Updated: 2019/09/02 12:43:43 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/02 13:35:39 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@ int			create_corewar_visual(t_gui *data, int cycle)
 	frame_calculator(SDL_GetTicks());
 	while (!data->pause)
 	{
-		SDL_PollEvent(&data->event);
-		sdl_events_hook(data);
+		while (SDL_PollEvent(&data->event))
+			sdl_events_pause(data);
 	}
 	return (EXIT_SUCCESS);
 }
