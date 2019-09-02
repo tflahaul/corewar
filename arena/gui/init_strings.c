@@ -6,7 +6,7 @@
 /*   By: roduquen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 12:38:46 by roduquen          #+#    #+#             */
-/*   Updated: 2019/09/01 20:45:03 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/02 12:15:21 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,36 @@ static void	create_string_position(t_gui *data)
 	}
 }
 
+static int	create_ui_strings(t_gui *data)
+{
+	int			i;
+
+	i = 0;
+	if (!(data->ui[0] = TTF_RenderText_Blended(data->font[1], "Running", data->color[0])))
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION
+				, "Couldn't load strings: %s", SDL_GetError());
+		return (EXIT_FAILURE);
+	}
+	if (!(data->ui[1] = TTF_RenderText_Blended(data->font[1], "Pause", data->color[0])))
+	{
+		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION
+				, "Couldn't load strings: %s", SDL_GetError());
+		return (EXIT_FAILURE);
+	}
+	while (i < 2)
+	{
+		if (!(data->ui_s[i] = SDL_CreateTextureFromSurface(data->renderer, data->ui[i])))
+		{
+			SDL_LogError(SDL_LOG_CATEGORY_APPLICATION
+					, "Couldn't create strings: %s", SDL_GetError());
+			return (EXIT_FAILURE);
+		}
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
 static int	textures_and_surfaces(t_gui *data, char byte[3], char *base
 	, int count[4])
 {
@@ -61,7 +91,7 @@ static int	textures_and_surfaces(t_gui *data, char byte[3], char *base
 		}
 		count[2]++;
 	}
-	return (EXIT_SUCCESS);
+	return (create_ui_strings(data));
 }
 
 int			create_every_strings(t_gui *data, char *base)

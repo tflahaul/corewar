@@ -6,7 +6,7 @@
 /*   By: roduquen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 12:26:25 by roduquen          #+#    #+#             */
-/*   Updated: 2019/09/01 18:44:44 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/02 09:55:40 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	init_font(t_gui *data)
 				, SDL_GetError());
 		return (EXIT_FAILURE);
 	}
-	if (!(data->font[1] = TTF_OpenFont("arena/gui/img/monofonto.ttf", 25)))
+	if (!(data->font[1] = TTF_OpenFont("arena/gui/img/helvetica.ttf", 40)))
 	{
 		SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't create font: %s"
 				, SDL_GetError());

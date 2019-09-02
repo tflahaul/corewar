@@ -6,9 +6,11 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/09/01 19:02:14 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/02 09:37:37 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
 
 #include <arena.h>
 #include <corewar_compiler.h>
@@ -20,15 +22,10 @@ inline unsigned short	ft_safe_update_pc(int16_t pc, int16_t nb)
 
 void					update_player_array(unsigned int addr, unsigned int id)
 {
-	t_warrior		*node;
-
-	node = g_arena.warriors;
-	while (node->next && id != (unsigned int)node->id)
-		node = node->next;
-	g_arena.arena_p[MEMINDEX(addr + 0)] = node->id_p;
-	g_arena.arena_p[MEMINDEX(addr + 1)] = node->id_p;
-	g_arena.arena_p[MEMINDEX(addr + 2)] = node->id_p;
-	g_arena.arena_p[MEMINDEX(addr + 3)] = node->id_p;
+	g_arena.arena_p[MEMINDEX(addr + 0)] = id;
+	g_arena.arena_p[MEMINDEX(addr + 1)] = id;
+	g_arena.arena_p[MEMINDEX(addr + 2)] = id;
+	g_arena.arena_p[MEMINDEX(addr + 3)] = id;
 }
 
 void					ft_int_to_binarray(unsigned int addr, unsigned int nb)

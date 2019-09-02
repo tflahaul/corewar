@@ -6,7 +6,7 @@
 /*   By: roduquen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 12:45:31 by roduquen          #+#    #+#             */
-/*   Updated: 2019/09/01 12:47:22 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/02 10:07:24 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ static void	leave_ttf(t_gui *data)
 
 int			leave_sdl(t_gui *data, int type)
 {
+	int		i;
+
+	i = -1;
+	while (++i < 2)
+	{
+		if (data->ui[i])
+			SDL_FreeSurface(data->ui[i]);
+		if (data->ui_s[i])
+			SDL_DestroyTexture(data->ui_s[i]);
+	}
 	leave_ttf(data);
 	if (data->texture)
 		SDL_DestroyTexture(data->texture);

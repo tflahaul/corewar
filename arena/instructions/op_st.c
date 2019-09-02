@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:29:18 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/29 16:24:07 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/02 09:35:05 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void							op_st(t_process *process, t_parameters *params)
 		{
 			ret = ft_safe_update_pc(process->pc, NEG_IDX(params->tab[1]));
 			ft_int_to_binarray(ret , value);
-			update_player_array(ret, process->registers[1]);
+			update_player_array(ret, process->idx);
 		}
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);

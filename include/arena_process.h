@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:23:49 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/29 16:00:49 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/02 09:35:14 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct			s_process {
 	t_ops				instruction;
 	int32_t				registers[REG_NUMBER + 1];
 	uint32_t			live;
+	unsigned int		idx;
 	int16_t				pc;
 }						t_process;
 

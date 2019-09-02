@@ -6,11 +6,12 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 13:26:06 by thflahau          #+#    #+#             */
-/*   Updated: 2019/09/01 20:41:19 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/02 09:38:19 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include <libft.h>
 #include <arena.h>
@@ -18,7 +19,7 @@
 #include <arena_process.h>
 #include <corewar_compiler.h>
 
-static int				ft_new_process(t_listhead *hd, int32_t id, int16_t pc)
+static int				ft_new_process(t_listhead *hd, int32_t id, int16_t pc, int idx)
 {
 	t_process			*process;
 
@@ -26,6 +27,7 @@ static int				ft_new_process(t_listhead *hd, int32_t id, int16_t pc)
 		return (EXIT_ERROR);
 	ft_bzero(process, sizeof(*process));
 	process->registers[1] = id;
+	process->idx = idx;
 	process->pc = pc;
 	ft_list_push(&(process->list), hd);
 	return (EXIT_SUCCESS);
@@ -45,8 +47,8 @@ int						ft_load_warriors_into_arena(t_listhead lst[MAX_PLAYERS])
 	while ((node != NULL) && (idx < MAX_PLAYERS))
 	{
 		ft_memcpy(arena, node->program, node->size);
-		ft_memset(g_arena.arena_p + gap * idx, node->id, node->size);
-		if (ft_new_process(&(lst[idx]), node->id, (int16_t)(arena - temp)) < 0)
+		ft_memset(g_arena.arena_p + gap * idx, idx + 1, node->size);
+		if (ft_new_process(&(lst[idx]), node->id, (int16_t)(arena - temp), idx + 1) < 0)
 			return (ft_puterror_memalloc_failure(&(lst[idx])));
 		node = node->next;
 		arena += gap;

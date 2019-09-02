@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/09/01 17:46:03 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/02 12:20:11 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,11 @@ void						ft_arena_main_loop(t_listhead process_lst[MAX_PLAYERS], t_gui *data)
 		}
 		ft_for_each_process(process_lst);
 		if (!data->running && !(i % data->speed))
-			create_corewar_visual(data);
+			create_corewar_visual(data, i);
 		i++;
 	}
 	while (!data->running)
-		create_corewar_visual(data);
+		create_corewar_visual(data, i);
 	ft_delete_process_list(process_lst);
 	ft_hexdump_memory();
 }

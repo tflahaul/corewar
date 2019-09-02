@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 12:02:53 by roduquen          #+#    #+#             */
-/*   Updated: 2019/09/01 18:49:39 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/02 12:18:35 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@
 # define	H_MIN				(47 + S_MIN)
 # define	W_MIN				(240 + S_X)
 
-# define LOG_WINNER				"Player %i '%s' won the game\n"
-# define LOG_PLAYER				"* Player %i, weighing %3i bytes, '%s'\n"
+# define	LOG_WINNER				"Player %i '%s' won the game\n"
+# define	LOG_PLAYER				"* Player %i, weighing %3i bytes, '%s'\n"
 
 # include <SDL.h>
 # include <SDL_ttf.h>
@@ -59,6 +59,8 @@ struct							s_gui
 	SDL_Surface					*byte[256][5];
 	SDL_Texture					*byte_s[256][5];
 	SDL_Surface					*bmp;
+	SDL_Surface					*ui[2];
+	SDL_Texture					*ui_s[2];
 	uint32_t					*pixels;
 	SDL_Color					color[5];
 	SDL_Event					event;
@@ -78,7 +80,7 @@ int								gui(t_gui *data);
 
 void							ft_print_winner(void);
 void							ft_introduce_contestants(void);
-int								create_corewar_visual(t_gui *data);
+int								create_corewar_visual(t_gui *data, int i);
 int								create_every_strings(t_gui *data, char *base);
 int								leave_sdl(t_gui *data, int type);
 int								sdl_events_hook(t_gui *data);
