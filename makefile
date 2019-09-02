@@ -6,7 +6,7 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 22:08:10 by abrunet           #+#    #+#              #
-#    Updated: 2019/08/28 13:25:37 by thflahau         ###   ########.fr        #
+#    Updated: 2019/09/02 12:22:21 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ NAME		= 	corewar
 #######   DIRECTORIES   #######
 HDR			=	include
 LIBDIR		=	libft
+PRTFDIR		=	ft_printf
 SRCDIR		=	arena
 GUIDIR		=	gui
 OBJDIR		=	obj
@@ -34,7 +35,7 @@ CFLAGS		=	-Wall						\
 
 INCFLAG		=	-I $(HDR)
 INCSDL		=	`sdl2-config --cflags`
-LIBFLAG		=	-L $(LIBDIR) -lft
+LIBFLAG		=	-L $(LIBDIR) -lft -L $(PRTFDIR) -lftprintf
 LIBSDL		=	`sdl2-config --libs --cflags` -lSDL2 -lSDL2_ttf
 
 #########   SOURCES   #########
@@ -55,28 +56,31 @@ YELLOW		=	\033[0;33m
 all				: $(LIBFT) $(NAME)
 
 $(NAME)			: $(ARENA_OBJ)
-	@printf "$(YELLOW)%-40s$(STD)" "Building executable $@ ..."
+	@printf "$(YELLOW)%-55s$(STD)" "Building executable $@ ..."
 	@$(CC) $(CFLAGS) $(INCFLAG) $(ARENA_OBJ) -o $@ $(LIBFLAG) $(LIBSDL)
 	@echo "$(GREEN)DONE$(STD)"
 
 $(LIBFT)		: $(HDR)/libft.h
 	@make -C $(LIBDIR)
+	@make -C $(PRTFDIR)
 
 -include $(DEPENDS)
 
 $(OBJDIR)/%.o	: $(SRCDIR)/%.c
 	@mkdir -p $(DIRS)
-	@printf "%-43s" " > Compiling $* ..."
+	@printf "%-55s" " > Compiling $* ..."
 	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@ $(INCSDL)
 	@echo '✓'
 
 clean			:
 	@/bin/rm -rf $(OBJDIR)
 	@make clean -C $(LIBDIR)
+	@make clean -C $(PRTFDIR)
 
 fclean			: clean
 	@/bin/rm -rf $(NAME)
 	@make fclean -C $(LIBDIR)
+	@make fclean -C $(PRTFDIR)
 
 re				: fclean all
 

@@ -6,12 +6,11 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:48:59 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 16:23:43 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/02 12:24:49 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 
 #include <arena.h>
 #include <arena_errors.h>
@@ -22,19 +21,19 @@ void					ft_hexdump_memory(void)
 {
 	uint16_t			index = 0;
 
-	printf("0x%#.4x:  ", index);
+	ft_printf("0x%#.4x:  ", index);
 	while (index < MEM_SIZE)
 	{
-		printf("%02hhx", g_arena.arena[index]);
+		ft_printf("%02hhx", g_arena.arena[index]);
 		if (!(++index % 64))
 		{
-			printf("\n");
-			printf("%#.4x:  ", index);
+			ft_putchar('\n');
+			ft_printf("%#.4x:  ", index);
 		}
 		else
-			printf(" ");
+			ft_putchar(' ');
 	}
-	printf("\n");
+	ft_putchar('\n');
 }
 
 void					*ft_get_process(t_listhead *node)

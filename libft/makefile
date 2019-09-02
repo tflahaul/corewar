@@ -6,7 +6,7 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/11 10:35:03 by thflahau          #+#    #+#              #
-#    Updated: 2019/08/28 15:33:48 by thflahau         ###   ########.fr        #
+#    Updated: 2019/09/02 12:22:58 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,14 +37,12 @@ YELLOW		=	\033[0;33m
 all		: $(NAME)
 
 $(NAME)	: $(OBJS)
-	@printf "$(YELLOW)%-40s$(STD)" "Building library $@ ..."
 	@$(CC) $(HFLAGS) $(CFLAGS) $(LIBSOURCES)
 	@ar -cq $@ $(OBJS)
 	@ranlib $@
-	@echo "$(GREEN)DONE$(STD)"
 
 %.o		: %.c	$(INCLUDE)/libft.h
-	@printf "%-43s" " > Compiling libft/$* ..."
+	@printf "%-55s" " > Compiling libft/$* ..."
 	@$(CC) $(CFLAGS) $(HFLAGS) -o $@ -c $<
 	@echo '✓'
 

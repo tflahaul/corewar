@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 12:34:53 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/28 16:03:35 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/02 12:21:24 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void			ft_list_delete(t_listhead *head, void *(*funptr)(t_listhead *));
 /*
 **  Misc
 */
+int				ft_printf(char const *fmt, ...);
 int		    	ft_display_file(char const *file);
 
 #endif
