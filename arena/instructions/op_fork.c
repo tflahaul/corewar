@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:28:33 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/28 13:22:37 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/02 11:47:24 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void						op_fork(t_process *process, t_parameters *params)
 		node->pc = ft_safe_update_pc(process->pc, NEG_IDX(params->tab[0]));
 		ft_bzero(&(node->params), sizeof(t_parameters));
 		RESET_PROCESS(node);
-		ft_list_push(&(node->list), process->list.prev);
+		ft_list_push(&(node->list), process->list.next);
 		++g_arena.processes;
 	}
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);

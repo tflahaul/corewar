@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 13:58:50 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/28 15:18:59 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/02 11:42:49 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void					ft_for_each_process(t_listhead *processes)
 	t_listhead			*child;
 
 	child = processes;
-	while ((child = child->next) != processes)
+	while ((child = child->prev) != processes)
 	{
 		parent = (t_process *)ft_get_process(child);
 		if (parent->instruction.cycle == 0)
