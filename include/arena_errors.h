@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:28:50 by thflahau          #+#    #+#             */
-/*   Updated: 2019/07/18 15:09:20 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/03 09:38:47 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,4 @@ int							ft_puterror_illegal_option(char const *str);
 int							ft_puterror_memalloc_failure(t_listhead *head);
 int							ft_puterror_and_close_fd(char const *str, int fd);
 
-#endif /* ARENA_ERRORS_H */
+#endif

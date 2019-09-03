@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:23:49 by thflahau          #+#    #+#             */
-/*   Updated: 2019/09/02 09:35:14 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/03 09:27:34 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct			s_process {
 }						t_process;
 
 # define RESET_PROCESS(x)	(((t_process *)x)->instruction.funptr = (void *)0)
+# define DECREASE_CTD(ctd)	do {(ctd) -= CYCLE_DELTA; live = 0;} while (0);
+
 
 int					ft_load_warriors_into_arena(t_listhead *head);
 void				ft_arena_main_loop(t_listhead lst[MAX_PLAYERS], t_gui *data);

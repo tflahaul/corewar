@@ -6,44 +6,44 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 12:02:53 by roduquen          #+#    #+#             */
-/*   Updated: 2019/09/02 13:36:05 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/03 09:41:00 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GUI_H
 # define GUI_H
 
-# define	ARN_HEIGHT			(1344)
-# define	ARN_WIDTH			(1728)
-# define	ARN_SIZE			(ARN_WIDTH * ARN_HEIGHT)
-# define	CHAR_HEIGHT			(21)
-# define	CHAR_WIDTH			(18)
-# define	HEIGHT				(1440)
-# define	WIDTH				(2560)
-# define	SIZE				(WIDTH * HEIGHT)
+# define ARN_HEIGHT				(1344)
+# define ARN_WIDTH				(1728)
+# define ARN_SIZE				(ARN_WIDTH * ARN_HEIGHT)
+# define CHAR_HEIGHT			(21)
+# define CHAR_WIDTH				(18)
+# define HEIGHT					(1440)
+# define WIDTH					(2560)
+# define SIZE					(WIDTH * HEIGHT)
 
-# define	S_X					(2143)
-# define	S_QUIT				(95)
-# define	H_QUIT				(47 + S_QUIT)
-# define	W_QUIT				(101 + S_X)
-# define	S_PAUSE				(147)
-# define	H_PAUSE				(37 + S_PAUSE)
-# define	W_PAUSE				(140 + S_X)
-# define	S_UP				(195)
-# define	H_UP				(47 + S_UP)
-# define	W_UP				(214 + S_X)
-# define	S_DOWN				(245)
-# define	H_DOWN				(47 + S_DOWN)
-# define	W_DOWN				(278 + S_X)
-# define	S_MAX				(295)
-# define	H_MAX				(47 + S_MAX)
-# define	W_MAX				(253 + S_X)
-# define	S_MIN				(345)
-# define	H_MIN				(47 + S_MIN)
-# define	W_MIN				(240 + S_X)
+# define S_X					(2143)
+# define S_QUIT					(95)
+# define H_QUIT					(47 + S_QUIT)
+# define W_QUIT					(101 + S_X)
+# define S_PAUSE				(147)
+# define H_PAUSE				(37 + S_PAUSE)
+# define W_PAUSE				(140 + S_X)
+# define S_UP					(195)
+# define H_UP					(47 + S_UP)
+# define W_UP					(214 + S_X)
+# define S_DOWN					(245)
+# define H_DOWN					(47 + S_DOWN)
+# define W_DOWN					(278 + S_X)
+# define S_MAX					(295)
+# define H_MAX					(47 + S_MAX)
+# define W_MAX					(253 + S_X)
+# define S_MIN					(345)
+# define H_MIN					(47 + S_MIN)
+# define W_MIN					(240 + S_X)
 
-# define	LOG_WINNER				"Player %i '%s' won the game\n"
-# define	LOG_PLAYER				"* Player %i, weighing %3i bytes, '%s'\n"
+# define LOG_WINNER				"Player %i '%s' won the game\n"
+# define LOG_PLAYER				"* Player %i, weighing %3i bytes, '%s'\n"
 
 # include <SDL.h>
 # include <SDL_ttf.h>
