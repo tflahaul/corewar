@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/09/02 12:20:11 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/03 09:28:05 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 #include <corewar_compiler.h>
 #include <gui.h>
 
-#define DECREASE_CTD(ctd)	do {(ctd) -= CYCLE_DELTA; live = 0;} while (0);
-
-static inline int			ft_pop_dead_processes(t_listhead const *head)
+static inline int	ft_pop_dead_processes(t_listhead const *head)
 {
 	int						live;
 	t_process				*prcs;
@@ -40,7 +38,7 @@ static inline int			ft_pop_dead_processes(t_listhead const *head)
 	return (live);
 }
 
-static inline int			ft_check_cycle_to_die(t_listhead lst[MAX_PLAYERS])
+static inline int	ft_check_cycle_to_die(t_listhead lst[MAX_PLAYERS])
 {
 	int						lives_in_current_period = 0;
 	static int				first_check;
@@ -57,7 +55,8 @@ static inline int			ft_check_cycle_to_die(t_listhead lst[MAX_PLAYERS])
 	return (lives_in_current_period >= NBR_LIVE ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-void						ft_arena_main_loop(t_listhead process_lst[MAX_PLAYERS], t_gui *data)
+void				ft_arena_main_loop(	t_listhead process_lst[MAX_PLAYERS]
+	, t_gui *data)
 {
 	int						live = 0;
 	int						main_cycle = 0;

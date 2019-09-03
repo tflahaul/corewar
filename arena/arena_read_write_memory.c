@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/09/02 09:37:37 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/03 09:31:35 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ void					ft_int_to_binarray(unsigned int addr, unsigned int nb)
 
 int32_t					ft_binarray_to_int(unsigned int addr, unsigned int size)
 {
-	int32_t				value = 0;
+	int32_t				value;
 
+	value = 0;
 	if (size == 1)
 		value = g_arena.arena[MEMINDEX(addr)];
 	else if (size == 2)

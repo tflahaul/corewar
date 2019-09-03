@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:48:59 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 16:23:43 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/03 09:37:05 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 
 void					ft_hexdump_memory(void)
 {
-	uint16_t			index = 0;
+	uint16_t			index;
 
+	index = 0;
 	printf("0x%#.4x:  ", index);
 	while (index < MEM_SIZE)
 	{

@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 13:58:50 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/28 15:18:59 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/03 09:31:02 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void					ft_for_each_process(t_listhead tab[MAX_PLAYERS])
 {
 	t_process			*process;
 	t_listhead			*child;
+	register int		idx;
 
-	for (register int idx = (MAX_PLAYERS - 1); idx >= 0; --idx)
+	idx = (MAX_PLAYERS - 1);
+	while (idx >= 0)
 	{
 		child = &(tab[idx]);
 		while ((child = child->next) != &(tab[idx]))
@@ -34,5 +36,6 @@ void					ft_for_each_process(t_listhead tab[MAX_PLAYERS])
 			else
 				process->instruction.cycle--;
 		}
+		idx--;
 	}
 }
