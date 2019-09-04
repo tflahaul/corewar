@@ -6,7 +6,7 @@
 /*   By: roduquen <roduquen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 11:54:04 by roduquen          #+#    #+#             */
-/*   Updated: 2019/09/02 13:35:39 by roduquen         ###   ########.fr       */
+/*   Updated: 2019/09/04 20:11:00 by roduquen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 #include <arena_errors.h>
 #include <arena_process.h>
 
-void		frame_calculator(unsigned int actual)
+void		frame_calculator(void)
 {
 	static unsigned int	frame = 0;
 	static unsigned int	time = 0;
+	int					actual;
 
+	actual = SDL_GetTicks();
 	if (actual - time > 1000)
 	{
 		printf("FPS : ");
@@ -61,19 +63,13 @@ static int	add_text_for_ui(t_gui *data, int cycle)
 	SDL_Surface	*tmp;
 	SDL_Texture	*tmp_s;
 	char		*str;
+	int			pause;
 
 	pos.x = 2140;
 	pos.y = 560;
-	if (data->pause)
-	{
-		SDL_QueryTexture(data->ui_s[0], NULL, NULL, &pos.w, &pos.h);
-		SDL_RenderCopy(data->renderer, data->ui_s[0], NULL, &pos);
-	}
-	else
-	{
-		SDL_QueryTexture(data->ui_s[1], NULL, NULL, &pos.w, &pos.h);
-		SDL_RenderCopy(data->renderer, data->ui_s[1], NULL, &pos);
-	}
+	pause = data->pause ? 0 : 1;
+	SDL_QueryTexture(data->ui_s[pause], NULL, NULL, &pos.w, &pos.h);
+	SDL_RenderCopy(data->renderer, data->ui_s[pause], NULL, &pos);
 	pos.y = 465;
 	str = (char*)malloc(sizeof(char) * 4096);
 	sprintf(str, "%d", cycle);
@@ -117,7 +113,7 @@ int			create_corewar_visual(t_gui *data, int cycle)
 			SDL_RenderPresent(data->renderer);
 		}
 	}
-	frame_calculator(SDL_GetTicks());
+	frame_calculator();
 	while (!data->pause)
 	{
 		while (SDL_PollEvent(&data->event))
