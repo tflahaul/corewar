@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:23:49 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/31 15:50:29 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/04 11:03:22 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct			s_process {
 	int32_t				registers[REG_NUMBER + 1];
 	uint32_t			live;
 	int16_t				pc;
+	t_listhead			*head;
 }						t_process;
 
 # define RESET_PROCESS(x)	(((t_process *)x)->instruction.funptr = (void *)0)
