@@ -21,7 +21,6 @@ static t_options		options[] = {
 	{"number", &ft_get_numb, required_argument, 'n'},
 	{"help", &ft_print_help, no_argument, 'h'},
 	{"dump", &ft_get_dump, required_argument, 'd'},
-	{"gui", &ft_set_gui, no_argument, 'g'},
 	{"print", &ft_set_print, no_argument, 'p'},
 	{0, 0, 0, 0}
 };
@@ -33,7 +32,7 @@ static inline char		*ft_option_trim(char const *argument)
 
 	index = 0;
 	ptr = (char *)argument;
-	while (*ptr == '-' && __likely(++index <= 2))
+	while (*ptr == '-' && LIKELY(++index <= 2))
 		++ptr;
 	return (ptr);
 }
@@ -58,7 +57,7 @@ static inline int		ft_short_option_lookup(char const *argument)
 
 	index = 0;
 	ret = EXIT_ERROR;
-	if (__unlikely(*(argument + 1)))
+	if (UNLIKELY(*(argument + 1)))
 		return (EXIT_ERROR);
 	while (options[index++].longname != 0)
 		if (*argument == options[index - 1].shortname)
@@ -74,7 +73,7 @@ void					ft_get_options(char const ***argv)
 		index = ft_long_option_lookup(ft_option_trim((*argv)[0]));
 	else
 		index = ft_short_option_lookup(ft_option_trim((*argv)[0]));
-	if (__unlikely(index < 0))
+	if (UNLIKELY(index < 0))
 	{
 		ft_puterror_illegal_option(ft_option_trim(**argv));
 		exit(EXIT_FAILURE);

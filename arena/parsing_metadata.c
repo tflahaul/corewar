@@ -20,7 +20,7 @@
 
 static inline int			ft_read_filetype(uint8_t *mdata)
 {
-	if (__unlikely(BINARR_TO_I(mdata) != COREWAR_EXEC_MAGIC))
+	if (UNLIKELY(BINARR_TO_I(mdata) != COREWAR_EXEC_MAGIC))
 		return (EXIT_ERROR);
 	return (EXIT_SUCCESS);
 }
@@ -28,7 +28,7 @@ static inline int			ft_read_filetype(uint8_t *mdata)
 static inline int			ft_read_program_size(uint8_t *mdata)
 {
 	g_arena.warriors->size = BINARR_TO_I(mdata);
-	if (__unlikely(!(g_arena.warriors->size) || g_arena.warriors->size > CHAMP_MAX_SIZE))
+	if (!(g_arena.warriors->size) || g_arena.warriors->size > CHAMP_MAX_SIZE)
 		return (EXIT_ERROR);
 	return (EXIT_SUCCESS);
 }
@@ -47,13 +47,13 @@ int							ft_fetch_and_check_metadata(int fd)
 {
 	uint8_t					metadata[sizeof(t_header)];
 
-	if (__unlikely(read(fd, metadata, sizeof(t_header)) < 0))
+	if (UNLIKELY(read(fd, metadata, sizeof(t_header)) < 0))
 		return (ft_close_fd_on_error(fd));
-	if (__unlikely(ft_read_filetype(metadata) < 0))
+	if (UNLIKELY(ft_read_filetype(metadata) < 0))
 		return (ft_puterror_and_close_fd(FILERR, fd));
-	ft_read_program_name(metadata + offsetof(t_header, prog_name));
-	if (__unlikely(ft_read_program_size(metadata + offsetof(t_header, prog_size)) < 0))
+	ft_read_program_name(metadata + OFFSETOF(t_header, prog_name));
+	if (ft_read_program_size(metadata + OFFSETOF(t_header, prog_size)) < 0)
 		return (ft_puterror_and_close_fd(CHAMPSIZERR, fd));
-	ft_read_program_comment(metadata + offsetof(t_header, comment));
+	ft_read_program_comment(metadata + OFFSETOF(t_header, comment));
 	return (EXIT_SUCCESS);
 }

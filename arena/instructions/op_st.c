@@ -18,7 +18,7 @@ void							op_st(t_process *process, t_parameters *params)
 {
 	register int				value;
 
-	if (__likely(ISREG(params->tab[0])))
+	if (LIKELY(ISREG(params->tab[0])))
 	{
 		value = process->registers[params->tab[0]];
 		if ((params->ocp & 48) >> 4 == REG_CODE && ISREG(params->tab[1]))

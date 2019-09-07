@@ -25,12 +25,6 @@ void					ft_print_help(char const **argv)
 	exit(EXIT_SUCCESS);
 }
 
-void					ft_set_gui(char const **argv)
-{
-	(void)argv;
-	g_arena.options |= OPTION_V;
-}
-
 void					ft_set_print(char const **argv)
 {
 	(void)argv;
@@ -39,7 +33,7 @@ void					ft_set_print(char const **argv)
 
 void					ft_get_dump(char const **argv)
 {
-	if (__unlikely(*argv == NULL))
+	if (UNLIKELY(*argv == NULL))
 	{
 		ft_puterror(NULLOPT);
 		exit(EXIT_FAILURE);
@@ -54,7 +48,7 @@ void					ft_get_dump(char const **argv)
 
 void					ft_get_numb(char const **argv)
 {
-	if (__unlikely(*argv == NULL))
+	if (UNLIKELY(*argv == NULL))
 	{
 		ft_puterror(NULLOPT);
 		exit(EXIT_FAILURE);

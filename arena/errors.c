@@ -16,6 +16,7 @@
 #include <libft.h>
 #include <arena_errors.h>
 #include <arena_process.h>
+#include <corewar_compiler.h>
 
 int					ft_close_fd_on_error(int fd)
 {
@@ -47,7 +48,7 @@ int					ft_puterror_memalloc_failure(t_listhead *head)
 
 int					ft_puterror_and_close_fd(char const *string, int fd)
 {
-	if (__builtin_expect((close(fd) < 0), 0))
+	if (UNLIKELY((close(fd) < 0)))
 		ft_puterror(strerror(errno));
 	return (ft_puterror(string));
 }

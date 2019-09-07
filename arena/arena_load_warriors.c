@@ -22,7 +22,7 @@ static int				ft_new_process(t_listhead *hd, int32_t id, int16_t pc)
 {
 	t_process			*process;
 
-	if (__unlikely((process = (t_process *)malloc(sizeof(*process))) == NULL))
+	if (UNLIKELY((process = (t_process *)malloc(sizeof(*process))) == NULL))
 		return (EXIT_ERROR);
 	ft_bzero(process, sizeof(*process));
 	process->registers[1] = id;

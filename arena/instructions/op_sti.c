@@ -14,21 +14,21 @@
 #include <arena_process.h>
 #include <corewar_compiler.h>
 
-void						op_sti(t_process *process, t_parameters *params)
+void						op_sti(t_process *proc, t_parameters *params)
 {
 	register int			addr = 0;
 
-	if (__likely(ISREG(params->tab[0]) && (params->ocp & 192) >> 6 == REG_CODE))
+	if (LIKELY(ISREG(params->tab[0]) && (params->ocp & 192) >> 6 == REG_CODE))
 	{
 		if ((params->ocp & 48) >> 4 == REG_CODE && ISREG(params->tab[1]))
-			addr += NEG_IDX(process->registers[params->tab[1]]);
+			addr += NEG_IDX(proc->registers[params->tab[1]]);
 		else
 			addr += NEG_IDX(params->tab[1]);
 		if ((params->ocp & 12) >> 2 == REG_CODE && ISREG(params->tab[2]))
-			addr += NEG_IDX(process->registers[params->tab[2]]);
+			addr += NEG_IDX(proc->registers[params->tab[2]]);
 		else
 			addr += NEG_IDX(params->tab[2]);
-		ft_int_to_binarray(process->pc + addr, process->registers[params->tab[0]]);
+		ft_int_to_binarray(proc->pc + addr, proc->registers[params->tab[0]]);
 	}
-	process->pc = MEMINDEX(process->pc + params->oplen + 1);
+	proc->pc = MEMINDEX(proc->pc + params->oplen + 1);
 }

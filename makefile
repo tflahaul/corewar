@@ -19,7 +19,6 @@ HDR			=	include
 LIBDIR		=	libft
 PRTFDIR		=	ft_printf
 SRCDIR		=	arena
-GUIDIR		=	gui
 OBJDIR		=	obj
 
 DIRS := $(patsubst $(SRCDIR)%, $(OBJDIR)%, $(shell find $(SRCDIR) -type d))
@@ -34,9 +33,7 @@ CFLAGS		=	-Wall						\
 				-g -O0 # debug
 
 INCFLAG		=	-I $(HDR)
-INCSDL		=	`sdl2-config --cflags`
 LIBFLAG		=	-L $(LIBDIR) -lft -L $(PRTFDIR) -lftprintf
-LIBSDL		=	`sdl2-config --libs --cflags` -lSDL2 -lSDL2_ttf
 
 #########   SOURCES   #########
 LIBFT		=	$(LIBDIR)/libft.a
@@ -53,35 +50,35 @@ GREEN		=	\033[0;32m
 YELLOW		=	\033[0;33m
 
 ##########   RULES   ##########
-all				: $(LIBFT) $(NAME)
+all			: $(LIBFT) $(NAME)
 
-$(NAME)			: $(ARENA_OBJ)
+$(NAME)		: $(ARENA_OBJ)
 	@printf "$(YELLOW)%-55s$(STD)" "Building executable $@ ..."
-	@$(CC) $(CFLAGS) $(INCFLAG) $(ARENA_OBJ) -o $@ $(LIBFLAG) $(LIBSDL)
+	@$(CC) $(CFLAGS) $(INCFLAG) $(ARENA_OBJ) -o $@ $(LIBFLAG)
 	@echo "$(GREEN)DONE$(STD)"
 
-$(LIBFT)		: $(HDR)/libft.h
+$(LIBFT)	: $(HDR)/libft.h
 	@make -C $(LIBDIR)
 	@make -C $(PRTFDIR)
 
 -include $(DEPENDS)
 
-$(OBJDIR)/%.o	: $(SRCDIR)/%.c
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(DIRS)
 	@printf "%-55s" " > Compiling $* ..."
-	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@ $(INCSDL)
+	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@
 	@echo '✓'
 
-clean			:
+clean		:
 	@/bin/rm -rf $(OBJDIR)
 	@make clean -C $(LIBDIR)
 	@make clean -C $(PRTFDIR)
 
-fclean			: clean
+fclean		: clean
 	@/bin/rm -rf $(NAME)
 	@make fclean -C $(LIBDIR)
 	@make fclean -C $(PRTFDIR)
 
-re				: fclean all
+re			: fclean all
 
-.PHONY			: all $(LIBFT) clean fclean re
+.PHONY		: all $(LIBFT) clean fclean re

@@ -13,15 +13,15 @@
 #include <arena.h>
 #include <arena_process.h>
 
-void						op_sub(t_process *process, t_parameters *params)
+void						op_sub(t_process *proc, t_parameters *params)
 {
 	register int			sub;
 
 	if (ISREG(params->tab[0]) && ISREG(params->tab[1]) && ISREG(params->tab[2]))
 	{
-		sub = process->registers[params->tab[0]] - process->registers[params->tab[1]];
-		process->registers[params->tab[2]] = sub;
-		process->registers[0] = !(sub);
+		sub = proc->registers[params->tab[0]] - proc->registers[params->tab[1]];
+		proc->registers[params->tab[2]] = sub;
+		proc->registers[0] = !(sub);
 	}
-	process->pc = MEMINDEX(process->pc + params->oplen + 1);
+	proc->pc = MEMINDEX(proc->pc + params->oplen + 1);
 }

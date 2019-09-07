@@ -38,7 +38,7 @@ void					ft_hexdump_memory(void)
 
 void					*ft_get_process(t_listhead *node)
 {
-	return ((void *)((char *)node - offsetof(t_process, list)));
+	return ((void *)((char *)node - OFFSETOF(t_process, list)));
 }
 
 void					ft_free_warriors(void)

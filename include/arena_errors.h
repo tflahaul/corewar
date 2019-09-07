@@ -48,4 +48,4 @@ int							ft_puterror_illegal_option(char const *str);
 int							ft_puterror_memalloc_failure(t_listhead *head);
 int							ft_puterror_and_close_fd(char const *str, int fd);
 
-#endif /* ARENA_ERRORS_H */
+#endif

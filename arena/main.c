@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <gui.h>
 #include <arena.h>
 #include <arena_errors.h>
 #include <arena_process.h>
@@ -18,22 +17,13 @@
 
 int						main(int argc, char const **argv)
 {
-	t_gui				data;
 	t_listhead			processes;
 
-	if (__unlikely(ft_parse_args(argc, argv) != EXIT_SUCCESS))
+	if (UNLIKELY(ft_parse_args(argc, argv) != EXIT_SUCCESS))
 		return (EXIT_FAILURE);
 	ft_list_init_head(&processes);
 	if (ft_load_warriors_into_arena(&processes) != EXIT_SUCCESS)
 		return (EXIT_ERROR);
-	if (g_arena.options & OPTION_V)
-	{
-		if (g_arena.options & ~OPTION_V)
-			ft_puterror(OPTIGNORE);
-		g_arena.options = OPTION_V;
-		if (__unlikely(gui(&data)!= EXIT_SUCCESS))
-			return (EXIT_ERROR);
-	}
 	ft_introduce_contestants();
 	ft_arena_main_loop(&processes);
 	ft_print_winner();

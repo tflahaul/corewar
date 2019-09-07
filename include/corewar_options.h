@@ -31,7 +31,6 @@ typedef struct			s_options {
 	int					shortname;
 }						t_options;
 
-void					ft_set_gui(char const **av);
 void					ft_get_dump(char const **av);
 void					ft_get_numb(char const **av);
 void					ft_set_print(char const **av);

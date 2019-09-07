@@ -19,7 +19,7 @@ void						op_ldi(t_process *process, t_parameters *params)
 	register int			value;
 	register short			address = 0;
 
-	if (__likely(ISREG(params->tab[2])))
+	if (LIKELY(ISREG(params->tab[2])))
 	{
 		if ((params->ocp & 192) >> 6 == REG_CODE && ISREG(params->tab[0]))
 			address += NEG_IDX(process->registers[params->tab[0]]);
