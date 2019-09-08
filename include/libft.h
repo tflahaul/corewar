@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 12:34:53 by thflahau          #+#    #+#             */
-/*   Updated: 2019/09/02 12:21:24 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/08 10:39:23 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 # include <stdint.h>
 # include <sys/types.h>
 
-typedef struct			s_listhead {
-	struct s_listhead	*next;
-	struct s_listhead	*prev;
-}						t_listhead;
+typedef struct s_listhead	t_listhead;
+
+struct			s_listhead {
+	t_listhead	*next;
+	t_listhead	*prev;
+};
 
 /*
 **	Strings
@@ -51,6 +53,6 @@ void			ft_list_delete(t_listhead *head, void *(*funptr)(t_listhead *));
 **  Misc
 */
 int				ft_printf(char const *fmt, ...);
-int		    	ft_display_file(char const *file);
+int				ft_display_file(char const *file);
 
 #endif

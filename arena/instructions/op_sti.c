@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:29:24 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/28 13:23:04 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/08 10:29:29 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 
 void						op_sti(t_process *proc, t_parameters *params)
 {
-	register int			addr = 0;
+	register int			addr;
 
+	addr = 0;
 	if (LIKELY(ISREG(params->tab[0]) && (params->ocp & 192) >> 6 == REG_CODE))
 	{
 		if ((params->ocp & 48) >> 4 == REG_CODE && ISREG(params->tab[1]))

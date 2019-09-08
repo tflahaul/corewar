@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/20 15:16:03 by thflahau          #+#    #+#             */
-/*   Updated: 2019/09/02 12:32:23 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/08 10:36:05 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <arena_errors.h>
 #include <arena_process.h>
 #include <corewar_compiler.h>
-
-#define DECREASE_CTD(ctd)	do {(ctd) -= CYCLE_DELTA; live = 0;} while (0);
 
 static inline int			ft_pop_dead_processes(t_listhead const *head)
 {
@@ -44,21 +42,29 @@ static inline int			ft_pop_dead_processes(t_listhead const *head)
 	return (live);
 }
 
-void						ft_arena_main_loop(t_listhead *processes)
+static inline void			ft_decrease_ctd(int *ctd, int *live)
 {
-	int						live = 0;
-	int						main_cycle = 0;
-	register int			internal_cycle = 0;
-	register int			ctd = CYCLE_TO_DIE;
+	*ctd -= CYCLE_DELTA;
+	*live = 0;
+}
 
+void						ft_arena_main_loop(t_listhead *processes, int live)
+{
+	int						ctd;
+	int						main_cycle;
+	register int			internal_cycle;
+
+	main_cycle = 0;
+	internal_cycle = 0;
+	ctd = CYCLE_TO_DIE;
 	while (ctd > 0 && g_arena.processes > 0)
 	{
 		if (++main_cycle > (CYCLE_TO_DIE << 1) && ++internal_cycle > ctd)
 		{
 			if (ft_pop_dead_processes(processes) >= NBR_LIVE)
-				DECREASE_CTD(ctd)
+				ft_decrease_ctd(&ctd, &live);
 			else if (++live == MAX_CHECKS)
-				DECREASE_CTD(ctd)
+				ft_decrease_ctd(&ctd, &live);
 			internal_cycle = 0;
 		}
 		ft_for_each_process(processes);

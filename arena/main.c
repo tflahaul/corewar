@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 10:35:01 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/28 15:37:27 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/08 10:36:18 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int						main(int argc, char const **argv)
 	if (ft_load_warriors_into_arena(&processes) != EXIT_SUCCESS)
 		return (EXIT_ERROR);
 	ft_introduce_contestants();
-	ft_arena_main_loop(&processes);
+	ft_arena_main_loop(&processes, 0);
 	ft_print_winner();
 	return (EXIT_SUCCESS);
 }
