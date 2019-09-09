@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 12:34:53 by thflahau          #+#    #+#             */
-/*   Updated: 2019/09/08 10:39:23 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/09 12:13:09 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char			*ft_strrchr(char const *str, int c);
 void			ft_bzero(void *ptr, size_t size);
 void			ft_memcpy(void *dst, void *src, size_t size);
 void			*ft_memset(void *dst, int c, size_t size);
+uint32_t		ft_endian_swap(uint32_t nb);
 
 /*
 **	Linked list

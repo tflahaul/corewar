@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 15:46:39 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/27 16:33:42 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/09 12:14:26 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 
 static inline int			ft_read_filetype(uint8_t *mdata)
 {
-	if (UNLIKELY(BINARR_TO_I(mdata) != COREWAR_EXEC_MAGIC))
+	if (UNLIKELY(ft_endian_swap(*((uint32_t *)mdata)) != COREWAR_EXEC_MAGIC))
 		return (EXIT_ERROR);
 	return (EXIT_SUCCESS);
 }
 
 static inline int			ft_read_program_size(uint8_t *mdata)
 {
-	g_arena.warriors->size = BINARR_TO_I(mdata);
+	g_arena.warriors->size = ft_endian_swap(*((uint32_t *)mdata));
 	if (!(g_arena.warriors->size) || g_arena.warriors->size > CHAMP_MAX_SIZE)
 		return (EXIT_ERROR);
 	return (EXIT_SUCCESS);

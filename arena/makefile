@@ -6,13 +6,13 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 22:08:10 by abrunet           #+#    #+#              #
-#    Updated: 2019/09/08 11:46:20 by thflahau         ###   ########.fr        #
+#    Updated: 2019/09/08 12:08:46 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	gcc
 
-NAME		= 	corewar
+NAME		= 	../corewar
 
 #######   DIRECTORIES   #######
 HDR			=	../include
