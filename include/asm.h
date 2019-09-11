@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrunet <abrunet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 13:58:03 by abrunet           #+#    #+#             */
-/*   Updated: 2019/08/15 19:10:42 by abrunet          ###   ########.fr       */
+/*   Updated: 2019/09/11 12:33:24 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "op.h"
 # include <stdint.h>
 # include <sys/types.h>
-# include "../libft/libft.h"
+# include "libft.h"
 
 # define ASM_EXT		".s"
 # define CHMP_BUFF		5000

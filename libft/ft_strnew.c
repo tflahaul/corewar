@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_word_count.c                                    :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/10 18:56:53 by thflahau          #+#    #+#             */
-/*   Updated: 2019/04/23 16:16:57 by thflahau         ###   ########.fr       */
+/*   Created: 2019/04/10 18:55:37 by thflahau          #+#    #+#             */
+/*   Updated: 2019/09/11 12:43:57 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
-#define UNLIKELY(x)		__builtin_expect(!!(x), 0)
 
-uint32_t				ft_word_count(char const *str)
+char					*ft_strnew(size_t size)
 {
-	uint32_t			words;
+	char				*str;
 
-	words = 0;
-	while (*str)
-	{
-		if (ft_isblank(*str) == 0)
-		{
-			++words;
-			while (ft_isblank(*str) == 0 && *str)
-				if (UNLIKELY(!ft_isprintable(*str++)))
-					return (0);
-		}
-		else
-			str++;
-	}
-	return (words);
+	if (!(str = (char *)malloc(sizeof(char) * (size + 1))))
+		return (NULL);
+	ft_bzero(str, size + 1);
+	return (str);
 }

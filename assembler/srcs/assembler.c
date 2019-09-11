@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   assembler.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrunet <abrunet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 13:59:08 by abrunet           #+#    #+#             */
-/*   Updated: 2019/09/09 19:44:05 by abrunet          ###   ########.fr       */
+/*   Updated: 2019/09/11 12:54:55 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int						init_file(t_file *file, int fd, char *file_name)
 	file->cmnt = 0;
 	if ((file->wr_buff = malloc(sizeof(uint8_t) * CHMP_BUFF)))
 		return (EXIT_ERROR);
-	ft_fast_bzero(file->wr_buff, CHMP_BUFF);
+	ft_bzero(file->wr_buff, CHMP_BUFF);
 	return (EXIT_SUCCESS);
 }
 

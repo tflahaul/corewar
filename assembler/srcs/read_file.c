@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrunet <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 17:08:12 by abrunet           #+#    #+#             */
-/*   Updated: 2019/09/09 19:34:36 by abrunet          ###   ########.fr       */
+/*   Updated: 2019/09/11 12:56:29 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ uint8_t		get_funptr_index(char **start, char **end, t_file *file)
 	int		i;
 
 	i = 0;
-	ft_fast_bzero(s, INST_MAX_SIZE);
+	ft_bzero(s, INST_MAX_SIZE);
 	if (**start == '.')
 		return (check_header_var(&name, &cmnt, start, end));
 	else if (name && cmnt)

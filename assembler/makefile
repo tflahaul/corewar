@@ -6,19 +6,19 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 22:08:10 by abrunet           #+#    #+#              #
-#    Updated: 2019/09/11 12:24:14 by thflahau         ###   ########.fr        #
+#    Updated: 2019/09/11 12:28:27 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	gcc
 
-NAME		= 	../corewar
+NAME		= 	../asm
 
 #######   DIRECTORIES   #######
 HDR			=	../include
 LIBDIR		=	../libft
 PRTFDIR		=	../ft_printf
-SRCDIR		=	.
+SRCDIR		=	srcs
 OBJDIR		=	../obj
 
 DIRS := $(patsubst $(SRCDIR)%, $(OBJDIR)%, $(shell find $(SRCDIR) -type d))
