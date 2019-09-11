@@ -16,9 +16,7 @@
 int		main(int argc, char **argv)
 {
 	t_file			file;
-	unsigned int	i;
 
-	i = -1;
 	if (argc < 2)
 		ft_print_asm_usage();
 	else
