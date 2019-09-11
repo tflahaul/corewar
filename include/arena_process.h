@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:23:49 by thflahau          #+#    #+#             */
-/*   Updated: 2019/09/08 10:40:37 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/11 12:19:07 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,15 @@ typedef struct		s_instructions {
 **	@live:			Nombre de live valides sur la période.
 **	@pc:			Program counter
 */
-struct				s_process {
-	t_listhead		list;
-	t_parameters	params;
-	t_ops			instruction;
-	int32_t			registers[REG_NUMBER + 1];
-	uint32_t		live;
-	int16_t			pc;
-};
+typedef struct			s_process {
+	t_listhead			list;
+	t_parameters		params;
+	t_ops				instruction;
+	int32_t				registers[REG_NUMBER + 1];
+	uint32_t			live;
+	int16_t				pc;
+	t_listhead			*head;
+}						t_process;
 
 # define RESET_PROCESS(x)	(((t_process *)x)->instruction.funptr = (void *)0)
 
