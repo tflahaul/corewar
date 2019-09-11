@@ -17,12 +17,12 @@ void						op_live(t_process *process, t_parameters *par)
 {
 	t_warrior				*warrior;
 
+	process->live++;
 	if ((warrior = ft_get_warrior_from_id(par->tab[0])) != (void *)0)
 	{
 		if (g_arena.options & OPTION_P)
 			ft_printf("A process is saying player %i is alive\n", par->tab[0]);
 		g_arena.last_alive = warrior;
-		process->live++;
 	}
 	process->pc = MEMINDEX(process->pc + par->oplen + 1);
 }

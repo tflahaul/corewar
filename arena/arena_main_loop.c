@@ -59,7 +59,8 @@ void						ft_arena_main_loop(t_listhead *processes, int live)
 	ctd = CYCLE_TO_DIE;
 	while (ctd > 0 && g_arena.processes > 0)
 	{
-		if (++main_cycle > (CYCLE_TO_DIE << 1) && ++internal_cycle > ctd)
+		ft_for_each_process(processes);
+		if (++main_cycle > CYCLE_TO_DIE && ++internal_cycle > ctd)
 		{
 			if (ft_pop_dead_processes(processes) >= NBR_LIVE)
 				ft_decrease_ctd(&ctd, &live);
@@ -67,7 +68,6 @@ void						ft_arena_main_loop(t_listhead *processes, int live)
 				ft_decrease_ctd(&ctd, &live);
 			internal_cycle = 0;
 		}
-		ft_for_each_process(processes);
 		if (HAS_DUMP(g_arena.options) && main_cycle == g_arena.dump_cycles)
 		{
 			ft_hexdump_memory();
