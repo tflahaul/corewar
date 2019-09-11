@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abrunet <abrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 13:58:03 by abrunet           #+#    #+#             */
-/*   Updated: 2019/09/11 12:33:24 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/11 15:08:56 by abrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef	struct			s_file
 	int					line;
 	int					wr;
 	int					cmnt;
+	int					op;
 	char				*tmp;
 	off_t				bytes;
 	char				*cor;
@@ -94,8 +95,7 @@ int						get_comment(t_file *file, char **wd, char **end);
 int						get_label(t_file *file, char **wd, char **end);
 int						get_instruction(t_file *file, char **wd, char **end);
 void					init_inst(t_inst *inst, t_file *file);
-int						handle_instruction(t_file *file, char **str,
-		t_inst *inst);
+int						handle_instruction(t_file *f, char **s, t_inst *inst);
 int						valid_instruction_format(char *str, int type);
 int						is_instruction(char *str, t_op const *op_tab);
 int						write_to_cor(unsigned int byte, int oct, t_file *file);
@@ -111,7 +111,10 @@ int						parse_lab_list(t_file *file);
 int						inc_size(t_inst *inst, int type);
 int						write_to_cor_file(t_file *file);
 int						check_arg_num(char **split, int arg);
+int						check_header_var(int *name, int *c, char **s, char **e);
+int						get_end_word_index(char **start);
 int64_t					asm_atoi(char **string, int shrt);
+t_label					*label_exist(char *str, t_file *file);
 t_lab					*lab_list(char **str, t_file *file, t_inst *inst);
 t_label					*make_label(char **wd, t_file *file,
 		unsigned int start);
