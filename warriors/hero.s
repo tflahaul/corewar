@@ -135,7 +135,6 @@ st r10, 498
 st r11, 497
 st r2, 497  
 st r8, 496
-ld %590322 ,r12 	#09 01 f2   ->zjmp sur jumper mis a begin
 fork %:soldier2
 ld %190056201, r8   #0b540709
 ld %4294967043 ,r7  #ffffff03

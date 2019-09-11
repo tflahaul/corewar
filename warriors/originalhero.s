@@ -1,4 +1,4 @@
-.name "hero"
+.name "originalhero"
 .comment "fire on the mood"
 
 starter:
@@ -121,7 +121,6 @@ ld %495 , r9
 ld %0, r6
 st r2, 497  
 st r8, 496
-ld %590322 ,r12 	#09 01 f2   ->zjmp sur jumper mis a begin
 fork %:soldier2
 ld %190056201, r8   #0b540709
 ld %4294967043 ,r7  #ffffff03
