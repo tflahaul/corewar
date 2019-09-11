@@ -37,15 +37,15 @@ typedef struct		s_instructions {
 **	@live:			Nombre de live valides sur la période.
 **	@pc:			Program counter
 */
-typedef struct			s_process {
-	t_listhead			list;
-	t_parameters		params;
-	t_ops				instruction;
-	int32_t				registers[REG_NUMBER + 1];
-	uint32_t			live;
-	int16_t				pc;
-	t_listhead			*head;
-}						t_process;
+struct				s_process {
+	t_listhead		list;
+	t_parameters	params;
+	t_ops			instruction;
+	int32_t			registers[REG_NUMBER + 1];
+	uint32_t		live;
+	int16_t			pc;
+	t_listhead		*head;
+};
 
 # define RESET_PROCESS(x)	(((t_process *)x)->instruction.funptr = (void *)0)
 
