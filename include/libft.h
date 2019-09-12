@@ -56,6 +56,7 @@ void			ft_putstr_fd(char const *s, int fd);
 void			ft_putchar_fd(char c, int fd);
 void			ft_putendl_fd(char const *s, int fd);
 char			*ft_strncpy(char *dst, char const *src, size_t len);
+char			*ft_itoa(int n);
 char			*ft_strcpy(char *dst, char const *src);
 int				ft_iswhitespace(char c);
 int				get_next_word(char const *str, char **start, char **end);

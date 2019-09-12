@@ -6,7 +6,7 @@
 /*   By: abrunet <abrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 17:08:12 by abrunet           #+#    #+#             */
-/*   Updated: 2019/09/11 16:01:27 by abrunet          ###   ########.fr       */
+/*   Updated: 2019/09/11 22:14:02 by abrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 int			check_valid_inst_index(char **start,
 		int i, t_file *file, char **end)
 {
-	char	s[INST_MAX_SIZE];
+	char	*s;
 
+	if (!(s = ft_strnew(INST_MAX_SIZE)))
+		return (0);
 	if (!file->op)
 		file->op = 1;
-	ft_bzero(s, INST_MAX_SIZE);
 	ft_strncpy(s, (*start), i);
 	if (is_instruction(s, file->op_tab) != EXIT_ERROR)
 	{
@@ -29,6 +30,7 @@ int			check_valid_inst_index(char **start,
 		*start = s;
 		return (1);
 	}
+	free((void *)s);
 	return (0);
 }
 
@@ -101,7 +103,7 @@ int			parse_line(t_file *file, char **buff,
 		return (EXIT_ERROR);
 	if (*start == '#' || *start == ';')
 		return (EXIT_SUCCESS);
-	return (ft_puterror(INVLDCHAR));
+	return (ft_puterror(INVLDCHAR, file->line));
 }
 
 int			read_file(t_file *file)
@@ -122,12 +124,9 @@ int			read_file(t_file *file)
 		file->mult_inst = 0;
 		file->mult_lab = 0;
 		if (parse_line(file, &buffer, funptr) == EXIT_ERROR)
-		{
-			free((void *)buffer);
-			return (EXIT_ERROR);
-		}
+			return (file_read_free(buffer, string, 1));
+		file->line++;
 		free((void *)buffer);
 	}
-	free((void *)buffer);
-	return (EXIT_SUCCESS);
+	return (file_read_free(buffer, string, 0));
 }

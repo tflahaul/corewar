@@ -6,7 +6,7 @@
 /*   By: abrunet <abrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 13:58:03 by abrunet           #+#    #+#             */
-/*   Updated: 2019/09/11 16:00:31 by abrunet          ###   ########.fr       */
+/*   Updated: 2019/09/11 22:04:46 by abrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef	struct			s_file
 	int					mult_lab;
 	int					mult_inst;
 	int					op;
+	int					line;
 	char				*tmp;
 	off_t				bytes;
 	char				*cor;
@@ -96,8 +97,7 @@ int						get_comment(t_file *file, char **wd, char **end);
 int						get_label(t_file *file, char **wd, char **end);
 int						get_instruction(t_file *file, char **wd, char **end);
 void					init_inst(t_inst *inst, t_file *file);
-int						handle_instruction(t_file *file, char **str,
-		t_inst *inst);
+int						handle_instruction(t_file *f, char **str, t_inst *inst);
 int						valid_instruction_format(char *str, int type);
 int						is_instruction(char *str, t_op const *op_tab);
 int						write_to_cor(unsigned int byte, int oct, t_file *file);
@@ -113,14 +113,13 @@ int						parse_lab_list(t_file *file);
 int						inc_size(t_inst *inst, int type);
 int						write_to_cor_file(t_file *file);
 int						check_arg_num(char **split, int arg);
-int						check_header_var(int *name, int *cmnt,
-		char **start, char **end);
+int						check_header_var(int *name, int *c, char **s, char **e);
 int						get_end_word_index(char **start);
+int						file_read_free(char *buff, char *str, int err);
 int64_t					asm_atoi(char **string, int shrt);
 t_label					*label_exist(char *str, t_file *file);
 t_lab					*lab_list(char **str, t_file *file, t_inst *inst);
-t_label					*make_label(char **wd, t_file *file,
-		unsigned int start);
+t_label					*make_label(char **wd, t_file *f, unsigned int start);
 t_label					*parse_file_label(char *str, t_file *file, off_t bytes);
 
 #endif

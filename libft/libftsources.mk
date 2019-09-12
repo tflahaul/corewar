@@ -50,4 +50,5 @@ LIBSOURCES		=	ft_strrchr.c				\
 					ft_strnjoinfree.c			\
 					ft_strsplit.c				\
 					ft_strsub.c					\
-					get_next_word.c
+					get_next_word.c				\
+					ft_itoa.c

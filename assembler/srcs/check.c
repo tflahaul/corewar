@@ -6,7 +6,7 @@
 /*   By: abrunet <abrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 14:01:28 by abrunet           #+#    #+#             */
-/*   Updated: 2019/09/09 19:44:36 by abrunet          ###   ########.fr       */
+/*   Updated: 2019/09/11 22:06:16 by abrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,15 @@ int			check_extension(char *str)
 	{
 		if (!(ft_strcmp(ptr, ASM_EXT)))
 			return (EXIT_SUCCESS);
-		return (ft_puterror(BADFMT));
+		return (ft_puterror(BADFMT, 0));
 	}
-	return (ft_puterror(FILERR));
+	return (ft_puterror(FILERR, 0));
+}
+
+int			err_check(char **split)
+{
+	free_split(split);
+	return (EXIT_ERROR);
 }
 
 int			check_arg_num(char **split, int arg)
@@ -38,9 +44,15 @@ int			check_arg_num(char **split, int arg)
 		while (*str++)
 		{
 			if (*str == '#' || *str == ';')
-				return ((arg != i + 1) ? EXIT_ERROR : EXIT_SUCCESS);
+			{
+				if (arg != i + 1)
+					return (err_check(split));
+				return (EXIT_SUCCESS);
+			}
 		}
 		i++;
 	}
-	return ((arg != i) ? EXIT_ERROR : EXIT_SUCCESS);
+	if (arg != i)
+		return (err_check(split));
+	return (EXIT_SUCCESS);
 }
