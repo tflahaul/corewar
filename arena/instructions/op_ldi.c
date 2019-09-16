@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 11:28:44 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/28 13:22:43 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/08 10:29:19 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 void						op_ldi(t_process *process, t_parameters *params)
 {
 	register int			value;
-	register short			address = 0;
+	register short			address;
 
-	if (__likely(ISREG(params->tab[2])))
+	address = 0;
+	if (LIKELY(ISREG(params->tab[2])))
 	{
 		if ((params->ocp & 192) >> 6 == REG_CODE && ISREG(params->tab[0]))
 			address += NEG_IDX(process->registers[params->tab[0]]);

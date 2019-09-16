@@ -16,7 +16,7 @@
 
 void						op_aff(t_process *process, t_parameters *params)
 {
-	if (__likely(ISREG(params->tab[0])) && (g_arena.options & OPTION_P))
+	if (LIKELY(ISREG(params->tab[0])) && (g_arena.options & OPTION_P))
 		ft_putchar((unsigned char)(process->registers[params->tab[0]]));
 	process->pc = MEMINDEX(process->pc + params->oplen + 1);
 }

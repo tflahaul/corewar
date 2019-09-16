@@ -17,19 +17,19 @@
 #  define __CCV (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
 
 #  if __CCV > 29600
-#   define __likely(x)				__builtin_expect((x), 1)
-#   define __unlikely(x)			__builtin_expect((x), 0)
-#   ifndef offsetof
-#    define offsetof(type, member)	__builtin_offsetof(type, member)
-#   endif /* offsetof */
+#   define LIKELY(x)				__builtin_expect((x), 1)
+#   define UNLIKELY(x)			    __builtin_expect((x), 0)
+#   ifndef OFFSETOF
+#    define OFFSETOF(type, member)	__builtin_offsetof(type, member)
+#   endif
 
 #  else
-#   define __likely(x)				(x)
-#   define __unlikely(x)			(x)
-#  endif /* __CCV */
+#   define LIKELY(x)				(x)
+#   define UNLIKELY(x)		    	(x)
+#  endif
 
 # else
 #  error "Your compiler does not use the C preprocessor, try using GCC"
-# endif /* __GNUC__ */
+# endif
 
-#endif /* COREWAR_COMPILER_H */
+#endif

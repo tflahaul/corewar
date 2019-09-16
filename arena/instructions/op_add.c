@@ -13,15 +13,15 @@
 #include <arena.h>
 #include <arena_process.h>
 
-void						op_add(t_process *process, t_parameters *params)
+void						op_add(t_process *proc, t_parameters *params)
 {
 	register int32_t		sum;
 
 	if (ISREG(params->tab[0]) && ISREG(params->tab[1]) && ISREG(params->tab[2]))
 	{
-		sum = process->registers[params->tab[0]] + process->registers[params->tab[1]];
-		process->registers[params->tab[2]] = sum;
-		process->registers[0] = !(sum);
+		sum = proc->registers[params->tab[0]] + proc->registers[params->tab[1]];
+		proc->registers[params->tab[2]] = sum;
+		proc->registers[0] = !(sum);
 	}
-	process->pc = MEMINDEX(process->pc + params->oplen + 1);
+	proc->pc = MEMINDEX(proc->pc + params->oplen + 1);
 }

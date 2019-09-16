@@ -61,7 +61,7 @@ int						init_file(t_file *file, char *file_name)
 	file->op = 0;
 	if ((file->wr_buff = malloc(sizeof(uint8_t) * CHMP_BUFF)))
 		return (EXIT_ERROR);
-	ft_fast_bzero(file->wr_buff, CHMP_BUFF);
+	ft_bzero(file->wr_buff, CHMP_BUFF);
 	return (EXIT_SUCCESS);
 }
 

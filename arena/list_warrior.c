@@ -16,6 +16,7 @@
 #include <libft.h>
 #include <arena.h>
 #include <arena_errors.h>
+#include <corewar_compiler.h>
 
 inline t_warrior		*ft_get_warrior_from_id(int id)
 {
@@ -47,7 +48,7 @@ inline int				ft_number_in_list(int32_t id)
 
 static inline void		ft_list_push_warrior(t_warrior *entry)
 {
-	if (__builtin_expect((g_arena.warriors == NULL), 0))
+	if (UNLIKELY(g_arena.warriors == NULL))
 		g_arena.warriors = entry;
 	else
 	{

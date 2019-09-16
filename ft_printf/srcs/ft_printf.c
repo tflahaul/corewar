@@ -3,51 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roduquen <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: thflahau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/07 13:51:11 by roduquen          #+#    #+#             */
-/*   Updated: 2019/04/07 15:41:27 by roduquen         ###   ########.fr       */
+/*   Created: 2018/12/28 17:40:17 by thflahau          #+#    #+#             */
+/*   Updated: 2019/02/07 11:24:48 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../headers/libftprintf.h"
 
-static void	detect_escape_char(const char *format, t_printf *data, va_list *ap)
+int						ft_printf(char const *format, ...)
 {
-	int			i;
-	int			ret;
+	t_format			p;
+	t_funptr			*ptr;
+	va_list				argument_list;
 
-	i = 0;
-	while (format[i])
+	if (!format || !(*format))
+		return (0);
+	p.printed = 0;
+	ft_reset_struct_datas(&p);
+	va_start(argument_list, format);
+	while (*format)
 	{
-		if (format[i] != '%')
-			ft_add_char_to_buff(data, format[i++]);
-		else
+		if (*format++ == '%')
 		{
-			i++;
-			if ((ret = start_fullish_attr(data, (char*)format + i, ap))
-				!= ERROR)
-				i += ret;
-			else
-				return ;
+			ft_get_format(format++, &p);
+			if ((ptr = ft_printf_dispatcher(p.conv)))
+				ptr(&p, &argument_list);
+			format += p.flength > 1 ? p.flength - 1 : 0;
+			ft_reset_struct_datas(&p);
 		}
+		else if (*(format - 1))
+			ft_write_char_pf(&p, *(format - 1));
 	}
-	if (data->actual != 0)
-		ft_putbuffer(data);
-}
-
-int			ft_printf(const char *format, ...)
-{
-	t_printf	data;
-	int			ret;
-	va_list		ap;
-
-	if (!format)
-		return (ERROR);
-	ft_memset(&data, 0, sizeof(t_printf));
-	va_start(ap, format);
-	detect_escape_char(format, &data, &ap);
-	ret = data.ret;
-	va_end(ap);
-	return (ret);
+	va_end(argument_list);
+	return (p.printed);
 }

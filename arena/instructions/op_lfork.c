@@ -20,7 +20,7 @@ void						op_lfork(t_process *process, t_parameters *params)
 {
 	t_process				*node;
 
-	if (__likely((node = (t_process *)malloc(sizeof(t_process))) != NULL))
+	if (LIKELY((node = (t_process *)malloc(sizeof(t_process))) != NULL))
 	{
 		ft_memcpy(node, process, sizeof(*process));
 		node->pc = ft_safe_update_pc(process->pc, params->tab[0]);

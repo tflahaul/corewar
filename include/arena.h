@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 19:33:12 by thflahau          #+#    #+#             */
-/*   Updated: 2019/08/28 13:22:09 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/11 12:49:05 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,11 @@ typedef struct			s_arena_state {
 t_arena_state			g_arena;
 
 # define OPTION_N		0x00000001ul
-# define OPTION_V		0x00000010ul
-# define OPTION_D		0x00000100ul
-# define OPTION_P		0x00001000ul
+# define OPTION_D		0x00000010ul
+# define OPTION_P		0x00000100ul
 
 # define ABS(x)				((x) < 0 ? -(x) : (x))
 
-# define HAS_VISU(x)		(x & OPTION_V)
 # define HAS_DUMP(x)		(x & OPTION_D)
 # define HAS_NUMBER(x)		(x & OPTION_N)
 # define UNSET_OPTION_N(x)	(x &= ~OPTION_N)
@@ -90,5 +88,11 @@ int32_t					ft_binarray_to_int(int ptr, int sz);
 */
 void					ft_free_warriors(void) __attribute__((destructor));
 unsigned short			ft_safe_update_pc(int16_t pc, int16_t ptr);
+
+/*
+**	Messages
+*/
+void					ft_print_winner(void);
+void					ft_introduce_contestants(void);
 
 #endif

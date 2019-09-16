@@ -43,7 +43,7 @@ static inline int			ft_store_warrior_id(void)
 	g_arena.warriors->id = COREWAR_EXEC_MAGIC;
 	if (HAS_NUMBER(g_arena.options))
 	{
-		if (__unlikely(ft_number_in_list(g_arena.value) == EXIT_FAILURE))
+		if (UNLIKELY(ft_number_in_list(g_arena.value) == EXIT_FAILURE))
 			return (ft_puterror(NUMERR));
 		g_arena.warriors->id = g_arena.value;
 		UNSET_OPTION_N(g_arena.options);
@@ -56,12 +56,12 @@ static inline int			ft_store_warrior(int fd)
 	ssize_t					bytes;
 	uint8_t					buffer[CHAMP_MAX_SIZE];
 
-	if (__unlikely(lseek(fd, sizeof(t_header), SEEK_SET) < 0))
+	if (UNLIKELY(lseek(fd, sizeof(t_header), SEEK_SET) < 0))
 		return (ft_puterror(strerror(errno)));
-	if (__unlikely((bytes = read(fd, buffer, CHAMP_MAX_SIZE)) < 0))
+	if (UNLIKELY((bytes = read(fd, buffer, CHAMP_MAX_SIZE)) < 0))
 		return (ft_puterror(strerror(errno)));
 	ft_memcpy(g_arena.warriors->program, buffer, bytes);
-	if (__unlikely(ft_store_warrior_id() < 0))
+	if (UNLIKELY(ft_store_warrior_id() < 0))
 		return (EXIT_ERROR);
 	return (EXIT_SUCCESS);
 }
@@ -70,17 +70,17 @@ int							ft_parse_warrior(char const *file)
 {
 	int						fd;
 
-	if (__unlikely(g_arena.size >= MAX_PLAYERS))
+	if (UNLIKELY(g_arena.size >= MAX_PLAYERS))
 		return (ft_puterror(MAXCHAMP));
-	if (__unlikely((fd = open(file, O_RDONLY)) < 0))
+	if (UNLIKELY((fd = open(file, O_RDONLY)) < 0))
 		return (ft_puterror(strerror(errno)));
-	if (__unlikely(ft_malloc_new_warrior() != EXIT_SUCCESS))
+	if (UNLIKELY(ft_malloc_new_warrior() != EXIT_SUCCESS))
 		return (ft_close_fd_on_error(fd));
-	if (__unlikely(ft_fetch_and_check_metadata(fd) != EXIT_SUCCESS))
+	if (UNLIKELY(ft_fetch_and_check_metadata(fd) != EXIT_SUCCESS))
 		return (ft_close_fd_on_error(fd));
-	if (__unlikely(ft_store_warrior(fd) < 0))
+	if (UNLIKELY(ft_store_warrior(fd) < 0))
 		return (ft_close_fd_on_error(fd));
-	if (__unlikely(close(fd) < 0))
+	if (UNLIKELY(close(fd) < 0))
 		return (ft_puterror(strerror(errno)));
 	return (EXIT_SUCCESS);
 }

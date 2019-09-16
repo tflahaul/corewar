@@ -6,7 +6,7 @@
 /*   By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:48:59 by thflahau          #+#    #+#             */
-/*   Updated: 2019/09/02 12:24:49 by thflahau         ###   ########.fr       */
+/*   Updated: 2019/09/08 10:29:45 by thflahau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 
 void					ft_hexdump_memory(void)
 {
-	uint16_t			index = 0;
+	uint16_t			index;
 
+	index = 0;
 	ft_printf("0x%#.4x:  ", index);
 	while (index < MEM_SIZE)
 	{
@@ -38,7 +39,7 @@ void					ft_hexdump_memory(void)
 
 void					*ft_get_process(t_listhead *node)
 {
-	return ((void *)((char *)node - offsetof(t_process, list)));
+	return ((void *)((char *)node - OFFSETOF(t_process, list)));
 }
 
 void					ft_free_warriors(void)

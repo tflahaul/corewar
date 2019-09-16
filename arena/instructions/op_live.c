@@ -13,16 +13,16 @@
 #include <arena.h>
 #include <arena_process.h>
 
-void						op_live(t_process *process, t_parameters *params)
+void						op_live(t_process *process, t_parameters *par)
 {
 	t_warrior				*warrior;
 
-	if ((warrior = ft_get_warrior_from_id(params->tab[0])) != (void *)0)
+	process->live++;
+	if ((warrior = ft_get_warrior_from_id(par->tab[0])) != (void *)0)
 	{
 		if (g_arena.options & OPTION_P)
-			ft_printf("A process is saying player %i is alive\n", params->tab[0]);
+			ft_printf("A process is saying player %i is alive\n", par->tab[0]);
 		g_arena.last_alive = warrior;
-		process->live++;
 	}
-	process->pc = MEMINDEX(process->pc + params->oplen + 1);
+	process->pc = MEMINDEX(process->pc + par->oplen + 1);
 }

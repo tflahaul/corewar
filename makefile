@@ -6,23 +6,25 @@
 #    By: thflahau <thflahau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/03 22:08:10 by abrunet           #+#    #+#              #
-#    Updated: 2019/09/02 12:22:21 by thflahau         ###   ########.fr        #
+#    Updated: 2019/09/11 12:24:14 by thflahau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			=	gcc
 
-NAME		= 	corewar
+NAME1		= 	corewar
+NAME2		=	asm
 
 #######   DIRECTORIES   #######
 HDR			=	include
 LIBDIR		=	libft
 PRTFDIR		=	ft_printf
-SRCDIR		=	arena
-GUIDIR		=	gui
+ARENADIR	=	arena
+ASSEMDIR	=	assembler
 OBJDIR		=	obj
 
-DIRS := $(patsubst $(SRCDIR)%, $(OBJDIR)%, $(shell find $(SRCDIR) -type d))
+DIRS := $(patsubst $(ARENADIR)%, $(OBJDIR)%, $(shell find $(ARENADIR) -type d))
+DIRAS := $(patsubst $(ASSEMDIR)%, $(OBJDIR)%, $(shell find $(ASSEMDIR) -type d))
 
 ##########   FLAGS   ##########
 CFLAGS		=	-Wall						\
@@ -30,22 +32,22 @@ CFLAGS		=	-Wall						\
 				-Werror						\
 				-Wshadow					\
 				-Wnull-dereference			\
-				-pedantic					\
-				-g -O0 # debug
+				-pedantic
 
 INCFLAG		=	-I $(HDR)
-INCSDL		=	`sdl2-config --cflags`
 LIBFLAG		=	-L $(LIBDIR) -lft -L $(PRTFDIR) -lftprintf
-LIBSDL		=	`sdl2-config --libs --cflags` -lSDL2 -lSDL2_ttf
 
 #########   SOURCES   #########
 LIBFT		=	$(LIBDIR)/libft.a
 
-SRCS		=	$(shell find $(SRCDIR) -type f -name "*.c")
+SRCSARE		=	$(shell find $(ARENADIR) -type f -name "*.c")
+SRCSASM		=	$(shell find $(ASSEMDIR) -type f -name "*.c")
 
-ARENA_OBJ	=	$(patsubst $(SRCDIR)%.c, $(OBJDIR)%.o, $(SRCS))
+ARENA_OBJ	=	$(patsubst $(ARENADIR)%.c, $(OBJDIR)%.o, $(SRCSARE))
+ASM_OBJ		=	$(patsubst $(ASSEMDIR)%.c, $(OBJDIR)%.o, $(SRCSASM))
 
 DEPENDS		=	${ARENA_OBJ:.o=.d}
+DEPENDSASM	=	${ASM_OBJ:.o=.d}
 
 #########   COLORS   ##########
 STD			=	\033[0m
@@ -53,35 +55,49 @@ GREEN		=	\033[0;32m
 YELLOW		=	\033[0;33m
 
 ##########   RULES   ##########
-all				: $(LIBFT) $(NAME)
+all			: $(NAME1) $(NAME2)
 
-$(NAME)			: $(ARENA_OBJ)
-	@printf "$(YELLOW)%-55s$(STD)" "Building executable $@ ..."
-	@$(CC) $(CFLAGS) $(INCFLAG) $(ARENA_OBJ) -o $@ $(LIBFLAG) $(LIBSDL)
-	@echo "$(GREEN)DONE$(STD)"
-
-$(LIBFT)		: $(HDR)/libft.h
+$(NAME1)	: $(ARENA_OBJ)
 	@make -C $(LIBDIR)
 	@make -C $(PRTFDIR)
+	@printf "$(YELLOW)%-55s$(STD)" "Building executable $@ ..."
+	@$(CC) $(CFLAGS) $(INCFLAG) $(ARENA_OBJ) -o $@ $(LIBFLAG)
+	@echo "$(GREEN)DONE$(STD)"
 
 -include $(DEPENDS)
 
-$(OBJDIR)/%.o	: $(SRCDIR)/%.c
+$(OBJDIR)/%.o: $(ARENADIR)/%.c
 	@mkdir -p $(DIRS)
 	@printf "%-55s" " > Compiling $* ..."
-	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@ $(INCSDL)
+	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@
 	@echo '✓'
 
-clean			:
+$(NAME2)	: $(ASM_OBJ)
+	@make -C $(LIBDIR)
+	@make -C $(PRTFDIR)
+	@printf "$(YELLOW)%-55s$(STD)" "Building executable $@ ..."
+	@$(CC) $(CFLAGS) $(INCFLAG) $(ASM_OBJ) -o $@ $(LIBFLAG)
+	@echo "$(GREEN)DONE$(STD)"
+
+-include $(DEPENDSASM)
+
+$(OBJDIR)/%.o: $(ASSEMDIR)/%.c
+	@mkdir -p $(DIRAS)
+	@printf "%-55s" " > Compiling $* ..."
+	@$(CC) $(CFLAGS) -MMD $(INCFLAG) -c $< -o $@
+	@echo '✓'
+
+clean		:
 	@/bin/rm -rf $(OBJDIR)
 	@make clean -C $(LIBDIR)
 	@make clean -C $(PRTFDIR)
 
-fclean			: clean
-	@/bin/rm -rf $(NAME)
+fclean		: clean
+	@/bin/rm -rf $(NAME1)
+	@/bin/rm -rf $(NAME2)
 	@make fclean -C $(LIBDIR)
 	@make fclean -C $(PRTFDIR)
 
-re				: fclean all
+re			: fclean all
 
-.PHONY			: all $(LIBFT) clean fclean re
+.PHONY		: all $(LIBFT) clean fclean re
