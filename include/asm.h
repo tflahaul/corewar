@@ -113,12 +113,7 @@ int						parse_lab_list(t_file *file);
 int						inc_size(t_inst *inst, int type);
 int						write_to_cor_file(t_file *file);
 int						check_arg_num(char **split, int arg);
-<<<<<<< HEAD:assembler/include/asm.h
-int						check_header_var(int *name, int *cmnt,
-		char **start, char **end);
-=======
 int						check_header_var(int *name, int *c, char **s, char **e);
->>>>>>> norme:include/asm.h
 int						get_end_word_index(char **start);
 int						file_read_free(char *buff, char *str, int err);
 int64_t					asm_atoi(char **string, int shrt);

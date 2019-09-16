@@ -39,7 +39,7 @@ int32_t					ft_binarray_to_int(int addr, int size)
 		value |= g_arena.arena[NEG_MEM(addr + 1)];
 		return ((int16_t)value);
 	}
-	else if (LIKELY(size == 4))
+	else if (__likely(size == 4))
 	{
 		value |= (g_arena.arena[NEG_MEM(addr + 0)] << 24);
 		value |= (g_arena.arena[NEG_MEM(addr + 1)] << 16);

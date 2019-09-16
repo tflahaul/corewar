@@ -42,30 +42,28 @@ static inline int			ft_pop_dead_processes(t_listhead const *head)
 	return (live);
 }
 
-static inline void			ft_decrease_ctd(int *ctd, int *live)
+void						ft_arena_main_loop(t_listhead *processes)
 {
-	*ctd -= CYCLE_DELTA;
-	*live = 0;
-}
+	int						live = 0;
+	int						main_cycle = 0;
+	register int			internal_cycle = 0;
+	register int			ctd = CYCLE_TO_DIE;
 
-void						ft_arena_main_loop(t_listhead *processes, int live)
-{
-	int						ctd;
-	int						main_cycle;
-	register int			internal_cycle;
-
-	main_cycle = 0;
-	internal_cycle = 0;
-	ctd = CYCLE_TO_DIE;
 	while (ctd > 0 && g_arena.processes > 0)
 	{
 		ft_for_each_process(processes);
 		if (++main_cycle > CYCLE_TO_DIE && ++internal_cycle > ctd)
 		{
 			if (ft_pop_dead_processes(processes) >= NBR_LIVE)
-				ft_decrease_ctd(&ctd, &live);
+			{
+				ctd -= CYCLE_DELTA;
+				live = 0;
+			}
 			else if (++live == MAX_CHECKS)
-				ft_decrease_ctd(&ctd, &live);
+			{
+				ctd -= CYCLE_DELTA;
+				live = 0;
+			}
 			internal_cycle = 0;
 		}
 		if (HAS_DUMP(g_arena.options) && main_cycle == g_arena.dump_cycles)

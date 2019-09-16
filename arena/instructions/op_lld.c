@@ -16,7 +16,7 @@
 
 void					op_lld(t_process *proc, t_parameters *params)
 {
-	if (LIKELY(ISREG(params->tab[1])))
+	if (__likely(ISREG(params->tab[1])))
 	{
 		if ((params->ocp & 192) >> 6 == REG_CODE && ISREG(params->tab[0]))
 			proc->registers[params->tab[1]] = proc->registers[params->tab[0]];

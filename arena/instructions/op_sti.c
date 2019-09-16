@@ -19,7 +19,7 @@ void						op_sti(t_process *proc, t_parameters *params)
 	register int			addr;
 
 	addr = 0;
-	if (LIKELY(ISREG(params->tab[0]) && (params->ocp & 192) >> 6 == REG_CODE))
+	if (__likely(ISREG(params->tab[0]) && (params->ocp & 192) >> 6 == REG_CODE))
 	{
 		if ((params->ocp & 48) >> 4 == REG_CODE && ISREG(params->tab[1]))
 			addr += NEG_IDX(proc->registers[params->tab[1]]);

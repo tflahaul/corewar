@@ -48,7 +48,7 @@ inline int				ft_number_in_list(int32_t id)
 
 static inline void		ft_list_push_warrior(t_warrior *entry)
 {
-	if (UNLIKELY(g_arena.warriors == NULL))
+	if (__unlikely(g_arena.warriors == NULL))
 		g_arena.warriors = entry;
 	else
 	{

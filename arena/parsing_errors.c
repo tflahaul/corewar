@@ -48,7 +48,7 @@ int					ft_puterror_memalloc_failure(t_listhead *head)
 
 int					ft_puterror_and_close_fd(char const *string, int fd)
 {
-	if (UNLIKELY((close(fd) < 0)))
+	if (__unlikely((close(fd) < 0)))
 		ft_puterror(strerror(errno));
 	return (ft_puterror(string));
 }

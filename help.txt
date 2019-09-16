@@ -4,6 +4,5 @@ in which two or more battle programs compete for control of a virtual computer.
 
   -d, --dump N       After N execution cycles, dump memory and exit.
   -n, --number N     Set the number of the next player as N.
-  -v, --visualize    Visualize arena.
   -h, --help         Display this help and exit.
 

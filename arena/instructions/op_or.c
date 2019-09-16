@@ -19,7 +19,7 @@ void						op_or(t_process *process, t_parameters *params)
 	register int			p1;
 	register int			p2;
 
-	if (LIKELY(ISREG(params->tab[2])))
+	if (__likely(ISREG(params->tab[2])))
 	{
 		if ((params->ocp & 192) >> 6 == REG_CODE && ISREG(params->tab[0]))
 			p1 = process->registers[params->tab[0]];

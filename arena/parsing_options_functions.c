@@ -33,7 +33,7 @@ void					ft_set_print(char const **argv)
 
 void					ft_get_dump(char const **argv)
 {
-	if (UNLIKELY(*argv == NULL))
+	if (__unlikely(*argv == NULL))
 	{
 		ft_puterror(NULLOPT);
 		exit(EXIT_FAILURE);
@@ -48,7 +48,7 @@ void					ft_get_dump(char const **argv)
 
 void					ft_get_numb(char const **argv)
 {
-	if (UNLIKELY(*argv == NULL))
+	if (__unlikely(*argv == NULL))
 	{
 		ft_puterror(NULLOPT);
 		exit(EXIT_FAILURE);

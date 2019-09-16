@@ -45,8 +45,6 @@ static inline int		ft_update_oplength(t_process *prc, t_parameters *data)
 		size = 1;
 	else if (byte == DIR_CODE)
 		size = prc->instruction.dirsize;
-	else if (byte == IND_CODE)
-		size = 8;
 	return (size);
 }
 
@@ -55,7 +53,7 @@ static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 	int					value;
 	int const			size = ft_update_oplength(prc, data);
 
-	if (size != 8)
+	if (size)
 	{
 		value = ft_binarray_to_int(prc->pc + data->oplen + 1, size);
 		data->oplen += size;
@@ -66,8 +64,7 @@ static inline int		ft_get_op_parameter(t_process *prc, t_parameters *data)
 		if (prc->instruction.readmem > 0)
 			value = ft_binarray_to_int(ft_safe_update_pc(prc->pc,\
 				(prc->instruction.readmem > 1 ? value : NEG_IDX(value))),\
-				(prc->instruction.funptr == &op_ldi\
-				|| prc->instruction.funptr == &op_lldi) ? 2 : 4);
+				(prc->instruction.funptr == &op_ldi || prc->instruction.funptr == &op_lldi) ? 2 : 4);
 		data->oplen += 2;
 	}
 	return (value);
@@ -77,7 +74,7 @@ void					ft_fetch_instruction(t_process *proc, t_parameters *par)
 {
 	unsigned int const	opc = g_arena.arena[proc->pc];
 
-	if (LIKELY(opc > 0 && opc < 17))
+	if (__likely(opc > 0 && opc < 17))
 	{
 		proc->instruction = g_opset[opc];
 		ft_bzero(&(proc->params), sizeof(t_parameters));

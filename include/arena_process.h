@@ -50,7 +50,7 @@ struct				s_process {
 # define RESET_PROCESS(x)	(((t_process *)x)->instruction.funptr = (void *)0)
 
 int					ft_load_warriors_into_arena(t_listhead *head);
-void				ft_arena_main_loop(t_listhead *list, int live);
+void				ft_arena_main_loop(t_listhead *list);
 void				ft_for_each_process(t_listhead *list);
 void				ft_init_process_list(t_listhead *list);
 void				ft_delete_process_list(t_listhead *list);
